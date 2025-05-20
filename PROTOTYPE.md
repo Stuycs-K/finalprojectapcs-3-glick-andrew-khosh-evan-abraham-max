@@ -44,7 +44,55 @@ UML Diagrams and descriptions of key algorithms, classes, and how things fit tog
     
 # Intended pacing:
 
-How you are breaking down the project and who is responsible for which parts.
+Part 1: Setup & Core Mechanics  
+Expected Completion: May 24
 
-A timeline with expected completion dates of parts of the project. (CHANGE THIS!!!!!)
+Andrew:
+- Create basic game loop and UI display (score, game over text)
+- Implement input handling for bat swing (mouse click triggers swing)
+
+Max:
+- Initiate ball throw animation
+- Add collision detection logic between ball and bat
+- Add logic for ball movement
+  - Use velocity vectors
+  - Handle ball reset on out or home run
+
+Evan:
+- Create Ball class with basic physics
+  - Position and velocity
+
+Part 2: MVP Completion  
+Expected Completion: May 29
+
+Andrew:
+- Improve collision detection (accuracy based on timing)
+
+
+Max:
+- Handle ball counts and auto-homerun after 4 balls
+- Add strikeout detection after 3 strikes
+- Implement basic outcomes
+  - Track homerun/out based on timing
+
+Evan:
+- Improve UI: show current score and game status
+
+Part 3: Make the game better
+Expected Completion: June 3
+
+Andrew:
+- Add support for multiple batter stats (Strength, swing speed)
+- Animate bat movement (swing follow-through)
+- Update 4 balls to cause a walk and not a homerun
+
+Max:
+- Implement different pitch types (fastball, curve, etc.)
+- Introduce wind/weather conditions impacting ball physics
+
+Evan:
+- Add base runners and logic for them to advance
+- Make it so there are more options that homerun or out
+- Enhance runner decision-making (stealing, tagging, etc.)
+
 
