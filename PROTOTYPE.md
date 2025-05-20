@@ -38,7 +38,7 @@ Nice to Have Features:
      
 # Project Design
 
-UML Diagrams and descriptions of key algorithms, classes, and how things fit together.
+![UML](/FinalProjectUML.png)
 
 
     
