@@ -67,6 +67,8 @@ Expected Completion: May 29
 
 Andrew:
 - Improve collision detection (accuracy based on timing)
+- Improve Visuals
+  - Allow user to choose color of jerset for their team and opponents
 
 
 Max:
@@ -85,6 +87,7 @@ Andrew:
 - Add support for multiple batter stats (Strength, swing speed)
 - Animate bat movement (swing follow-through)
 - Update 4 balls to cause a walk and not a homerun
+- Make it so the opponents play offense to (random amount of points based on a few factors)
 
 Max:
 - Implement different pitch types (fastball, curve, etc.)
