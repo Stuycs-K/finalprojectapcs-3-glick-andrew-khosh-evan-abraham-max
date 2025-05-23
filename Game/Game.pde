@@ -26,6 +26,8 @@ void frontView() {
 
   fill(34, 139, 34);
   rect(0, height * 2 / 3, width, height / 3);
+ noFill();
+  rect(width/2 -75, height/2 , 150, 200);
 
 
 }
