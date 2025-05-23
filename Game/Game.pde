@@ -2,16 +2,16 @@
 
 =======
 int backGround = 0;
-
+//0 will be front view, 1 will be top down
 void setup() {
   size(800, 600);
 }
 
 void draw() {
   if (backGround == 0) {
-    drawBackground1();
+    frontView();
   } else {
-    drawBackground2();
+    topDownView();
   }
 }
   void keyPressed() {
@@ -23,7 +23,7 @@ void draw() {
   }
 }
 
-void drawBackground1() {
+void frontView() {
   background(135, 206, 235); 
 
   fill(34, 139, 34);
@@ -32,7 +32,7 @@ void drawBackground1() {
 
 }
 
-void drawBackground2() {
+void topDownView() {
   background(135, 206, 235); 
 
   fill(200, 139, 34); 
