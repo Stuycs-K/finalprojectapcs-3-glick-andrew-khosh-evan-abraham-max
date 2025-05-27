@@ -21,20 +21,18 @@ void draw() {
 }
 
 void frontView() {
-  background(135, 206, 235);
+  background(135, 206, 235); 
 
   fill(34, 139, 34);
   rect(0, height * 2 / 3, width, height / 3);
- noFill();
-  rect(width/2 -75, height/2 , 150, 200);
 
 
 }
 
 void topDownView() {
-  background(135, 206, 235);
+  background(135, 206, 235); 
 
-  fill(200, 139, 34);
+  fill(200, 139, 34); 
   rect(0, height * 2 / 3, width, height / 3);
 
 }
