@@ -1,4 +1,3 @@
-
 int backGround = 0;
 //0 will be front view, 1 will be top down
 void setup() {
