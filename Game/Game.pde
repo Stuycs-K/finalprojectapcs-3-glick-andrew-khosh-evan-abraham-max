@@ -34,7 +34,8 @@ void frontView() {
  noFill();
 
   rect(width/2 -75, height/2 , 150, 200);
-
+  fill(150, 75, 0);
+ellipse(200,400,200,40);
 
 }
 
