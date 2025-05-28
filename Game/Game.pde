@@ -1,4 +1,3 @@
-
 int backGround = 0;
 //0 will be front view, 1 will be top down
 void setup() {
@@ -22,8 +21,12 @@ void draw() {
 }
 
 void frontView() {
+<<<<<<< HEAD
+  background(135, 206, 235);
+=======
 
   background(135, 206, 235); 
+>>>>>>> 90cf1d1ce221609af9a3593f34c72b20431adc9e
 
   fill(34, 139, 34);
   rect(0, height * 2 / 3, width, height / 3);
@@ -40,9 +43,9 @@ ellipse(200,400,200,40);
 }
 
 void topDownView() {
-  background(135, 206, 235); 
+  background(135, 206, 235);
 
-  fill(200, 139, 34); 
+  fill(200, 139, 34);
   rect(0, height * 2 / 3, width, height / 3);
 
 }
