@@ -30,12 +30,24 @@ void frontView() {
 }
 
 void topView() {
-  background(135, 206, 235);
+  background(200);
   noStroke();
 
   fill(34, 139, 34); 
-  rect(0, 0, width, height);
+  quad(width / 2, (height / 2) - 300, (width / 2) - 300, height / 2,
+       width / 2, (height / 2) + 300, (width / 2) + 300, height / 2);
+       
   fill(200, 139, 34);
-  quad(width / 2, height / 2, (width / 2) - 100, (height / 2) + 100,
-       width / 2, (height / 2) + 200, (width / 2) + 100, (height / 2) + 100);
+  quad(width / 2, height / 2, (width / 2) - 200, (height / 2) + 100,
+       width / 2, (height / 2) + 300, (width / 2) + 200, (height / 2) + 100);
+       
+  fill(255);
+  drawBase(width / 2, (height / 2) - 200);
+  drawBase((width / 2) - 175, (height / 2) - 25);
+  drawBase(width / 2, (height / 2) + 150);
+  drawBase((width / 2) + 175, (height / 2) - 25);
+}
+
+void drawBase(int x, int y){
+  quad(x, y, x - 25, y + 25, x, y + 50, x + 25, y + 25);
 }
