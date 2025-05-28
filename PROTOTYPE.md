@@ -38,7 +38,7 @@ Nice to Have Features:
      
 # Project Design
 
-![UML](/FinalProjectUML.png)
+![UML](/FinalProjectUML.drawio.png)
 
 Within the game loop in the Game class, the code to run the batting simulation will be looping. When the mouse is clicked, the Player hit method will be called and within that the Ball hit method will be called. If the ball is hit, the run method from Game will be called starting the top-down view of the players running the bases. The tick method from the Ball class will constantly be called to move the ball trhough the air. The run method from the Player class will be called every time a Player needs to run to the next base. The homeRun method from the Game class will be called whenever a player rounds all the bases, increasing the score. If the pitcher throws 4 balls instead of the batter hitting a pitch, the walk method from the Game class will be called, moving the PLayers round the bases automatically.
     

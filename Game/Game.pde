@@ -21,11 +21,21 @@ void draw() {
 }
 
 void frontView() {
+<<<<<<< HEAD
   background(135, 206, 235);
+=======
+
+  background(135, 206, 235); 
+>>>>>>> 90cf1d1ce221609af9a3593f34c72b20431adc9e
 
   fill(34, 139, 34);
   rect(0, height * 2 / 3, width, height / 3);
+  text("Click space to pitch the ball", 20, 30);
+  text("Click with your mouse to swing the bat", 20, 50);
+  noFill();
+
  noFill();
+
   rect(width/2 -75, height/2 , 150, 200);
 
 
