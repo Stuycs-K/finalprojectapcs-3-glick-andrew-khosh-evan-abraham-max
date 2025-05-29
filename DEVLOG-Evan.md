@@ -18,3 +18,10 @@ ABSENT ON BREAK
 
 ### 2025-05-28
 Finished top-down view's basic background of baseball stadium
+
+### 2025-05-28 HOME
+Wrote basic structure for Player class
+
+Added player display functionality for top view
+
+Clarified variables in Ball class by changing names and writing comments
