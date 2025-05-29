@@ -15,15 +15,24 @@ void setup() {
 }
 
 void draw() {
-  if(swinging){
-    bat1.swing(swingDistance);
-    swingDistance++;
-  }
+
   if (backGround == 0) {
     frontView();
   } else {
     topView();
   }
+    if(swinging){
+    println("swinging");
+    bat1.swing(swingDistance);
+    swingDistance++;
+    if(swingDistance > 20){
+      swingDistance = 0;
+      swinging = false;
+  }
+    }
+  else{
+  bat1.swing(0);  }
+  //bat1.create();}
 }
   void keyPressed() {
   if (key == 'b') {
@@ -51,7 +60,7 @@ void frontView() {
 
   rect(width/2 -75, height/2 , 150, 200);
   fill(150, 75, 0);
-  bat1.create();
+//  bat1.create();
   //ellipse(200,400,200,40);
 }
 
