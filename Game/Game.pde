@@ -16,7 +16,6 @@ void draw() {
   } else {
     topView();
   }
-  displayPlayers();
 }
   void keyPressed() {
   if (key == 'b') {
@@ -26,6 +25,12 @@ void draw() {
       backGround = 0;}
   }
 }
+void mouseClicked(){
+  swing();}
+void swing(){
+
+}
+  
 
 void frontView() {
   background(135, 206, 235);
@@ -38,7 +43,9 @@ void frontView() {
 
   rect(width/2 -75, height/2 , 150, 200);
   fill(150, 75, 0);
-  ellipse(200,400,200,40);
+  Bat bat1 = new Bat();
+  bat1.create();
+  //ellipse(200,400,200,40);
 }
 
 void topView() {
@@ -58,6 +65,8 @@ void topView() {
   drawBase((width / 2) - 150, (height / 2) + 75);
   drawBase(width / 2, (height / 2) + 225);
   drawBase((width / 2) + 150, (height / 2) + 75);
+  
+  displayPlayers();
 }
 
 void drawBase(int x, int y){
