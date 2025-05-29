@@ -16,7 +16,6 @@ void draw() {
   } else {
     topView();
   }
-  displayPlayers();
 }
   void keyPressed() {
   if (key == 'b') {
@@ -58,6 +57,8 @@ void topView() {
   drawBase((width / 2) - 150, (height / 2) + 75);
   drawBase(width / 2, (height / 2) + 225);
   drawBase((width / 2) + 150, (height / 2) + 75);
+  
+  displayPlayers();
 }
 
 void drawBase(int x, int y){
