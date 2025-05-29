@@ -5,6 +5,12 @@ public class Player{
   private PVector velocity;
   private PVector acceleration;
   
+  public Player(){
+    strength = 1;
+    speed = 1;
+    position = new PVector(width / 2, (height / 2) + 225);
+  }
+  
   public Player(int str, int spd){
     strength = str;
     speed = spd;
