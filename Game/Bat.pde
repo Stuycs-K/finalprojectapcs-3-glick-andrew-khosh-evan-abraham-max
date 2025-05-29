@@ -3,9 +3,14 @@ public class Bat{
   private int batYcor = 400;
   public Bat(){
   }
-  public void swing(){
-    
+  public void swing(int i){
+    //for(int i = 0; i < 10; i++){
+ 
+      ellipse(batXcor + i*10, batYcor, 200, 40);
+    //  }
+
   }
+  
   public void create(){
       ellipse(batXcor,batYcor,200,40);
   }

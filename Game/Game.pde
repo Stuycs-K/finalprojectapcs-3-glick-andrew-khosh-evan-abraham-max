@@ -1,7 +1,11 @@
 private Player[] bases;
 int backGround = 0;
+private int swingDistance;
+private boolean swinging = false;
+  Bat bat1 = new Bat();
 //0 will be front view, 1 will be top down
 void setup() {
+  swingDistance = 0;
   size(800, 600);
   bases = new Player[4];
   bases[0] = new Player(1, 1, new PVector(width / 2, (height / 2) + 225));
@@ -11,6 +15,10 @@ void setup() {
 }
 
 void draw() {
+  if(swinging){
+    bat1.swing(swingDistance);
+    swingDistance++;
+  }
   if (backGround == 0) {
     frontView();
   } else {
@@ -26,10 +34,9 @@ void draw() {
   }
 }
 void mouseClicked(){
-  swing();}
-void swing(){
-
+  swinging = true;
 }
+
   
 
 void frontView() {
@@ -39,11 +46,11 @@ void frontView() {
   rect(0, height * 2 / 3, width, height / 3);
   text("Click space to pitch the ball", 20, 30);
   text("Click with your mouse to swing the bat", 20, 50);
+   text("Swinging = " + swinging, 20, 70);
   noFill();
 
   rect(width/2 -75, height/2 , 150, 200);
   fill(150, 75, 0);
-  Bat bat1 = new Bat();
   bat1.create();
   //ellipse(200,400,200,40);
 }
