@@ -1,31 +1,34 @@
 public class Ball{
-  PVector pBat;
-  PVector fBreak;
-  int rBat;
-  int rMax;
-  PVector pPlanar;
-  int pHeight;
-  PVector vPlanar;
-  int vHeight;
+  private PVector positionFront;       //Position in front view
+  private PVector velocityFront;       //Velocity in 2D plane during front view (ex. curve ball)
+  private PVector accelerationFront;   //Acceleration in 2D plane during front view (ex. curve ball)
+  private int speedFront;              //Speed of ball in/out of 2D plane during front view
+  private int radiusFront;             //Radius of slice of ball going through 2D plane during front view
+  private int radiusMax;               //Max radius of slice of ball going through 2D plane during front view
+  private PVector positionTop;         //Position in top view
+  private int heightTop;               //Height in top view
+  private PVector velocityTop;         //Velocity in 2D plane during top view
+  private int velocityHeight;          //Velocity in/out of 2D plane during top view
   
-  public Ball(PVector posBat, int radMax){
-    pBat = posBat;
-    rMax = radMax;
+  public Ball(PVector posFront, int radMax){
+    positionFront = posFront;
+    radiusMax = radMax;
+    //set starting vals for top view of ball
   }
   
-  public void tickBat(int vBat){
-    //Increases/Decreases rBat according to vBat and moves pBat based on fBreak
+  public void tickFront(){
+    //Increases/Decreases radiusFront according to speedFront and updates positionFront and velocityFront
   }
   
-  public void breakBat(PVector forBreak){
-    fBreak = forBreak;
+  public void breakFront(PVector forceBreak){
+    accelerationFront = velocityFront;
   }
   
-  public void tickPlanar(){
+  public void tickTop(){
     //Changes pPlanar and pHeight based on vPlanar and vHeight, also applys gravity
   }
   
-  public void hit(PVector fPlanar, int fHeight){
-    //Sets the starting vPlanar and vHeight based on the force applied
+  public void hit(PVector forceTop, int forceHeight){
+    //Sets the starting velocityTop velocityHeight based on the force applied
   }
 }
