@@ -13,3 +13,6 @@ Made instructions and the bat
 ### 2025-05-29
 Created bat class
 made a bat that swings when you click the screen
+### 2025-05-30
+Created a ball that launches when you click space
+
