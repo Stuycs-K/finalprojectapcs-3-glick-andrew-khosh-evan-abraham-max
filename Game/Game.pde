@@ -2,10 +2,10 @@ import java.util.*;
 import java.io.*;
 
 int backGround = 0;    //0 will be front view, 1 will be top down
-public final PVector firstBase = new PVector((width / 2) + 150, (height / 2) + 75);
-public final PVector secondBase = new PVector(width / 2, (height / 2) - 75);
-public final PVector homePLate = new PVector(width / 2, (height / 2) + 225);
-public final PVector thirdBase = new PVector((width / 2) - 150, (height / 2) + 75);
+public final PVector homePlate = new PVector(800 / 2, (600 / 2) + 225);
+public final PVector firstBase = new PVector((800 / 2) + 150, (600 / 2) + 75);
+public final PVector secondBase = new PVector(800 / 2, (600 / 2) - 75);
+public final PVector thirdBase = new PVector((800 / 2) - 150, (600 / 2) + 75);
 private int swingDistance;
 private int ballRadius;
 private boolean swinging = false;
@@ -105,7 +105,7 @@ void topDownView() {
   displayPlayers();
 }
 
-void drawBase(int x, int y){
+void drawBase(float x, float y){
   quad(x, y, x - 25, y + 25, x, y + 50, x + 25, y + 25);
 }
 
