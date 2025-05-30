@@ -92,5 +92,3 @@ void topDownView() {
 
   displayPlayers();
 }
-
-}
