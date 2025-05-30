@@ -1,12 +1,13 @@
 private Player[] bases;
 int backGround = 0;
+//0 will be front view, 1 will be top down
 private int swingDistance;
 private int ballRadius;
 private boolean swinging = false;
 private boolean pitching = false;
   Bat bat1 = new Bat();
   Ball ball1 = new Ball(new PVector(400,400), 50);
-//0 will be front view, 1 will be top down
+
 void setup() {
   swingDistance = 0;
   ballRadius = 100;
