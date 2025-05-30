@@ -1,8 +1,8 @@
-int backGround = 0;
-private int swingDistance;
-private boolean swinging = false;
-  Bat bat1 = new Bat();
-//0 will be front view, 1 will be top down
+int backGround = 0;    //0 will be front view, 1 will be top down
+public int swingDistance;
+public boolean swinging = false;
+Bat bat1 = new Bat();
+
 void setup() {
   swingDistance = 0;
   size(800, 600);
