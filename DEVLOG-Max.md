@@ -31,3 +31,7 @@ Finished the new UML in totality, which took around 40 minutes, including adding
 - Worked on Outfielder (10 minutes)
 - Worked on Hitter (15 minutes)
 - Worked on BaseRunner (7 minutes)
+
+### 2025-05-30 - Worked on changing bases from ints to PVectors and displaying based off of it
+- converted to PVectors (15 minutes)
+- displayed PVecotrs (15 minutes)
