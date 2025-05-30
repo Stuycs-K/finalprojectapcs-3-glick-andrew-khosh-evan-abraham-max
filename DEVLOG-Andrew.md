@@ -10,3 +10,6 @@ cloned repo onto lab computer and worked with partners to revamp UML drawing as 
 Made two different background that could toggle. One will be for top down view, and one will be for forward facing view. 
 ### 2025-05-28 
 Made instructions and the bat
+### 2025-05-29
+Created bat class
+made a bat that swings when you click the screen

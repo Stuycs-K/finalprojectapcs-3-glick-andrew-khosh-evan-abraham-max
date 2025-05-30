@@ -1,14 +1,14 @@
 public class Ball{
-  private PVector positionFront;       //Position in front view
-  private PVector velocityFront;       //Velocity in 2D plane during front view (ex. curve ball)
-  private PVector accelerationFront;   //Acceleration in 2D plane during front view (ex. curve ball)
-  private int speedFront;              //Speed of ball in/out of 2D plane during front view
-  private int radiusFront;             //Radius of slice of ball going through 2D plane during front view
-  private int radiusMax;               //Max radius of slice of ball going through 2D plane during front view
-  private PVector positionTop;         //Position in top view
-  private int heightTop;               //Height in top view
-  private PVector velocityTop;         //Velocity in 2D plane during top view
-  private int velocityHeight;          //Velocity in/out of 2D plane during top view
+  public PVector positionFront;       //Position in front view
+  public PVector velocityFront;       //Velocity in 2D plane during front view (ex. curve ball)
+  public PVector accelerationFront;   //Acceleration in 2D plane during front view (ex. curve ball)
+  public int speedFront;              //Speed of ball in/out of 2D plane during front view
+  public int radiusFront;             //Radius of slice of ball going through 2D plane during front view
+  public int radiusMax;               //Max radius of slice of ball going through 2D plane during front view
+  public PVector positionTop;         //Position in top view
+  public double heightTop;               //Height in top view
+  public PVector velocityTop;         //Velocity in 2D plane during top view
+  public double velocityHeight;          //Velocity in/out of 2D plane during top view
   
   public Ball(PVector posFront, int radMax){
     positionFront = posFront;
@@ -28,7 +28,9 @@ public class Ball{
     //Changes pPlanar and pHeight based on vPlanar and vHeight, also applys gravity
   }
   
-  public void hit(PVector forceTop, int forceHeight){
+  public void hit(PVector forceTop, double forceHeight){
     //Sets the starting velocityTop velocityHeight based on the force applied
+    velocityTop = forceTop;
+    velocityHeight = forceHeight;
   }
 }

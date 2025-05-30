@@ -1,9 +1,9 @@
 public class Player{  
-  private int strength;
-  private int speed;
-  private PVector position;
-  private PVector velocity;
-  private PVector acceleration;
+  public int strength;
+  public int speed;
+  public PVector position;
+  public PVector velocity;
+  public PVector acceleration;
   
   public Player(){
     strength = 1;
