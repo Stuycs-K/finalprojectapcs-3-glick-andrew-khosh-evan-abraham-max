@@ -1,10 +1,18 @@
+import java.util.*;
+import java.io.*;
+
 int backGround = 0;    //0 will be front view, 1 will be top down
-public int swingDistance;
-public boolean swinging = false;
+private int swingDistance;
+private int ballRadius;
+private boolean swinging = false;
+private boolean pitching = false;
 Bat bat1 = new Bat();
+Ball ball1 = new Ball(new PVector(400,400), 50);
+ArrayList<Player> bases = new ArrayList<Player>();
 
 void setup() {
   swingDistance = 0;
+  ballRadius = 100;
   size(800, 600);
 }
 
@@ -27,6 +35,13 @@ void draw() {
   else{
   bat1.swing(0);  }
   //bat1.create();}
+    if(pitching){
+    ball1.pitch(ballRadius);
+    ballRadius -=1;
+    if(ballRadius < 1){
+      pitching = false;
+      ballRadius = 100;}
+  }
 }
   void keyPressed() {
   if (key == 'b') {
@@ -34,6 +49,11 @@ void draw() {
       backGround = 1;}
     else{
       backGround = 0;}
+  }
+  if(key == ' '){
+  //ball1.display(10);
+  pitching = true;
+ // ball1.pitch();
   }
 }
 void mouseClicked(){
@@ -61,7 +81,12 @@ void frontView() {
 }
 
 void topDownView() {
-  background(135, 206, 235);
+  background(200);
+  noStroke();
+
+  fill(34, 139, 34); 
+  quad(width / 2, (height / 2) - 300, (width / 2) - 300, height / 2,
+       width / 2, (height / 2) + 300, (width / 2) + 300, height / 2);
 
   fill(200, 139, 34);
   quad(width / 2, (height / 2) - 100, (width / 2) - 200, (height / 2) + 100,
@@ -76,4 +101,14 @@ void topDownView() {
   displayPlayers();
 }
 
+void drawBase(int x, int y){
+  quad(x, y, x - 25, y + 25, x, y + 50, x + 25, y + 25);
+}
+
+void displayPlayers(){
+  noStroke();
+  for (Player player : bases){
+    fill(0);
+    circle(player.position.x, player.position.y, 30);
+  }
 }
