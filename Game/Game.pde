@@ -1,6 +1,10 @@
 int backGround = 0;
-private int swingDistance;
-private boolean swinging = false;
+public final PVector firstBase = new PVector((width / 2) + 150, (height / 2) + 75);
+public final PVector secondBase = new PVector(width / 2, (height / 2) - 75);
+public final PVector homePLate = new PVector(width / 2, (height / 2) + 225);
+public final PVector thirdBase = new PVector((width / 2) - 150, (height / 2) + 75);
+public int swingDistance;
+public boolean swinging = false;
   Bat bat1 = new Bat();
 //0 will be front view, 1 will be top down
 void setup() {
@@ -68,12 +72,10 @@ void topDownView() {
        width / 2, (height / 2) + 300, (width / 2) + 200, (height / 2) + 100);
 
   fill(255);
-  drawBase(width / 2, (height / 2) - 75);
-  drawBase((width / 2) - 150, (height / 2) + 75);
-  drawBase(width / 2, (height / 2) + 225);
-  drawBase((width / 2) + 150, (height / 2) + 75);
+  drawBase(firstBase.x, firstBase.y);
+  drawBase(secondBase.x, secondBase.y);
+  drawBase(thirdBase.x, thirdBase.y);
+  drawBase(homePlate.x, homePlate.y);
 
   displayPlayers();
-}
-
 }
