@@ -1,4 +1,3 @@
-private Player[] bases;
 int backGround = 0;
 private int swingDistance;
 private boolean swinging = false;
@@ -7,11 +6,6 @@ private boolean swinging = false;
 void setup() {
   swingDistance = 0;
   size(800, 600);
-  bases = new Player[4];
-  bases[0] = new Player(1, 1, new PVector(width / 2, (height / 2) + 225));
-  bases[1] = new Player(1, 1, new PVector((width / 2) + 150, (height / 2) + 75));
-  bases[2] = new Player(1, 1, new PVector(width / 2, (height / 2) - 75));
-  bases[3] = new Player(1, 1, new PVector((width / 2) - 150, (height / 2) + 75));
 }
 
 void draw() {
@@ -19,7 +13,7 @@ void draw() {
   if (backGround == 0) {
     frontView();
   } else {
-    topView();
+    topDownView();
   }
     if(swinging){
     println("swinging");
@@ -46,7 +40,7 @@ void mouseClicked(){
   swinging = true;
 }
 
-  
+
 
 void frontView() {
   background(135, 206, 235);
@@ -58,41 +52,28 @@ void frontView() {
    text("Swinging = " + swinging, 20, 70);
   noFill();
 
+ noFill();
+
   rect(width/2 -75, height/2 , 150, 200);
   fill(150, 75, 0);
 //  bat1.create();
   //ellipse(200,400,200,40);
 }
 
-void topView() {
-  background(200);
-  noStroke();
+void topDownView() {
+  background(135, 206, 235);
 
-  fill(34, 139, 34); 
-  quad(width / 2, (height / 2) - 300, (width / 2) - 300, height / 2,
-       width / 2, (height / 2) + 300, (width / 2) + 300, height / 2);
-       
   fill(200, 139, 34);
   quad(width / 2, (height / 2) - 100, (width / 2) - 200, (height / 2) + 100,
        width / 2, (height / 2) + 300, (width / 2) + 200, (height / 2) + 100);
-       
+
   fill(255);
   drawBase(width / 2, (height / 2) - 75);
   drawBase((width / 2) - 150, (height / 2) + 75);
   drawBase(width / 2, (height / 2) + 225);
   drawBase((width / 2) + 150, (height / 2) + 75);
-  
+
   displayPlayers();
 }
 
-void drawBase(int x, int y){
-  quad(x, y, x - 25, y + 25, x, y + 50, x + 25, y + 25);
-}
-
-void displayPlayers(){
-  noStroke();
-  for (Player player : bases){
-    fill(0);
-    circle(player.position.x, player.position.y, 30);
-  }
 }
