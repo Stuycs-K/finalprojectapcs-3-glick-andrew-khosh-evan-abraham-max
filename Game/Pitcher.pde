@@ -2,9 +2,9 @@ import java.util.*;
 import java.io.*;
 
 public class Pitcher extends Player{
-  private ArrayList<String> pitches;
-  private ArrayList<Integer> velocities;
-  private ArrayList<Double> spin;
+  public ArrayList<String> pitches;
+  public ArrayList<Integer> velocities;
+  public ArrayList<Double> spin;
   
   public Pitcher(){
     pitches = new ArrayList<String>();
