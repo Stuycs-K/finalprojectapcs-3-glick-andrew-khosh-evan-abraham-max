@@ -26,3 +26,8 @@ Finished the new UML in totality, which took around 40 minutes, including adding
 - Pushed and pulled on the branch test1 for the first time (5 minutes)
 - Fixed errors in code (7 minutes)
 - Updated devLog (5 minutes)
+
+### 2025-05-29 - Worked on children of Player class
+- Worked on Outfielder (10 minutes)
+- Worked on Hitter (15 minutes)
+- Worked on BaseRunner (7 minutes)
