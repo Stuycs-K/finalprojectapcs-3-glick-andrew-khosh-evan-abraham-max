@@ -7,8 +7,16 @@ public int swingDistance;
 public boolean swinging = false;
   Bat bat1 = new Bat();
 //0 will be front view, 1 will be top down
+private int swingDistance;
+private int ballRadius;
+private boolean swinging = false;
+private boolean pitching = false;
+  Bat bat1 = new Bat();
+  Ball ball1 = new Ball(new PVector(400,400), 50);
+
 void setup() {
   swingDistance = 0;
+  ballRadius = 100;
   size(800, 600);
 }
 
@@ -31,6 +39,13 @@ void draw() {
   else{
   bat1.swing(0);  }
   //bat1.create();}
+    if(pitching){
+    ball1.pitch(ballRadius);
+    ballRadius -=1;
+    if(ballRadius < 1){
+      pitching = false;
+      ballRadius = 100;}
+  }
 }
   void keyPressed() {
   if (key == 'b') {
@@ -38,6 +53,11 @@ void draw() {
       backGround = 1;}
     else{
       backGround = 0;}
+  }
+  if(key == ' '){
+  //ball1.display(10);
+  pitching = true;
+ // ball1.pitch();
   }
 }
 void mouseClicked(){
