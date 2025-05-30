@@ -3,6 +3,7 @@ int backGround = 0;
 private int swingDistance;
 private boolean swinging = false;
   Bat bat1 = new Bat();
+  Ball ball1 = new Ball(new PVector(400,400), 50);
 //0 will be front view, 1 will be top down
 void setup() {
   swingDistance = 0;
@@ -40,6 +41,9 @@ void draw() {
       backGround = 1;}
     else{
       backGround = 0;}
+  }
+  if(key == ' '){
+  ball1.display(10);
   }
 }
 void mouseClicked(){

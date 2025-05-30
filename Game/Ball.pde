@@ -15,7 +15,9 @@ public class Ball{
     radiusMax = radMax;
     //set starting vals for top view of ball
   }
-  
+  public void display(int radius){
+    circle(positionFront.x, positionFront.y, radius);
+  }
   public void tickFront(){
     //Increases/Decreases radiusFront according to speedFront and updates positionFront and velocityFront
   }
