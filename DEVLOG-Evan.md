@@ -25,3 +25,8 @@ Wrote basic structure for Player class
 Added player display functionality for top view
 
 Clarified variables in Ball class by changing names and writing comments
+
+### 2025-05-29
+Wrote hit method in Batter class to calculate force applied to ball
+
+Wrote hit method in Ball class to set the starting velocity of the ball from the hit
