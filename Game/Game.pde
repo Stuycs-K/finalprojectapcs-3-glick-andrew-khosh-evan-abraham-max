@@ -2,12 +2,14 @@ import java.util.*;
 import java.io.*;
 
 int background = 0;    //0 will be front view, 1 will be top down
+public final int width1 = 1400;
+public final int height1 = 840;
 public final int FRONTVIEW = 0;
 public final int TOPVIEW = 1;
-public final PVector homePlate = new PVector(800 / 2, (600 / 2) + 225);
-public final PVector firstBase = new PVector((800 / 2) + 150, (600 / 2) + 75);
-public final PVector secondBase = new PVector(800 / 2, (600 / 2) - 75);
-public final PVector thirdBase = new PVector((800 / 2) - 150, (600 / 2) + 75);
+public final PVector homePlate = new PVector(width1 / 2, height1-70);
+public final PVector firstBase = new PVector((width1 / 2) + 155, height1 -225);
+public final PVector secondBase = new PVector(width1 / 2, height1 - 380);
+public final PVector thirdBase = new PVector((width1 / 2) - 155, height1 - 225);
 private int swingDistance;
 private boolean swinging = false;
 public boolean pitching = false;
@@ -20,10 +22,10 @@ int totalPitches = 0;
 
 
 void setup() {
+  size(1400, 840);
   swingDistance = 0;
   bases.add(hitter1);
   hitter1.position = new PVector(homePlate.x, homePlate.y + 35);
-  size(800, 600);
 }
 
 void draw() {
@@ -32,7 +34,7 @@ void draw() {
     stroke(0);
     strokeWeight(1);
     frontView();
-    
+
     if(swinging){
       //println("swinging");
       bat1.swing(swingDistance);
@@ -51,7 +53,7 @@ void draw() {
       ball1.displayFront();
     }
   }
-  
+
   else { //Top View
     topDownView();
     displayPlayers();
@@ -70,15 +72,15 @@ void draw() {
     }
     else if (background == FRONTVIEW && pitching == false){
       pitching = true;
-      ball1.positionFront = new PVector(400, 325); 
-      ball1.velocityFront = new PVector(random(-0.75, 0.75), 0); 
+      ball1.positionFront = new PVector(400, 325);
+      ball1.velocityFront = new PVector(random(-0.75, 0.75), 0);
       ball1.accelerationFront = new PVector(0, random(0.03, 0.08));
     }
   }
 }
 
 void mousePressed(){
-  if (background == FRONTVIEW){ 
+  if (background == FRONTVIEW){
     swinging = true;
     if (hitter1.hit(ball1, new PVector(mouseX, mouseY))){
       score++;
@@ -98,7 +100,7 @@ void frontView() {
   text("Click with your mouse to swing the bat", 20, 50);
   text("Swinging = " + swinging, 20, 70);
   text("Score: " + score, 20, 90);
-  fill(255, 255, 255, 80); 
+  fill(255, 255, 255, 80);
 
   rect(width/2 -75, height/2 , 150, 200);
   fill(150, 75, 0);
@@ -111,12 +113,12 @@ void topDownView() {
   noStroke();
 
   fill(34, 139, 34);
-  quad(width / 2, (height / 2) - 300, (width / 2) - 300, height / 2,
-       width / 2, (height / 2) + 300, (width / 2) + 300, height / 2);
+  quad(width / 2, 0, (width/2)-(height / 2), height / 2,
+       width / 2, height, (width/2)+(height / 2), (height / 2));
 
   fill(200, 139, 34);
-  quad(width / 2, (height / 2) - 100, (width / 2) - 200, (height / 2) + 100,
-       width / 2, (height / 2) + 300, (width / 2) + 200, (height / 2) + 100);
+  quad(width / 2, height - 400, (width / 2) - 200, height- 200,
+       width / 2, height, (width / 2) + 200, height -200);
 
   fill(255);
   drawBase(firstBase.x, firstBase.y);
