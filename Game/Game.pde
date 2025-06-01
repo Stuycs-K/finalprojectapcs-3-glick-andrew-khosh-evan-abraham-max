@@ -22,29 +22,33 @@ void setup() {
 
 void draw() {
 
-  if (backGround == 0) {
+  if (backGround == 0) { //Batting View
     frontView();
-  } else {
-    topDownView();
-  }
-    if(swinging){
-    println("swinging");
-    bat1.swing(swingDistance);
-    swingDistance++;
-    if(swingDistance > 20){
-      swingDistance = 0;
-      swinging = false;
-  }
+    
+     if(swinging){
+      println("swinging");
+      bat1.swing(swingDistance);
+      swingDistance++;
+      if(swingDistance > 20){
+        swingDistance = 0;
+        swinging = false;
+      }
     }
-  else{
-  bat1.swing(0);  }
-  //bat1.create();}
-    if(pitching){
-    ball1.pitch(ballRadius);
-    ballRadius -=1;
-    if(ballRadius < 1){
-      pitching = false;
-      ballRadius = 100;}
+    else{
+    bat1.swing(0);  }
+    //bat1.create();}
+      if(pitching){
+        ball1.pitch(ballRadius);
+        ballRadius -=1;
+        if(ballRadius < 1){
+          pitching = false;
+          ballRadius = 100;
+        }
+      }
+  }
+  else { //Top View
+    topDownView();
+    displayPlayers();
   }
 }
   void keyPressed() {
@@ -101,8 +105,6 @@ void topDownView() {
   drawBase(secondBase.x, secondBase.y);
   drawBase(thirdBase.x, thirdBase.y);
   drawBase(homePlate.x, homePlate.y);
-
-  displayPlayers();
 }
 
 void drawBase(float x, float y){
