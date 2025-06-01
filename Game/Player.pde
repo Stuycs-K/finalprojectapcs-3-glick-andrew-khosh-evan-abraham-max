@@ -6,7 +6,7 @@ public class Player{
   public PVector acceleration;
   
   public Player(){
-    strength = 1;
+    strength = 10;
     speed = 1;
     position = new PVector(width / 2, (height / 2) + 225);
   }
