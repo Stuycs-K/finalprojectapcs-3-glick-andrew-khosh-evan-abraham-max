@@ -73,9 +73,10 @@ void draw() {
     }
     else{
 pitching = true;
+ball1.hideBall = false;
 ball1.radiusIncreasing = true;
 ball1.radiusFront = 0;
-
+ball1.showTarget = true;
 ball1.positionFront = new PVector(400, 400); 
 ball1.velocityFront = new PVector(random(-1.5, 1.5), 0); 
 ball1.accelerationFront = new PVector(0, random(0.03, 0.08)); 

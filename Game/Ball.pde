@@ -10,7 +10,10 @@ public class Ball{
   public double heightTop;               //Height in top view
   public PVector velocityTop;         //Velocity in 2D plane during top view
   public double velocityHeight;          //Velocity in/out of 2D plane during top view
-  
+  public boolean showTarget = false;
+  public boolean hideBall = false;
+
+
   public Ball(PVector posFront, int radMax){
     //set starting vals for front view of ball
     positionFront = posFront;
@@ -33,22 +36,39 @@ public class Ball{
     velocityFront.add(accelerationFront);
     positionFront.add(velocityFront);
      
-    if (radiusIncreasing){
-      radiusFront += speedFront;
-      if (radiusFront > radiusMax){
-        radiusFront = radiusMax;
-        radiusIncreasing = false;
-      }
-    }
-    else {
-      radiusFront -= speedFront;
-    }
+if (radiusIncreasing){
+  radiusFront += speedFront;
+  if (radiusFront > radiusMax){
+    radiusFront = radiusMax;
+    radiusIncreasing = false;
+    showTarget = false;
+        hideBall = true;
+  }
+}
+else {
+  radiusFront -= speedFront;
+    if (radiusFront < 0) {
+    radiusFront = 0;
+    hideBall = false; 
+  }
+}
+
     
     if (radiusFront < 0){ radiusFront = 0; }
   }
   
   public void displayFront(){
+    if (showTarget && radiusIncreasing) {
+  noFill();
+  stroke(0, 255, 0, 80); 
+  strokeWeight(2);
+  circle(positionFront.x, positionFront.y, radiusMax * 2); // Target circle at max size
+  noStroke();
+}
+  if (!hideBall) {
+  fill(255);
     circle(positionFront.x, positionFront.y, radiusFront*2);
+  }
   }
   
   public void breakFront(PVector forceBreak){
