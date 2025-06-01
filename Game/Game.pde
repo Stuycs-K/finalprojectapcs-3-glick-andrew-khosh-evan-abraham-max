@@ -1,32 +1,34 @@
 import java.util.*;
 import java.io.*;
 
-int backGround = 0;    //0 will be front view, 1 will be top down
+int background = 0;    //0 will be front view, 1 will be top down
+public final int FRONTVIEW = 0;
+public final int TOPVIEW = 1;
 public final PVector homePlate = new PVector(800 / 2, (600 / 2) + 225);
 public final PVector firstBase = new PVector((800 / 2) + 150, (600 / 2) + 75);
 public final PVector secondBase = new PVector(800 / 2, (600 / 2) - 75);
 public final PVector thirdBase = new PVector((800 / 2) - 150, (600 / 2) + 75);
 private int swingDistance;
-private int ballRadius;
 private boolean swinging = false;
 private boolean pitching = false;
 Bat bat1 = new Bat();
 Ball ball1 = new Ball(new PVector(400,400), 50);
+Hitter hitter1 = new Hitter();
 ArrayList<Player> bases = new ArrayList<Player>();
 
 void setup() {
   swingDistance = 0;
-  ballRadius = 100;
+  bases.add(hitter1);
   size(800, 600);
 }
 
 void draw() {
 
-  if (backGround == 0) { //Batting View
+  if (background == FRONTVIEW) { //Batting View
     frontView();
     
-     if(swinging){
-      println("swinging");
+    if(swinging){
+      //println("swinging");
       bat1.swing(swingDistance);
       swingDistance++;
       if(swingDistance > 20){
@@ -34,41 +36,47 @@ void draw() {
         swinging = false;
       }
     }
-    else{
-    bat1.swing(0);  }
-    //bat1.create();}
-      if(pitching){
-        ball1.pitch(ballRadius);
-        ballRadius -=1;
-        if(ballRadius < 1){
-          pitching = false;
-          ballRadius = 100;
-        }
+    else {
+      bat1.swing(0);
+    }
+
+    if(pitching){
+      ball1.tickFront();
+      ball1.displayFront();
+      
+      if (!ball1.radiusIncreasing && ball1.radiusFront == 0){
+        pitching = false;
       }
+    }
   }
+  
   else { //Top View
     topDownView();
     displayPlayers();
+    ball1.tickTop();
+    ball1.displayTop();
   }
 }
   void keyPressed() {
   if (key == 'b') {
-    if(backGround == 0){
-      backGround = 1;}
-    else{
-      backGround = 0;}
+    switchView();
   }
   if(key == ' '){
-  //ball1.display(10);
-  pitching = true;
- // ball1.pitch();
+    //ball1.display(10);
+    pitching = true;
+    ball1.radiusIncreasing = true;
+    ball1.radiusFront = 0;
   }
 }
+
 void mouseClicked(){
-  swinging = true;
+  if (background == FRONTVIEW){ 
+    swinging = true;
+    if (hitter1.hit(ball1, new PVector(mouseX, mouseY))){
+      switchView();
+    }
+  }
 }
-
-
 
 void frontView() {
   background(135, 206, 235);
@@ -109,6 +117,15 @@ void topDownView() {
 
 void drawBase(float x, float y){
   quad(x, y, x - 25, y + 25, x, y + 50, x + 25, y + 25);
+}
+
+void switchView(){
+  if (background == FRONTVIEW){
+    background = TOPVIEW;
+  }
+  else {
+    background = FRONTVIEW;
+  }
 }
 
 void displayPlayers(){
