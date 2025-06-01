@@ -27,6 +27,8 @@ public class Ball{
   }
   
   public void tickFront(){
+
+
     //Increases/Decreases radiusFront according to speedFront and updates positionFront and velocityFront
     velocityFront.add(accelerationFront);
     positionFront.add(velocityFront);
@@ -67,6 +69,9 @@ public class Ball{
   }
   
   public void displayTop(){
+    stroke(255, 100, 100, 100); 
+line(positionTop.x, positionTop.y, positionTop.x - velocityTop.x * 5, positionTop.y - velocityTop.y * 5);
+
     noStroke();
     fill(255, 0, 0);
     circle(positionTop.x, positionTop.y, (float) (25 + 0.1 * heightTop));
