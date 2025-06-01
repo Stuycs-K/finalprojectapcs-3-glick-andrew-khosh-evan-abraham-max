@@ -64,7 +64,8 @@ void draw() {
   if(key == ' '){
     if(background == TOPVIEW){
       background = 0;
-      
+      pitching = false;
+      swinging = false;
     }
     else{
     //ball1.display(10);
