@@ -2,9 +2,9 @@ public class Ball{
   public PVector positionFront;       //Position in front view
   public PVector velocityFront;       //Velocity in 2D plane during front view (ex. curve ball)
   public PVector accelerationFront;   //Acceleration in 2D plane during front view (ex. curve ball)
-  public int speedFront;              //Speed of ball in/out of 2D plane during front view
-  public int radiusFront;             //Radius of slice of ball going through 2D plane during front view
-  public int radiusMax;               //Max radius of slice of ball going through 2D plane during front view
+  public float speedFront;              //Speed of ball in/out of 2D plane during front view
+  public float radiusFront;             //Radius of slice of ball going through 2D plane during front view
+  public float radiusMax;               //Max radius of slice of ball going through 2D plane during front view
   public boolean radiusIncreasing;     //Radius increasing or decreasing
   public PVector positionTop;         //Position in top view
   public double heightTop;               //Height in top view
@@ -19,7 +19,7 @@ public class Ball{
     positionFront = posFront;
     radiusMax = radMax;
     radiusIncreasing = true;
-    speedFront = 1;
+    speedFront = 0.5;
     velocityFront = new PVector(0, 0);
     accelerationFront = new PVector(0, 0);
     //set starting vals for top view of ball
@@ -43,6 +43,10 @@ if (radiusIncreasing){
     radiusIncreasing = false;
     showTarget = false;
         hideBall = true;
+        if (radiusFront >= radiusMax && !pitchWasHit) {
+  totalPitches++;
+}
+
   }
 }
 else {
@@ -60,7 +64,7 @@ else {
   public void displayFront(){
     if (showTarget && radiusIncreasing) {
   noFill();
-  stroke(0, 255, 0, 80); 
+stroke(0, 0, 0, 80);
   strokeWeight(2);
   circle(positionFront.x, positionFront.y, radiusMax * 2); // Target circle at max size
   noStroke();
