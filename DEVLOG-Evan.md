@@ -27,6 +27,13 @@ Added player display functionality for top view
 Clarified variables in Ball class by changing names and writing comments
 
 ### 2025-05-29
-Wrote hit method in Batter class to calculate force applied to ball
+Wrote hit method in Hitter class to calculate force applied to ball
 
 Wrote hit method in Ball class to set the starting velocity of the ball from the hit
+
+### 2025-06-01 HOME
+Cleaned up code for controlling the ball in top view to use the proper variables and functions
+
+Fixed hit method in Hitter class to properly calculate direction of force applied to ball
+
+Wrote code to control and display ball in top view
