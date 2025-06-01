@@ -12,9 +12,13 @@ private int swingDistance;
 private boolean swinging = false;
 private boolean pitching = false;
 Bat bat1 = new Bat();
-Ball ball1 = new Ball(new PVector(400,400), 50);
+Ball ball1 = new Ball(new PVector(400,400), 30);
 Hitter hitter1 = new Hitter();
 ArrayList<Player> bases = new ArrayList<Player>();
+int score = 0;
+int totalPitches = 0;
+boolean pitchWasHit = false;
+
 
 void setup() {
   swingDistance = 0;
@@ -64,13 +68,24 @@ void draw() {
   if(key == ' '){
     if(background == TOPVIEW){
       background = 0;
-      
+      pitching = false;
+      swinging = false;
+      ball1.positionTop = new PVector(homePlate.x, homePlate.y);
+      ball1.heightTop = 10;
+      ball1.velocityTop = new PVector(0, 0);
+      ball1.velocityHeight = 0;
+      pitchWasHit = false;
     }
     else{
-    //ball1.display(10);
-    pitching = true;
-    ball1.radiusIncreasing = true;
-    ball1.radiusFront = 0;
+pitching = true;
+ball1.hideBall = false;
+ball1.radiusIncreasing = true;
+ball1.radiusFront = 0;
+ball1.showTarget = true;
+ball1.positionFront = new PVector(400, 300); 
+ball1.velocityFront = new PVector(random(-0.75, 0.75), 0); 
+ball1.accelerationFront = new PVector(0, random(0.03, 0.08)); 
+
   }
   }
 }
@@ -79,6 +94,8 @@ void mouseClicked(){
   if (background == FRONTVIEW){ 
     swinging = true;
     if (hitter1.hit(ball1, new PVector(mouseX, mouseY))){
+       score++;
+  pitchWasHit = true;
       switchView();
     }
   }
@@ -92,7 +109,7 @@ void frontView() {
   text("Click space to pitch the ball", 20, 30);
   text("Click with your mouse to swing the bat", 20, 50);
    text("Swinging = " + swinging, 20, 70);
-
+text("Score: " + score, 20, 90);
 fill(255, 255, 255, 80); 
 
   rect(width/2 -75, height/2 , 150, 200);
