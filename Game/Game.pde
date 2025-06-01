@@ -96,9 +96,9 @@ void frontView() {
 
   fill(34, 139, 34);
   rect(0, height * 2 / 3, width, height / 3);
-  text("Click space to pitch the ball", 20, 30);
+  text("Click space to pitch the ball and to go back to hitting", 20, 30);
   text("Click with your mouse to swing the bat", 20, 50);
-  text("Swinging = " + swinging, 20, 70);
+ // text("Swinging = " + swinging, 20, 70);
   text("Score: " + score, 20, 90);
   fill(255, 255, 255, 80);
 
