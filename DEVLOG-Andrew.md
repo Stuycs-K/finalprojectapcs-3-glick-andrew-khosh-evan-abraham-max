@@ -15,4 +15,8 @@ Created bat class
 made a bat that swings when you click the screen
 ### 2025-05-30
 Created a ball that launches when you click space
-
+### 2025-06-01
+I created the transition between once you hit the ball and when you wanted to bat again
+I made it so the pitch was random and curved, not just a straight line down the middle
+I introduced a score variable to track the number of hits
+I created a circle around the ball that shows its max size and the ball dissapears once it fills the circle
