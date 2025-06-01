@@ -62,10 +62,16 @@ void draw() {
     switchView();
   }
   if(key == ' '){
+    if(background == TOPVIEW){
+      background = 0;
+      
+    }
+    else{
     //ball1.display(10);
     pitching = true;
     ball1.radiusIncreasing = true;
     ball1.radiusFront = 0;
+  }
   }
 }
 
@@ -86,9 +92,8 @@ void frontView() {
   text("Click space to pitch the ball", 20, 30);
   text("Click with your mouse to swing the bat", 20, 50);
    text("Swinging = " + swinging, 20, 70);
-  noFill();
 
- noFill();
+fill(255, 255, 255, 80); 
 
   rect(width/2 -75, height/2 , 150, 200);
   fill(150, 75, 0);
