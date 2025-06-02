@@ -3,25 +3,29 @@ import java.io.*;
 
 public class Pitcher extends Player{
   public ArrayList<String> pitches;
-  public ArrayList<Integer> velocities;
-  public ArrayList<Double> spin;
   
   public Pitcher(){
     pitches = new ArrayList<String>();
-    velocities = new ArrayList<Integer>();
-    spin = new ArrayList<Double>();
+    pitches.add("fast"); pitches.add("curve"); pitches.add("change");
   }
   
-  public void addPitch(String pitch, int velocity, double junk){
-    pitches.add(pitch);
-    velocities.add(velocity);
-    spin.add(junk);
-  }
-  
-  public void pitch(){
+  public Ball pitch(){
     int chosen = (int)(Math.random()*pitches.size());
     String pitch = pitches.get(chosen);
-    int velocity = velocities.get(chosen)-5+(int)(Math.random()*10);
-    double junk = spin.get(chosen);
+    
+    Ball ball = new Ball(new PVector(width1/2, height1/2 - 50), 30);
+    ball.velocityFront = new PVector(random(-0.75, 0.75), 0);
+    ball.accelerationFront = new PVector(0, random(0.03, 0.08));
+    ball.speedFront = strength / 20;
+    return ball;
+    
+    /*
+    if (pitch = "fast"){
+    }
+    if (pitch = "curve"){
+    }
+    if (pitch = "change"){
+    }
+    */
   }
 }
