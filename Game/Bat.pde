@@ -1,5 +1,5 @@
 public class Bat{
-  private int batXcor = 200;
+  private int batXcor = 500;
   private int batYcor = 400;
   public Bat(){
   }
