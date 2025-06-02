@@ -2,6 +2,7 @@ import java.util.*;
 import java.io.*;
 
 int background = 0;    //0 will be front view, 1 will be top down
+boolean remove = false;
 public final int width1 = 1400;
 public final int height1 = 840;
 public final int FRONTVIEW = 0;
@@ -16,7 +17,7 @@ public boolean pitching = false;
 Bat bat1 = new Bat();
 Ball ball1 = new Ball(new PVector(width1/2, height1/2), 30);
 Hitter hitter1 = new Hitter();
-ArrayList<Player> bases = new ArrayList<Player>();
+ArrayList<Baserunner> runners = new ArrayList<Baserunner>();
 int score = 0;
 int totalPitches = 0;
 
@@ -24,8 +25,7 @@ int totalPitches = 0;
 void setup() {
   size(1400, 840);
   swingDistance = 0;
-  bases.add(hitter1);
-  hitter1.position = new PVector(homePlate.x, homePlate.y + 35);
+  hitter1.position = homePlate.copy();
 }
 
 void draw() {
@@ -57,6 +57,31 @@ void draw() {
   else { //Top View
     topDownView();
     displayPlayers();
+    for (Baserunner player : runners){
+      player.move();
+      if (player.position.x > firstBase.x){
+        player.stop();
+        player.onBase = 1;
+      }
+      else if (player.position.y < secondBase.y + 25){
+        player.stop();
+        player.onBase = 2;
+      }
+      else if (player.position.x < thirdBase.x){
+        player.stop();
+        player.onBase = 3;
+      }
+      else if (player.position.y > homePlate.y + 25){
+        player.stop();
+        player.position = new PVector(10000,10000);
+        remove = true;
+        score++;
+      }
+    }
+    if (remove){
+      runners.remove(0);
+      remove = false;
+    }
     ball1.tickTop();
     ball1.displayTop();
   }
@@ -77,6 +102,26 @@ void draw() {
       ball1.accelerationFront = new PVector(0, random(0.03, 0.08));
     }
   }
+  if(key == '0'){
+    for (Baserunner player : runners){
+      if (player.onBase == 0) player.run();
+    }
+  }
+  if(key == '1'){
+    for (Baserunner player : runners){
+      if (player.onBase == 1) player.run();
+    }
+  }
+  if(key == '2'){
+    for (Baserunner player : runners){
+      if (player.onBase == 2) player.run();
+    }
+  }
+  if(key == '3'){
+    for (Baserunner player : runners){
+      if (player.onBase == 3) player.run();
+    }
+  }
 }
 
 void mousePressed(){
@@ -87,6 +132,7 @@ void mousePressed(){
       pitching = false;
       swinging = false;
       switchView();
+      runners.add(new Baserunner(hitter1.strength,hitter1.speed));
     }
   }
 }
@@ -142,7 +188,7 @@ void switchView(){
 
 void displayPlayers(){
   noStroke();
-  for (Player player : bases){
+  for (Baserunner player : runners){
     fill(0);
     circle(player.position.x, player.position.y, 30);
   }
