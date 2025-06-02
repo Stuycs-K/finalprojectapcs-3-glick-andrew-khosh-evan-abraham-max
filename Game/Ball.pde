@@ -24,12 +24,12 @@ public class Ball{
     velocityTop = new PVector(0, 0);
     velocityHeight = 0;
   }
-  
+
   public void tickFront(){
     //Increases/Decreases radiusFront according to speedFront and updates positionFront and velocityFront
     velocityFront.add(accelerationFront);
     positionFront.add(velocityFront);
-     
+
     radiusFront += speedFront;
     if (radiusFront > radiusMax){
       pitching = false;
@@ -37,7 +37,7 @@ public class Ball{
       totalPitches++;
     }
   }
-  
+
   public void displayFront(){
     noFill();
     stroke(0);
@@ -47,15 +47,15 @@ public class Ball{
     fill(255);
     circle(positionFront.x, positionFront.y, radiusFront*2);
   }
-  
+
   public void breakFront(PVector forceBreak){
     accelerationFront = forceBreak;
   }
-  
+
   public void tickTop(){
     //Changes positionTop and heightTop based on velocityTop and velocityHeight, also applys gravity
     positionTop.add(velocityTop);
-    
+
     velocityHeight -= 0.1;
     heightTop += velocityHeight;
     if (heightTop < 0){
@@ -64,16 +64,16 @@ public class Ball{
       velocityTop = new PVector(0, 0);
     }
   }
-  
+
   public void displayTop(){
-    stroke(255, 100, 100, 100); 
+    stroke(255, 100, 100, 100);
     line(positionTop.x, positionTop.y, positionTop.x - velocityTop.x * 5, positionTop.y - velocityTop.y * 5);
 
     noStroke();
     fill(255, 0, 0);
     circle(positionTop.x, positionTop.y, (float) (25 + 0.1 * heightTop));
   }
-  
+
   public void hit(PVector forceTop, double forceHeight){
     //Sets the starting velocityTop velocityHeight based on the force applied
     velocityTop = forceTop;
