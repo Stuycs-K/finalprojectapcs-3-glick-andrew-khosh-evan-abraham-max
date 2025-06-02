@@ -15,11 +15,10 @@ private int swingDistance;
 private boolean swinging = false;
 public boolean pitching = false;
 Bat bat1 = new Bat();
-Ball ball1 = new Ball(new PVector(width1/2, height1/2 - 50), 25);
+Ball ball1 = new Ball(new PVector(width1/2, height1/2 - 50), 30);
 Hitter hitter1 = new Hitter();
 ArrayList<Baserunner> runners = new ArrayList<Baserunner>();
-int hits = 0;
-int runs = 0;
+int score = 0;
 int totalPitches = 0;
 
 
@@ -37,12 +36,9 @@ void draw() {
     frontView();
 
     if(swinging){
-      println("first :" + abs(400 - mouseY) + "second :" + abs(mouseX-500));
-      println(degrees(atan((abs(400 - mouseY)/abs(mouseX - 500)))));
-             rotate(degrees(atan((abs(400 - mouseY))/(abs(500 - mouseX)))));
+      //println("swinging");
       bat1.swing(swingDistance);
       swingDistance++;
-
       if(swingDistance > 20){
         swingDistance = 0;
         swinging = false;
@@ -79,7 +75,7 @@ void draw() {
         player.stop();
         player.position = new PVector(10000,10000);
         remove = true;
-        runs++;
+        score++;
       }
     }
     if (remove){
@@ -103,7 +99,7 @@ void draw() {
       pitching = true;
       ball1.positionFront = new PVector(width1/2, height1/2 - 50);
       ball1.velocityFront = new PVector(random(-0.75, 0.75), 0);
-      ball1.accelerationFront = new PVector(0, random(0.02, 0.03));
+      ball1.accelerationFront = new PVector(0, random(0.03, 0.08));
     }
   }
   if(key == '0'){
@@ -132,7 +128,7 @@ void mousePressed(){
   if (background == FRONTVIEW){
     swinging = true;
     if (hitter1.hit(ball1, new PVector(mouseX, mouseY))){
-      hits++;
+      score++;
       pitching = false;
       swinging = false;
       switchView();
@@ -149,8 +145,7 @@ void frontView() {
   text("Click space to pitch the ball and to go back to hitting", 20, 30);
   text("Click with your mouse to swing the bat", 20, 50);
  // text("Swinging = " + swinging, 20, 70);
-  text("Hits: " + hits, 20, 90);
-  text("Runs: " + runs, 20, 110);
+  text("Score: " + score, 20, 90);
   fill(255, 255, 255, 80);
 
   rect(width/2 - 75, (height*2/3) - 250 , 150, 200);
