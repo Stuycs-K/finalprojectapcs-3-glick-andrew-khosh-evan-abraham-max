@@ -18,7 +18,8 @@ Bat bat1 = new Bat();
 Ball ball1 = new Ball(new PVector(width1/2, height1/2 - 50), 30);
 Hitter hitter1 = new Hitter();
 ArrayList<Baserunner> runners = new ArrayList<Baserunner>();
-int score = 0;
+int hits = 0;
+int runs = 0;
 int totalPitches = 0;
 
 
@@ -75,7 +76,7 @@ void draw() {
         player.stop();
         player.position = new PVector(10000,10000);
         remove = true;
-        score++;
+        runs++;
       }
     }
     if (remove){
@@ -128,7 +129,7 @@ void mousePressed(){
   if (background == FRONTVIEW){
     swinging = true;
     if (hitter1.hit(ball1, new PVector(mouseX, mouseY))){
-      score++;
+      hits++;
       pitching = false;
       swinging = false;
       switchView();
@@ -145,7 +146,8 @@ void frontView() {
   text("Click space to pitch the ball and to go back to hitting", 20, 30);
   text("Click with your mouse to swing the bat", 20, 50);
  // text("Swinging = " + swinging, 20, 70);
-  text("Score: " + score, 20, 90);
+  text("Hits: " + hits, 20, 90);
+  text("Runs: " + runs, 20, 110);
   fill(255, 255, 255, 80);
 
   rect(width/2 - 75, (height*2/3) - 250 , 150, 200);
