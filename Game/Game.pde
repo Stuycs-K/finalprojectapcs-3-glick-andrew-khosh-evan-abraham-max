@@ -103,19 +103,38 @@ void draw() {
       ball1.accelerationFront = new PVector(0, random(0.03, 0.08));
     }
   }
-  if(key == '0'){
+  /*if(key == '0'){
     for (Baserunner player : runners){
       if (player.onBase == 0) player.run();
     }
-  }
+  }*/
   if(key == '1'){
     for (Baserunner player : runners){
-      if (player.onBase == 1) player.run();
+      if (player.onBase == 1) {
+        player.run();
+        for (Baserunner player1 : runners){
+          if (player1.onBase == 2){
+            player1.run();
+            for (Baserunner player2 : runners){
+              if (player2.onBase == 3){
+                player2.run();
+              }
+            }
+          }
+        }
+      }      
     }
   }
   if(key == '2'){
     for (Baserunner player : runners){
-      if (player.onBase == 2) player.run();
+      if (player.onBase == 2) {
+        player.run();
+        for (Baserunner player1 : runners){
+          if (player1.onBase == 3) {
+            player1.run();
+          }
+        }
+      }
     }
   }
   if(key == '3'){
@@ -134,6 +153,9 @@ void mousePressed(){
       swinging = false;
       switchView();
       runners.add(new Baserunner(hitter1.strength,hitter1.speed));
+      for (Baserunner player : runners){
+        if (player.onBase == 0) player.run();
+       }
     }
   }
 }
