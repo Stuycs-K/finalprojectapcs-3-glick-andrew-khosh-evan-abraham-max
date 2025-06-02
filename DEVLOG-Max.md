@@ -35,3 +35,14 @@ Finished the new UML in totality, which took around 40 minutes, including adding
 ### 2025-05-30 - Worked on changing bases from ints to PVectors and displaying based off of it
 - converted to PVectors (15 minutes)
 - displayed PVecotrs (15 minutes)
+
+### 2025-06-01 - Worked on changing dimensions and base running
+- Fixed size of field - made it bigger - made the infield/outfield ration better - tied the size to height and width (40 minutes)
+- Shifted strikezone to be more in the middle of the screen (10 minutes)
+- Moved ball to be inside the new strikzone (15 minutes)
+- Added Baserunner functions (30 minutes)
+  - run
+  - stop
+  - move (in Player class)
+- showed runners on bases (10 minutes)
+- Made number keys correspond to making runners run and made them stop at next base (30 minutes)
