@@ -59,6 +59,7 @@ void draw() {
   else { //Top View
     topDownView();
     displayPlayers();
+    
     for (Baserunner player : runners){
       player.move();
       if (player.position.x > firstBase.x){
@@ -84,11 +85,13 @@ void draw() {
       runners.remove(0);
       remove = false;
     }
+    
     ball1.tickTop();
     ball1.displayTop();
   }
 }
-  void keyPressed() {
+
+void keyPressed() {
   if (key == 'b') {
     switchView();
   }
