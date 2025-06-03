@@ -15,10 +15,11 @@ private int swingDistance;
 private boolean swinging = false;
 public boolean pitching = false;
 Bat bat1 = new Bat();
-Ball ball1 = new Ball(new PVector(width1/2, height1/2 - 50), 30);
 Hitter hitter1 = new Hitter();
 Pitcher pitcher1 = new Pitcher();
+Ball ball1 = new Ball(new PVector(width1/2, height1/2 - 50), 30, pitcher1.strength);
 ArrayList<Baserunner> runners = new ArrayList<Baserunner>();
+ArrayList<Outfielder> outfielders = new ArrayList<Outfielder>();
 int hits = 0;
 int runs = 0;
 int totalPitches = 0;
@@ -28,6 +29,7 @@ void setup() {
   size(1400, 840);
   swingDistance = 0;
   hitter1.position = homePlate.copy();
+  resetDefenders();
 }
 
 void draw() {
@@ -54,41 +56,19 @@ void draw() {
       ball1.tickFront();
       ball1.displayFront();
     }
-  }
+  } //End Batting View
 
   else { //Top View
     topDownView();
     displayPlayers();
     
-    for (Baserunner player : runners){
-      player.move();
-      if (player.position.x > firstBase.x){
-        player.stop();
-        player.onBase = 1;
-      }
-      else if (player.position.y < secondBase.y + 25){
-        player.stop();
-        player.onBase = 2;
-      }
-      else if (player.position.x < thirdBase.x){
-        player.stop();
-        player.onBase = 3;
-      }
-      else if (player.position.y > homePlate.y + 25){
-        player.stop();
-        player.position = new PVector(10000,10000);
-        remove = true;
-        runs++;
-      }
-    }
-    if (remove){
-      runners.remove(0);
-      remove = false;
-    }
+    movePlayers();
+    moveDefenders();
     
     ball1.tickTop();
     ball1.displayTop();
-  }
+  } //End Top View
+  
 }
 
 void keyPressed() {
@@ -96,30 +76,31 @@ void keyPressed() {
     switchView();
   }
   if(key == ' '){
-    if (background == TOPVIEW && ball1.heightTop == 0){
+    if (background == TOPVIEW && ball1.heightTop == 0 && playersOnBase()){
       background = 0;
+      resetDefenders();
     }
     else if (background == FRONTVIEW && pitching == false){
       pitching = true;
       ball1 = pitcher1.pitch();
     }
   }
-  if(key == '0'){
+  if(key == '1'){
     for (Baserunner player : runners){
       if (player.onBase == 0) player.run();
     }
   }
-  if(key == '1'){
+  if(key == '2'){
     for (Baserunner player : runners){
       if (player.onBase == 1) player.run();
     }
   }
-  if(key == '2'){
+  if(key == '3'){
     for (Baserunner player : runners){
       if (player.onBase == 2) player.run();
     }
   }
-  if(key == '3'){
+  if(key == '4'){
     for (Baserunner player : runners){
       if (player.onBase == 3) player.run();
     }
@@ -176,6 +157,63 @@ void topDownView() {
   drawBase(homePlate.x, homePlate.y);
 }
 
+boolean playersOnBase(){
+  for (Baserunner player : runners){
+     if (player.velocity.mag() > 0){
+      return false;
+    }
+  }
+  return true;
+}
+
+boolean ballCaught(){
+  return true;
+}
+
+void movePlayers(){
+  for (Baserunner player : runners){
+    player.move();
+    if (player.position.x > firstBase.x){
+      player.stop();
+      player.onBase = 1;
+    }
+    else if (player.position.y < secondBase.y + 25){
+      player.stop();
+      player.onBase = 2;
+    }
+    else if (player.position.x < thirdBase.x){
+      player.stop();
+      player.onBase = 3;
+    }
+    else if (player.position.y > homePlate.y + 25){
+      player.stop();
+      player.position = new PVector(10000,10000);
+      remove = true;
+      runs++;
+    }
+  }
+  if (remove){
+    runners.remove(0);
+    remove = false;
+  }
+}
+
+void moveDefenders(){
+  for (Outfielder player : outfielders){
+    player.chaseBall(ball1);
+    
+    if (player.position.dist(ball1.positionTop) < 12.5){
+      
+    }
+  }
+}
+
+void resetDefenders(){
+  outfielders = new ArrayList<Outfielder>();
+  
+  outfielders.add(new Outfielder(10, 1, new PVector(width/2 - 100, height/2))); 
+}
+
 void drawBase(float x, float y){
   quad(x, y, x - 25, y + 25, x, y + 50, x + 25, y + 25);
 }
@@ -193,6 +231,10 @@ void displayPlayers(){
   noStroke();
   for (Baserunner player : runners){
     fill(0);
+    circle(player.position.x, player.position.y, 30);
+  }
+  for (Outfielder player : outfielders){
+    fill(255);
     circle(player.position.x, player.position.y, 30);
   }
 }
