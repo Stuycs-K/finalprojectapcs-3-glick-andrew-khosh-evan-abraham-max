@@ -38,8 +38,9 @@ public class Ball{
       float bx = positionFront.x;
 float by = positionFront.y;
 
-if (bx >= zoneX1 && bx <= zoneX2 && by >= zoneY1 && by <= zoneY2) {
+if (bx >= zoneX1 && bx <= zoneX2 && by >= zoneY1 && by <= zoneY2||swung) {
   strikes++;
+  swung = false;
   println("Strike " + strikes);
 } else {
 

@@ -8,6 +8,7 @@ public final int height1 = 840;
 public final int FRONTVIEW = 0;
 public final int TOPVIEW = 1;
 public boolean foul = false;
+public boolean swung = false;
 int strikes = 0;
 int balls = 0;
 int outs = 0;  
@@ -53,6 +54,7 @@ void draw() {
 
       if(swingDistance > 20){
         swingDistance = 0;
+        swung = true;
         swinging = false;
       }
     }
