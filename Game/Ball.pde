@@ -57,6 +57,28 @@ if (balls >= 4) {
   println("Walk!");
   balls = 0;
   strikes = 0;
+  runners.add(new Baserunner(hitter1.strength,hitter1.speed));
+  for (Baserunner player : runners){
+    if (player.onBase == 0) {
+      player.run();
+      for (Baserunner player1 : runners){
+        if (player1.onBase == 1) {
+          player1.run();
+          for (Baserunner player2 : runners){
+            if (player2.onBase == 2){
+              player2.run();
+              for (Baserunner player3 : runners){
+                if (player3.onBase == 3){
+                   player3.run();
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  switchView();
     }
   }
   }
