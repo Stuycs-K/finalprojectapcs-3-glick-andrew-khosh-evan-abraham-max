@@ -1,6 +1,6 @@
 import java.util.*;
 import java.io.*;
-
+int innings = 1;
 int background = 0;    //0 will be front view, 1 will be top down
 boolean remove = false;
 public final int width1 = 1400;
@@ -194,11 +194,12 @@ void frontView() {
   rect(0, height * 2 / 3, width, height / 3);
   text("Click space to pitch the ball and to go back to hitting", 20, 30);
   text("Click with your mouse to swing the bat", 20, 50);
-  text("Balls : " + balls, 20, 60);
-  text("Strikes : " + strikes, 20, 80);
+  text("Balls : " + balls, 20, 70);
+  text("Strikes : " + strikes, 20, 90);
  // text("Swinging = " + swinging, 20, 70);
-  text("Hits: " + hits, 20, 90);
-  text("Runs: " + runs, 20, 110);
+  text("Hits: " + hits, 20, 110);
+  text("Runs: " + runs, 20, 130);
+    text("Inning : " + innings, 20, 150);
   fill(255, 255, 255, 80);
 
   rect(width/2 - 75, (height*2/3) - 250 , 150, 200);
