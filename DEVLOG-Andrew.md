@@ -23,3 +23,5 @@ I created a circle around the ball that shows its max size and the ball dissapea
 ### 2025-06-01
 looked into rotate on processing
 started implementing rotate for bat swing
+### 2025-06-01 HOME
+added strikes and balls and outs
