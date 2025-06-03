@@ -7,7 +7,7 @@ public class Bat{
     //for(int i = 0; i < 10; i++){
    //println("swinging2");
       ellipse(batXcor + i*10, batYcor, 200, 40);
-      
+
     //  }
 
   }
