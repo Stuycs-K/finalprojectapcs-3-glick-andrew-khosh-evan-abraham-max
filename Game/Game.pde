@@ -45,8 +45,8 @@ void draw() {
 
     if(swinging){
       println("first :" + abs(400 - mouseY) + "second :" + abs(mouseX-500));
-      println(degrees(atan((abs(400 - mouseY)/abs(mouseX - 500)))));
-             rotate(degrees(atan((abs(400 - mouseY))/(abs(500 - mouseX)))));
+      println((atan((abs(400 - mouseY)/abs(mouseX - 500)))));
+            rotate((atan((abs(400 - mouseY))/(abs(500 - mouseX)))));
       bat1.swing(swingDistance);
       swingDistance++;
 
