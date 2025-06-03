@@ -7,6 +7,13 @@ public final int width1 = 1400;
 public final int height1 = 840;
 public final int FRONTVIEW = 0;
 public final int TOPVIEW = 1;
+int strikes = 0;
+int balls = 0;
+int outs = 0;  
+float zoneX1 = width/2 - 75;
+float zoneX2 = width/2 + 75;
+float zoneY1 = (height*2/3) - 250;
+float zoneY2 = (height*2/3) - 50;
 public final PVector homePlate = new PVector(width1 / 2, height1-70);
 public final PVector firstBase = new PVector((width1 / 2) + 155, height1 -225);
 public final PVector secondBase = new PVector(width1 / 2, height1 - 380);
@@ -46,7 +53,7 @@ void draw() {
       }
     }
     else {
-      bat1.swing(0);
+      bat1.create();
     }
 
     if(pitching){
@@ -184,6 +191,8 @@ void frontView() {
   rect(0, height * 2 / 3, width, height / 3);
   text("Click space to pitch the ball and to go back to hitting", 20, 30);
   text("Click with your mouse to swing the bat", 20, 50);
+  text("Balls : " + balls, 20, 60);
+  text("Strikes : " + strikes, 20, 80);
  // text("Swinging = " + swinging, 20, 70);
   text("Hits: " + hits, 20, 90);
   text("Runs: " + runs, 20, 110);
