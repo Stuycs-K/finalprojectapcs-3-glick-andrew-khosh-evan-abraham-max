@@ -15,7 +15,7 @@ public class Ball{
     //set starting vals for front view of ball
     positionFront = posFront;
     radiusMax = radMax;
-    speedFront = 0.5;
+    speedFront = 0.25;
     velocityFront = new PVector(0, 0);
     accelerationFront = new PVector(0, 0);
     //set starting vals for top view of ball
@@ -35,7 +35,30 @@ public class Ball{
       pitching = false;
       radiusFront = 0;
       totalPitches++;
+      float bx = positionFront.x;
+float by = positionFront.y;
+
+if (bx >= zoneX1 && bx <= zoneX2 && by >= zoneY1 && by <= zoneY2) {
+  strikes++;
+  println("Strike " + strikes);
+} else {
+
+  balls++;
+  println("Ball " + balls);
+}
+
+if (strikes >= 3) {
+  outs++;
+  println("Strikeout!");
+  strikes = 0;
+  balls = 0;
+}
+if (balls >= 4) {
+  println("Walk!");
+  balls = 0;
+  strikes = 0;
     }
+  }
   }
 
   public void displayFront(){
