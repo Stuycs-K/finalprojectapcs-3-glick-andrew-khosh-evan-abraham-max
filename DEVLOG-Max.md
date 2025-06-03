@@ -46,3 +46,8 @@ Finished the new UML in totality, which took around 40 minutes, including adding
   - move (in Player class)
 - showed runners on bases (10 minutes)
 - Made number keys correspond to making runners run and made them stop at next base (30 minutes)
+
+### 2025-06-02 - Worked on forced running
+- made initial runner auto-run (10 minutes)
+- made forced running (10 minutes)
+- helped classmates with their work due to limited places to work in the moment (20 minutes)
