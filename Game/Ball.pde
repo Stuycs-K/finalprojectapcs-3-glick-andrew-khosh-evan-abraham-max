@@ -11,11 +11,11 @@ public class Ball{
   public double velocityHeight;       //Velocity in/out of 2D plane during top view
 
 
-  public Ball(PVector posFront, int radMax){
+  public Ball(PVector posFront, int radMax, int pitcherStrength){
     //set starting vals for front view of ball
     positionFront = posFront;
     radiusMax = radMax;
-    speedFront = 0.5;
+    speedFront = 0.05 * pitcherStrength;
     velocityFront = new PVector(0, 0);
     accelerationFront = new PVector(0, 0);
     //set starting vals for top view of ball
@@ -29,7 +29,7 @@ public class Ball{
     //Increases/Decreases radiusFront according to speedFront and updates positionFront and velocityFront
     velocityFront.add(accelerationFront);
     positionFront.add(velocityFront);
-     
+    
     radiusFront += speedFront;
     if (radiusFront > radiusMax){
       pitching = false;
