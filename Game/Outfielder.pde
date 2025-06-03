@@ -12,7 +12,7 @@ public class Outfielder extends Player{
   }
   
   public void chaseBall(Ball ball){
-    velocity = ball.positionTop.sub(position);
+    velocity = PVector.sub(ball.positionTop, position);
     velocity.normalize();
     velocity.mult(speed);
     move();
