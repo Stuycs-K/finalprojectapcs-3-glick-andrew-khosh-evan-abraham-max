@@ -20,8 +20,12 @@ I created the transition between once you hit the ball and when you wanted to ba
 I made it so the pitch was random and curved, not just a straight line down the middle
 I introduced a score variable to track the number of hits
 I created a circle around the ball that shows its max size and the ball dissapears once it fills the circle
-### 2025-06-01
+### 2025-06-01hit
 looked into rotate on processing
 started implementing rotate for bat swing
 ### 2025-06-01 HOME
 added strikes and balls and outs
+### 2025-06-02
+Fixed text display
+worked on bat logic(without success)
+added innings
