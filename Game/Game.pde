@@ -7,6 +7,8 @@ public final int width1 = 1400;
 public final int height1 = 840;
 public final int FRONTVIEW = 0;
 public final int TOPVIEW = 1;
+public boolean foul = false;
+public boolean swung = false;
 int strikes = 0;
 int balls = 0;
 int outs = 0;  
@@ -52,6 +54,7 @@ void draw() {
 
       if(swingDistance > 20){
         swingDistance = 0;
+        swung = true;
         swinging = false;
       }
     }
@@ -158,23 +161,27 @@ void mousePressed(){
   if (background == FRONTVIEW){
     swinging = true;
     if (hitter1.hit(ball1, new PVector(mouseX, mouseY))){
-      hits++;
-      pitching = false;
-      swinging = false;
-      switchView();
-      runners.add(new Baserunner(hitter1.strength,hitter1.speed));
-      for (Baserunner player : runners){
-        if (player.onBase == 0) {
-          player.run();
-          for (Baserunner player1 : runners){
-            if (player1.onBase == 1) {
-              player1.run();
-              for (Baserunner player2 : runners){
-                if (player2.onBase == 2){
-                  player2.run();
-                  for (Baserunner player3 : runners){
-                    if (player3.onBase == 3){
-                      player3.run();
+      if (!foul){
+        balls = 0;
+        strikes = 0;
+        hits++;
+        pitching = false;
+        swinging = false;
+        switchView();
+        runners.add(new Baserunner(hitter1.strength,hitter1.speed));
+        for (Baserunner player : runners){
+          if (player.onBase == 0) {
+            player.run();
+            for (Baserunner player1 : runners){
+              if (player1.onBase == 1) {
+                player1.run();
+                for (Baserunner player2 : runners){
+                  if (player2.onBase == 2){
+                    player2.run();
+                    for (Baserunner player3 : runners){
+                      if (player3.onBase == 3){
+                        player3.run();
+                      }
                     }
                   }
                 }
