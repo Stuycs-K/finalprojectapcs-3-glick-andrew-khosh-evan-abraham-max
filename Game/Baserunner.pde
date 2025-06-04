@@ -21,6 +21,6 @@ public class Baserunner extends Player{
    
    public void out(){
      runners.remove(this);
-     Game.outs++;
+     outs++;
    }
 }
