@@ -4,14 +4,12 @@ public class Bat{
   public Bat(){
   }
   public void swing(int i){
-    //for(int i = 0; i < 10; i++){
-   //println("swinging2");
-      ellipse(batXcor + i*10, batYcor, 200, 40);
-  //    pushMatrix();
-  //           rotate(degrees(atan((abs(400 - mouseY))/(abs(500 - mouseX))))/10);
-  //  popMatrix();
-    //  }
-
+    if (200-i*16 > 40){
+      ellipse(batXcor + i*8, batYcor, 200-i*16, 40);
+    }
+    else{
+      ellipse(batXcor + i*8, batYcor, 40+((i-12)*16), 40);
+    }
   }
   
   public void create(){
