@@ -24,7 +24,7 @@ private int swingDistance;
 private boolean swinging = false;
 public boolean pitching = false;
 Bat bat1 = new Bat();
-Ball ball1 = new Ball(new PVector(width1/2, height1/2 - 50), 25);
+Ball ball1 = new Ball(new PVector(width1/2, height1/2 - 50), 20);
 Hitter hitter1 = new Hitter();
 ArrayList<Baserunner> runners = new ArrayList<Baserunner>();
 int hits = 0;
@@ -112,8 +112,8 @@ void draw() {
     else if (background == FRONTVIEW && pitching == false){
       pitching = true;
       ball1.positionFront = new PVector(width1/2, height1/2 - 50);
-     // ball1.velocityFront = new PVector(random(-0.75, 0.75), 0);
-    //  ball1.accelerationFront = new PVector(0, random(0.02, 0.03));
+     ball1.velocityFront = new PVector(random(-1.3, 1.3), 0);
+     ball1.accelerationFront = new PVector(0, random(0.02, 0.03));
     }
   }
   /*if(key == '0'){

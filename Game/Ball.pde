@@ -15,7 +15,7 @@ public class Ball{
     //set starting vals for front view of ball
     positionFront = posFront;
     radiusMax = radMax;
-    speedFront = 0.25;
+    speedFront = 0.2;
     velocityFront = new PVector(0, 0);
     accelerationFront = new PVector(0, 0);
     //set starting vals for top view of ball
