@@ -57,3 +57,6 @@ Finished the new UML in totality, which took around 40 minutes, including adding
 - made walks happen (17 minutes)
 - made missed swings count as strikes (7 minutes)
 - started on counting outs (5 minutes)
+
+### 2025-06-04 - Fixed swing animation
+- worked on creating better swinging animation (still needs to be redone)
