@@ -24,20 +24,65 @@ public class Ball{
     velocityTop = new PVector(0, 0);
     velocityHeight = 0;
   }
-  
+
   public void tickFront(){
     //Increases/Decreases radiusFront according to speedFront and updates positionFront and velocityFront
     velocityFront.add(accelerationFront);
     positionFront.add(velocityFront);
-    
     radiusFront += speedFront;
     if (radiusFront > radiusMax){
       pitching = false;
       radiusFront = 0;
       totalPitches++;
+      float bx = positionFront.x;
+      float by = positionFront.y;
+
+if (bx >= zoneX1 && bx <= zoneX2 && by >= zoneY1 && by <= zoneY2||swung) {
+  strikes++;
+  swung = false;
+  println("Strike " + strikes);
+} else {
+
+  balls++;
+  println("Ball " + balls);
+}
+
+if (strikes >= 3) {
+  outs++;
+  println("Strikeout!");
+  strikes = 0;
+  balls = 0;
+}
+if (balls >= 4) {
+  println("Walk!");
+  balls = 0;
+  strikes = 0;
+  runners.add(new Baserunner(hitter1.strength,hitter1.speed));
+  for (Baserunner player : runners){
+    if (player.onBase == 0) {
+      player.run();
+      for (Baserunner player1 : runners){
+        if (player1.onBase == 1) {
+          player1.run();
+          for (Baserunner player2 : runners){
+            if (player2.onBase == 2){
+              player2.run();
+              for (Baserunner player3 : runners){
+                if (player3.onBase == 3){
+                   player3.run();
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
-  
+  switchView();
+    }
+  }
+  }
+
   public void displayFront(){
     noFill();
     stroke(0);
@@ -47,15 +92,15 @@ public class Ball{
     fill(255);
     circle(positionFront.x, positionFront.y, radiusFront*2);
   }
-  
+
   public void breakFront(PVector forceBreak){
     accelerationFront = forceBreak;
   }
-  
+
   public void tickTop(){
     //Changes positionTop and heightTop based on velocityTop and velocityHeight, also applys gravity
     positionTop.add(velocityTop);
-    
+
     velocityHeight -= 0.1;
     heightTop += velocityHeight;
     if (heightTop < 0){
@@ -64,16 +109,16 @@ public class Ball{
       velocityTop = new PVector(0, 0);
     }
   }
-  
+
   public void displayTop(){
-    stroke(255, 100, 100, 100); 
+    stroke(255, 100, 100, 100);
     line(positionTop.x, positionTop.y, positionTop.x - velocityTop.x * 5, positionTop.y - velocityTop.y * 5);
 
     noStroke();
     fill(255, 0, 0);
     circle(positionTop.x, positionTop.y, (float) (25 + 0.1 * heightTop));
   }
-  
+
   public void hit(PVector forceTop, double forceHeight){
     //Sets the starting velocityTop velocityHeight based on the force applied
     velocityTop = forceTop;

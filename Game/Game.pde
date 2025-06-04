@@ -1,12 +1,21 @@
 import java.util.*;
 import java.io.*;
-
+int innings = 1;
 int background = 0;    //0 will be front view, 1 will be top down
 boolean remove = false;
 public final int width1 = 1400;
 public final int height1 = 840;
 public final int FRONTVIEW = 0;
 public final int TOPVIEW = 1;
+public boolean foul = false;
+public boolean swung = false;
+int strikes = 0;
+int balls = 0;
+int outs = 0;  
+float zoneX1 = width/2 - 75;
+float zoneX2 = width/2 + 75;
+float zoneY1 = (height*2/3) - 250;
+float zoneY2 = (height*2/3) - 50;
 public final PVector homePlate = new PVector(width1 / 2, height1-70);
 public final PVector firstBase = new PVector((width1 / 2) + 155, height1 -225);
 public final PVector secondBase = new PVector(width1 / 2, height1 - 380);
@@ -43,16 +52,20 @@ void draw() {
     frontView();
 
     if(swinging){
-      //println("swinging");
+      println("first :" + abs(400 - mouseY) + "second :" + abs(mouseX-500));
+      println((atan((abs(400 - mouseY)/abs(mouseX - 500)))));
+            rotate((atan((abs(400 - mouseY))/(abs(500 - mouseX)))));
       bat1.swing(swingDistance);
       swingDistance++;
+
       if(swingDistance > 20){
         swingDistance = 0;
+        swung = true;
         swinging = false;
       }
     }
     else {
-      bat1.swing(0);
+      bat1.create();
     }
 
     if(pitching){
@@ -86,16 +99,43 @@ void keyPressed() {
     else if (background == FRONTVIEW && pitching == false){
       pitching = true;
       ball1 = pitcher1.pitch();
+      ball1.velocityFront = new PVector(random(-0.75, 0.75), 0);
+      ball1.accelerationFront = new PVector(0, random(0.02, 0.03));
     }
   }
-  if(key == '1'){
+  /*if(key == '0'){
     for (Baserunner player : runners){
       if (player.onBase == 0) player.run();
+>>>>>>> 22c7db9d404c2b89632db0f3fb88bab77059aa11
+    }
+  }*/
+  if(key == '1'){
+    for (Baserunner player : runners){
+      if (player.onBase == 1) {
+        player.run();
+        for (Baserunner player1 : runners){
+          if (player1.onBase == 2){
+            player1.run();
+            for (Baserunner player2 : runners){
+              if (player2.onBase == 3){
+                player2.run();
+              }
+            }
+          }
+        }
+      }      
     }
   }
   if(key == '2'){
     for (Baserunner player : runners){
-      if (player.onBase == 1) player.run();
+      if (player.onBase == 2) {
+        player.run();
+        for (Baserunner player1 : runners){
+          if (player1.onBase == 3) {
+            player1.run();
+          }
+        }
+      }
     }
   }
   if(key == '3'){
@@ -114,11 +154,35 @@ void mousePressed(){
   if (background == FRONTVIEW){
     swinging = true;
     if (hitter1.hit(ball1, new PVector(mouseX, mouseY))){
-      hits++;
-      pitching = false;
-      swinging = false;
-      switchView();
-      runners.add(new Baserunner(hitter1.strength,hitter1.speed));
+      if (!foul){
+        balls = 0;
+        strikes = 0;
+        hits++;
+        pitching = false;
+        swinging = false;
+        switchView();
+        runners.add(new Baserunner(hitter1.strength,hitter1.speed));
+        for (Baserunner player : runners){
+          if (player.onBase == 0) {
+            player.run();
+            for (Baserunner player1 : runners){
+              if (player1.onBase == 1) {
+                player1.run();
+                for (Baserunner player2 : runners){
+                  if (player2.onBase == 2){
+                    player2.run();
+                    for (Baserunner player3 : runners){
+                      if (player3.onBase == 3){
+                        player3.run();
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }      
     }
   }
 }
@@ -130,9 +194,12 @@ void frontView() {
   rect(0, height * 2 / 3, width, height / 3);
   text("Click space to pitch the ball and to go back to hitting", 20, 30);
   text("Click with your mouse to swing the bat", 20, 50);
+  text("Balls : " + balls, 20, 70);
+  text("Strikes : " + strikes, 20, 90);
  // text("Swinging = " + swinging, 20, 70);
-  text("Hits: " + hits, 20, 90);
-  text("Runs: " + runs, 20, 110);
+  text("Hits: " + hits, 20, 110);
+  text("Runs: " + runs, 20, 130);
+    text("Inning : " + innings, 20, 150);
   fill(255, 255, 255, 80);
 
   rect(width/2 - 75, (height*2/3) - 250 , 150, 200);

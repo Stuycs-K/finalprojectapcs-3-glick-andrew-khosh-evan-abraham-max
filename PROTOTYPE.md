@@ -23,11 +23,11 @@ These are the features we want working by the 1.5-week MVP deadline:
 - Pitcher that throws balls
 - Bat that swings on mouse click
 - Collision detection to see if the ball is hit
-- Each at-bat will result in one of two things: a homerun or an out
+- ~Each at-bat will result in one of two things: a homerun or an out~ Made it so each at bat causes the runner to run, and runs are scored when a runner reaches home
 - The outcome of each at bat will be determined by the accuracy and timing of the hit
-- Batter will be able to strike out and if he gets 4 balls he will get a homerun instead of a walk
-- Game resets and keeps score
-- Basic UI: score display and game over text
+- ~Batter will be able to strike out and if he gets 4 balls he will get a homerun instead of a walk~ Made it so the batter walks at 4 balls
+- Game resets and keeps score 
+- ~ Basic UI: score display and game over text~ didnt include this in ui
   
 Nice to Have Features:
 - Different pitch speeds/directions
