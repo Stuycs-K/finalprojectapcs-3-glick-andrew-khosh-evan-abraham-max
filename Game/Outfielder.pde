@@ -18,8 +18,12 @@ public class Outfielder extends Player{
     move();
   }
   
-  public void throwBall(Outfielder catcher){
+  public void throwBall(Outfielder catcher, Ball ball){
+    PVector throwVelocity = PVector.sub(catcher.position, this.position);
+    throwVelocity.normalize();
+    throwVelocity.mult(this.strength * 0.05);
     
+    ball1.velocityTop = throwVelocity;
   }
   
   public void catchBall(Player thrower){
