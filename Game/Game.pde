@@ -208,6 +208,20 @@ void moveDefenders(){
   }
 }
 
+Outfielder closestDefender(){
+  float minDist = outfielders.get(0).position.dist(ball1.positionTop);
+  Outfielder closestOutfielder = outfielders.get(0);
+  
+  for (Outfielder player : outfielders){
+    if (player.position.dist(ball1.positionTop) < minDist){
+      minDist = player.position.dist(ball1.positionTop);
+      closestOutfielder = player;
+    }
+  }
+  
+  return closestOutfielder;
+}
+
 void resetDefenders(){
   outfielders = new ArrayList<Outfielder>();
   
