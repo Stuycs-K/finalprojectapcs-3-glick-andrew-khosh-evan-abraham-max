@@ -14,12 +14,15 @@ public final PVector thirdBase = new PVector((width1 / 2) - 155, height1 - 225);
 private int swingDistance;
 private boolean swinging = false;
 public boolean pitching = false;
+public boolean ballCaught = false;
+public boolean ballThrown = false;
 Bat bat1 = new Bat();
 Hitter hitter1 = new Hitter();
 Pitcher pitcher1 = new Pitcher();
 Ball ball1 = new Ball(new PVector(width1/2, height1/2 - 50), 30, pitcher1.strength);
 ArrayList<Baserunner> runners = new ArrayList<Baserunner>();
 ArrayList<Outfielder> outfielders = new ArrayList<Outfielder>();
+ArrayList<Outfielder> basemen = new ArrayList<Outfielder>();
 int hits = 0;
 int runs = 0;
 int totalPitches = 0;
@@ -166,10 +169,6 @@ boolean playersOnBase(){
   return true;
 }
 
-boolean ballCaught(){
-  return true;
-}
-
 void movePlayers(){
   for (Baserunner player : runners){
     player.move();
@@ -199,12 +198,18 @@ void movePlayers(){
 }
 
 void moveDefenders(){
-  for (Outfielder player : outfielders){
-    player.chaseBall(ball1);
-    
-    if (player.position.dist(ball1.positionTop) < 12.5){
-      
+  Outfielder closestDefender = closestDefender();
+  
+  if (!ballCaught){
+    closestDefender.chaseBall(ball1); 
+    if (closestDefender.position.dist(ball1.positionTop) < 12.5){
+      ball1.positionTop = new PVector(closestDefender.position.x, closestDefender.position.y);
+      ballCaught = true;
     }
+  }
+  else {
+    Outfielder catcher = throwTarget();
+    
   }
 }
 
@@ -222,10 +227,23 @@ Outfielder closestDefender(){
   return closestOutfielder;
 }
 
+Outfielder throwTarget(){
+  Outfielder catcher = basemen.get(0);
+  
+  for (Baserunner player : runners){
+    if (player.velocity.mag() > 0){
+      catcher = basemen.get(player.onBase + 1 % 4);
+    }
+  }
+  
+  return catcher;
+}
+
 void resetDefenders(){
   outfielders = new ArrayList<Outfielder>();
-  
   outfielders.add(new Outfielder(10, 1, new PVector(width/2 - 100, height/2))); 
+  
+  ballCaught = false;
 }
 
 void drawBase(float x, float y){
