@@ -324,7 +324,10 @@ Outfielder throwTarget(){
 
 void resetDefenders(){
   outfielders = new ArrayList<Outfielder>();
-  outfielders.add(new Outfielder(10, 1, new PVector(width/2 - 100, height/2))); 
+  outfielders.add(new Outfielder(10, 1, new PVector(width/2 - 100, height/2)));
+  outfielders.add(new Outfielder(10, 1, new PVector(width/2 + 100, height/2)));
+  outfielders.add(new Outfielder(10, 1, new PVector(width/2, height/2 - 100)));
+  outfielders.add(new Outfielder(10, 1, new PVector(width/2, height/2 + 100)));
   
   ballCaught = false;
   ballThrown = false;
