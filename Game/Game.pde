@@ -12,10 +12,10 @@ public boolean swung = false;
 int strikes = 0;
 int balls = 0;
 int outs = 0;  
-float zoneX1 = width/2 - 75;
-float zoneX2 = width/2 + 75;
-float zoneY1 = (height*2/3) - 250;
-float zoneY2 = (height*2/3) - 50;
+float zoneX1 = width1/2 - 75;
+float zoneX2 = width1/2 + 75;
+float zoneY1 = (height1*2/3) - 250;
+float zoneY2 = (height1*2/3) - 50;
 public final PVector homePlate = new PVector(width1 / 2, height1-70);
 public final PVector firstBase = new PVector((width1 / 2) + 155, height1 -225);
 public final PVector secondBase = new PVector(width1 / 2, height1 - 380);
@@ -112,8 +112,8 @@ void draw() {
     else if (background == FRONTVIEW && pitching == false){
       pitching = true;
       ball1.positionFront = new PVector(width1/2, height1/2 - 50);
-      ball1.velocityFront = new PVector(random(-0.75, 0.75), 0);
-      ball1.accelerationFront = new PVector(0, random(0.02, 0.03));
+     // ball1.velocityFront = new PVector(random(-0.75, 0.75), 0);
+    //  ball1.accelerationFront = new PVector(0, random(0.02, 0.03));
     }
   }
   /*if(key == '0'){
