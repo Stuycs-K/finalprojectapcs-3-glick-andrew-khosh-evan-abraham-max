@@ -46,9 +46,6 @@ void draw() {
     frontView();
 
     if(swinging){
-      println("first :" + abs(400 - mouseY) + "second :" + abs(mouseX-500));
-      println((atan((abs(400 - mouseY)/abs(mouseX - 500)))));
-            rotate((atan((abs(400 - mouseY))/(abs(500 - mouseX)))));
       bat1.swing(swingDistance);
       swingDistance++;
 
