@@ -207,9 +207,24 @@ void moveDefenders(){
       ballCaught = true;
     }
   }
-  else {
+  else if (!ballThrown){
     Outfielder catcher = throwTarget();
-    
+    closestDefender.throwBall(catcher);
+    ballThrown = true;
+  }
+  
+  if (ballThrown){
+    for (Outfielder catcher : basemen){
+      if (catcher.position.dist(ball1.positionTop) < 12.5){
+        ballThrown = false;
+        int base = basemen.indexOf(catcher);
+        for (Baserunner player : runners){
+          if (player.velocity.mag() > 0 && player.onBase + 1 % 4 == base){
+            player.out();
+          }
+        }
+      }
+    }
   }
 }
 
@@ -244,6 +259,7 @@ void resetDefenders(){
   outfielders.add(new Outfielder(10, 1, new PVector(width/2 - 100, height/2))); 
   
   ballCaught = false;
+  ballThrown = false;
 }
 
 void drawBase(float x, float y){
