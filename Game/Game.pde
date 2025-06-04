@@ -209,7 +209,7 @@ void moveDefenders(){
   }
   else if (!ballThrown){
     Outfielder catcher = throwTarget();
-    closestDefender.throwBall(catcher);
+    closestDefender.throwBall(catcher, ball1);
     ballThrown = true;
   }
   
@@ -217,6 +217,7 @@ void moveDefenders(){
     for (Outfielder catcher : basemen){
       if (catcher.position.dist(ball1.positionTop) < 12.5){
         ballThrown = false;
+        ball1.velocityTop = new PVector(0, 0);
         int base = basemen.indexOf(catcher);
         for (Baserunner player : runners){
           if (player.velocity.mag() > 0 && player.onBase + 1 % 4 == base){
