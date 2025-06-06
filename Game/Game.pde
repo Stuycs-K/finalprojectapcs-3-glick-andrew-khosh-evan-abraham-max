@@ -337,10 +337,10 @@ Outfielder throwTarget(){
 
 void resetDefenders(){
   outfielders = new ArrayList<Outfielder>();
-  outfielders.add(new Outfielder(10, 1, new PVector(width/2 - 100, height/2)));
-  outfielders.add(new Outfielder(10, 1, new PVector(width/2 + 100, height/2)));
-  outfielders.add(new Outfielder(10, 1, new PVector(width/2, height/2 - 100)));
-  outfielders.add(new Outfielder(10, 1, new PVector(width/2, height/2 + 100)));
+  outfielders.add(new Outfielder(10, 1, new PVector(width/2 - 180, height/2)));
+  outfielders.add(new Outfielder(10, 1, new PVector(width/2 + 180, height/2)));
+  outfielders.add(new Outfielder(10, 1, new PVector(width/2, height/2 - 200)));
+  outfielders.add(new Outfielder(10, 1, new PVector((width/2)-40, height/2 + 100)));
   basemen.add(new Outfielder(10, 1, new PVector(-40,-14).add(firstBase)));
   basemen.add(new Outfielder(10, 1, new PVector(40,66).add(secondBase)));
   basemen.add(new Outfielder(10, 1, new PVector(40,-14).add(thirdBase)));
