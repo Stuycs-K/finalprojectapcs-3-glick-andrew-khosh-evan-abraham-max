@@ -20,7 +20,22 @@ public class Hitter extends Player{
       return false;
     }
 
-    double force = strength * ((double) ball.radiusFront / ball.radiusMax);
+    double baseforce = strength * ((double)ball.radiusFront / ball.radiusMax);
+ double zoneCenterX = (zoneX1 + zoneX2) / 2.0;
+double zoneCenterY = (zoneY1 + zoneY2) / 2.0;
+
+double distFromCenter = dist(ball.positionFront.x, ball.positionFront.y, (float)zoneCenterX, (float)zoneCenterY);
+double maxDist = dist(zoneX1, zoneY1, (float)zoneCenterX, (float)zoneCenterY);
+
+double accuracyBonus = 1.3 - 0.4 * (distFromCenter / maxDist);
+if (accuracyBonus > 1.3) {
+  accuracyBonus = 1.3;
+} else if (accuracyBonus < 0.6) {
+  accuracyBonus = 0.6;
+}
+
+double force = baseforce * accuracyBonus;
+
     double angleY = (bat.y - ball.positionFront.y) / (ball.radiusFront) * 0.5 + 0.5;  //Negative is ball aimed down, max of 0.75 min of -0.25
     double angleX = (ball.positionFront.x - bat.x) / (ball.radiusFront) * 1.25;  //Negative is ball aimed left, max of 0.75 min of -0.75
     if (angleY > 1){ angleY = 1.0; }
