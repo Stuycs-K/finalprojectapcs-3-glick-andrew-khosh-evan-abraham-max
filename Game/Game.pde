@@ -33,6 +33,7 @@ Ball ball1 = new Ball(new PVector(width1/2, height1/2 - 50), 20, pitcher1.streng
 ArrayList<Baserunner> runners = new ArrayList<Baserunner>();
 ArrayList<Outfielder> outfielders = new ArrayList<Outfielder>();
 ArrayList<Outfielder> basemen = new ArrayList<Outfielder>();
+
 int hits = 0;
 int runs = 0;
 int totalPitches = 0;
@@ -342,7 +343,9 @@ void resetDefenders(){
   outfielders.add(new Outfielder(10, 1, new PVector(width/2 + 100, height/2)));
   outfielders.add(new Outfielder(10, 1, new PVector(width/2, height/2 - 100)));
   outfielders.add(new Outfielder(10, 1, new PVector(width/2, height/2 + 100)));
-
+  basemen.add(new Outfielder(10, 1, firstBase));
+    basemen.add(new Outfielder(10, 1, secondBase));
+      basemen.add(new Outfielder(10, 1, thirdBase));
   ballCaught = false;
   ballThrown = false;
 }
