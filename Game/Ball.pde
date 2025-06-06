@@ -38,11 +38,6 @@ public class Ball{
       pitching = false;
       radiusFront = 0;
       totalPitches++;
-<<<<<<< HEAD
-     // float bx = positionFront.x;
-     // float by = positionFront.y;
-=======
->>>>>>> test1
 
 if (bx >= zoneX1 && bx <= zoneX2 && by >= zoneY1 && by <= zoneY2||swung) {
   strikes++;

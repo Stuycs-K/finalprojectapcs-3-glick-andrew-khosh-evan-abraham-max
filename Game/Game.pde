@@ -26,10 +26,6 @@ public boolean pitching = false;
 public boolean ballCaught = false;
 public boolean ballThrown = false;
 Bat bat1 = new Bat();
-<<<<<<< HEAD
-//Ball ball1 = new Ball(new PVector(width1/2, height1/2 - 50), 20);
-=======
->>>>>>> test1
 Hitter hitter1 = new Hitter();
 Pitcher pitcher1 = new Pitcher();
 Ball ball1 = new Ball(new PVector(width1/2, height1/2 - 50), 20, pitcher1.strength);
