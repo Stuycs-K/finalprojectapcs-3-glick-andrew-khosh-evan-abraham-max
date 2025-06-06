@@ -9,6 +9,9 @@ public final int FRONTVIEW = 0;
 public final int TOPVIEW = 1;
 public boolean foul = false;
 public boolean swung = false;
+public boolean on1 = false;
+public boolean on2 = false;
+public boolean on3 = false;
 int strikes = 0;
 int balls = 0;
 int outs = 0;
@@ -45,6 +48,17 @@ void setup() {
 }
 
 void draw() {
+  for (Baserunner runner : runners){
+    if (runner.onBase == 1){
+      on1 = true;
+    }
+    if (runner.onBase == 2){
+      on2 = true;
+    }
+    if (runner.onBase == 3){
+      on3 = true;
+    }
+  }
 
   if (background == FRONTVIEW) { //Batting View
     stroke(0);
@@ -204,11 +218,20 @@ void frontView() {
   fill(255, 255, 255, 80);
   //MAKING SCOREBUG ---------
   rect(1100, 50, 200, 100);
+  if (on1) fill(255,255,0);
+  else fill(255,255,255);
   quad(1200+35, 100, 1215+35, 115, 1200+35, 130 ,1185+35, 115);
+  on1 = false;
+  if (on3) fill(255,255,0);
+  else fill(255,255,255);
   quad(1200, 100, 1215, 115, 1200, 130 ,1185, 115);
+  on3 = false;
+  if (on2) fill(255,255,0);
+  else fill(255,255,255);
   quad(1200+17.5, 100-17.5, 1215+17.5, 115-17.5, 1200+17.5, 130-17.5 ,1185+17.5, 115-17.5);
-
+  on2 = false;
   //END OF SCOREBUG -----------
+  fill(255, 255, 255, 80);
   rect(width/2 - 75, (height*2/3) - 250 , 150, 200);
   fill(150, 75, 0);
   //bat1.create();
