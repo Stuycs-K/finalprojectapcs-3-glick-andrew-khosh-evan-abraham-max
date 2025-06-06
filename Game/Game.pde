@@ -366,7 +366,11 @@ void displayPlayers(){
     circle(player.position.x, player.position.y, 30);
   }
   for (Outfielder player : outfielders){
-    fill(255);
+    fill(255, 255, 0);
+    circle(player.position.x, player.position.y, 30);
+  }
+    for (Outfielder player : basemen){
+    fill(255, 165, 0);
     circle(player.position.x, player.position.y, 30);
   }
 }
