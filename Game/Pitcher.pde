@@ -12,11 +12,6 @@ public class Pitcher extends Player{
   public Ball pitch(){
     int chosen = (int)(Math.random()*pitches.size());
     String pitch = pitches.get(chosen);
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> test1
     Ball ball = new Ball(new PVector(width1/2, height1/2 - 50), 20, strength);
     ball.velocityFront = new PVector(random(-0.75, 0.75), 0);
     ball.accelerationFront = new PVector(0, random(0.03, 0.08));
