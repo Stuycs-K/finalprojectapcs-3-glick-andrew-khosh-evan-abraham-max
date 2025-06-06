@@ -104,7 +104,7 @@ void draw() {
   if(key == ' '){
     if (background == TOPVIEW && ball1.heightTop == 0){
       background = 0;
-      ball1 = new Ball(new PVector(width1/2, height1/2 - 50), 30);
+      ball1 = new Ball(new PVector(width1/2, height1/2 - 50), 20);
     }
     else if (background == FRONTVIEW && pitching == false){
       pitching = true;
