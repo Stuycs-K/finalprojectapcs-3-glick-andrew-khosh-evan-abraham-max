@@ -60,3 +60,8 @@ Finished the new UML in totality, which took around 40 minutes, including adding
 
 ### 2025-06-04 - Fixed swing animation
 - worked on creating better swinging animation (still needs to be redone)
+
+### 2025-06-06 - Worked on bugs
+- added code that disappeared (10 minutes)
+- Read and understood code that had been wirtten by Evan (7 minutes)
+- Added base defenders (10 minutes)
