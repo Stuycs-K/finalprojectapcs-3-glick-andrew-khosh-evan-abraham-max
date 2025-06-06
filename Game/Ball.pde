@@ -124,6 +124,6 @@ if (balls >= 4) {
   public void hit(PVector forceTop, double forceHeight){
     //Sets the starting velocityTop velocityHeight based on the force applied
     velocityTop = forceTop;
-    velocityHeight = forceHeight*1.5;
+    velocityHeight = forceHeight*1.3;
   }
 }

@@ -146,11 +146,6 @@ void keyPressed() {
   }
   if(key == '3'){
     for (Baserunner player : runners){
-      if (player.onBase == 2) player.run();
-    }
-  }
-  if(key == '4'){
-    for (Baserunner player : runners){
       if (player.onBase == 3) player.run();
     }
   }
