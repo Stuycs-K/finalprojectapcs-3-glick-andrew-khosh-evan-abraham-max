@@ -15,7 +15,11 @@ public class Ball{
     //set starting vals for front view of ball
     positionFront = posFront;
     radiusMax = radMax;
+<<<<<<< HEAD
     speedFront = 0.05 * pitcherStrength;
+=======
+    speedFront = 0.2;
+>>>>>>> c30146dd6bd64148e866b918424a4db2181ba0e4
     velocityFront = new PVector(0, 0);
     accelerationFront = new PVector(0, 0);
     //set starting vals for top view of ball
@@ -30,12 +34,20 @@ public class Ball{
     velocityFront.add(accelerationFront);
     positionFront.add(velocityFront);
     radiusFront += speedFront;
-    if (radiusFront > radiusMax){
+    if (radiusFront > radiusMax){ 
+            float bx = positionFront.x;
+float by = positionFront.y;
+System.out.println("bx " + bx + "by " + by);
+System.out.println("zoneX1: " + zoneX1 + "zoneX2" + zoneX2 + "zoneY1 " + zoneY1 + "zoneY2 " + zoneY2);
       pitching = false;
       radiusFront = 0;
       totalPitches++;
+<<<<<<< HEAD
       float bx = positionFront.x;
       float by = positionFront.y;
+=======
+
+>>>>>>> c30146dd6bd64148e866b918424a4db2181ba0e4
 
 if (bx >= zoneX1 && bx <= zoneX2 && by >= zoneY1 && by <= zoneY2||swung) {
   strikes++;
