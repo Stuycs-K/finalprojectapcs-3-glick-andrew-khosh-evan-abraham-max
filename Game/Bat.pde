@@ -11,7 +11,7 @@ public class Bat{
       ellipse(batXcor + i*8, batYcor, 40+((i-12)*16), 40);
     }
   }
-  
+
   public void create(){
     ellipse(batXcor,batYcor,200,40);
   }

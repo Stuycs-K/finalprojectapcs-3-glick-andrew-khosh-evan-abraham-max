@@ -31,15 +31,13 @@ public class Ball{
     positionFront.add(velocityFront);
     radiusFront += speedFront;
     if (radiusFront > radiusMax){
-            float bx = positionFront.x;
-float by = positionFront.y;
-System.out.println("bx " + bx + "by " + by);
-System.out.println("zoneX1: " + zoneX1 + "zoneX2" + zoneX2 + "zoneY1 " + zoneY1 + "zoneY2 " + zoneY2);
+      float bx = positionFront.x;
+      float by = positionFront.y;
+      System.out.println("bx " + bx + "by " + by);
+      System.out.println("zoneX1: " + zoneX1 + "zoneX2" + zoneX2 + "zoneY1 " + zoneY1 + "zoneY2 " + zoneY2);
       pitching = false;
       radiusFront = 0;
       totalPitches++;
-      float bx = positionFront.x;
-      float by = positionFront.y;
 
 if (bx >= zoneX1 && bx <= zoneX2 && by >= zoneY1 && by <= zoneY2||swung) {
   strikes++;
