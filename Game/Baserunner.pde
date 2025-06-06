@@ -18,4 +18,9 @@ public class Baserunner extends Player{
    public void stop(){
      velocity = new PVector(0,0);
    }
+   
+   public void out(){
+     runners.remove(this);
+     outs++;
+   }
 }

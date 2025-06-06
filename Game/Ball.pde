@@ -11,11 +11,11 @@ public class Ball{
   public double velocityHeight;       //Velocity in/out of 2D plane during top view
 
 
-  public Ball(PVector posFront, int radMax){
+  public Ball(PVector posFront, int radMax, int pitcherStrength){
     //set starting vals for front view of ball
     positionFront = posFront;
     radiusMax = radMax;
-    speedFront = 0.2;
+    speedFront = 0.05 * pitcherStrength;
     velocityFront = new PVector(0, 0);
     accelerationFront = new PVector(0, 0);
     //set starting vals for top view of ball
@@ -29,9 +29,8 @@ public class Ball{
     //Increases/Decreases radiusFront according to speedFront and updates positionFront and velocityFront
     velocityFront.add(accelerationFront);
     positionFront.add(velocityFront);
-
     radiusFront += speedFront;
-    if (radiusFront > radiusMax){ 
+    if (radiusFront > radiusMax){
             float bx = positionFront.x;
 float by = positionFront.y;
 System.out.println("bx " + bx + "by " + by);
@@ -39,7 +38,8 @@ System.out.println("zoneX1: " + zoneX1 + "zoneX2" + zoneX2 + "zoneY1 " + zoneY1 
       pitching = false;
       radiusFront = 0;
       totalPitches++;
-
+      float bx = positionFront.x;
+      float by = positionFront.y;
 
 if (bx >= zoneX1 && bx <= zoneX2 && by >= zoneY1 && by <= zoneY2||swung) {
   strikes++;

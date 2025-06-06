@@ -11,7 +11,7 @@ public boolean foul = false;
 public boolean swung = false;
 int strikes = 0;
 int balls = 0;
-int outs = 0;  
+int outs = 0;
 float zoneX1 = width1/2 - 75;
 float zoneX2 = width1/2 + 75;
 float zoneY1 = (height1*2/3) - 250;
@@ -23,10 +23,16 @@ public final PVector thirdBase = new PVector((width1 / 2) - 155, height1 - 225);
 private int swingDistance;
 private boolean swinging = false;
 public boolean pitching = false;
+public boolean ballCaught = false;
+public boolean ballThrown = false;
 Bat bat1 = new Bat();
 Ball ball1 = new Ball(new PVector(width1/2, height1/2 - 50), 20);
 Hitter hitter1 = new Hitter();
+Pitcher pitcher1 = new Pitcher();
+Ball ball1 = new Ball(new PVector(width1/2, height1/2 - 50), 30, pitcher1.strength);
 ArrayList<Baserunner> runners = new ArrayList<Baserunner>();
+ArrayList<Outfielder> outfielders = new ArrayList<Outfielder>();
+ArrayList<Outfielder> basemen = new ArrayList<Outfielder>();
 int hits = 0;
 int runs = 0;
 int totalPitches = 0;
@@ -36,6 +42,7 @@ void setup() {
   size(1400, 840);
   swingDistance = 0;
   hitter1.position = homePlate.copy();
+  resetDefenders();
 }
 
 void draw() {
@@ -63,59 +70,50 @@ void draw() {
       ball1.tickFront();
       ball1.displayFront();
     }
-  }
+  } //End Batting View
 
   else { //Top View
     topDownView();
     displayPlayers();
-    for (Baserunner player : runners){
-      player.move();
-      if (player.position.x > firstBase.x){
-        player.stop();
-        player.onBase = 1;
-      }
-      else if (player.position.y < secondBase.y + 25){
-        player.stop();
-        player.onBase = 2;
-      }
-      else if (player.position.x < thirdBase.x){
-        player.stop();
-        player.onBase = 3;
-      }
-      else if (player.position.y > homePlate.y + 25){
-        player.stop();
-        player.position = new PVector(10000,10000);
-        remove = true;
-        runs++;
-      }
-    }
-    if (remove){
-      runners.remove(0);
-      remove = false;
-    }
+
+    movePlayers();
+    moveDefenders();
+
     ball1.tickTop();
     ball1.displayTop();
-  }
+  } //End Top View
+
 }
-  void keyPressed() {
+
+void keyPressed() {
   if (key == 'b') {
     switchView();
   }
   if(key == ' '){
-    if (background == TOPVIEW && ball1.heightTop == 0){
+    if (background == TOPVIEW && ball1.heightTop == 0 && playersOnBase()){
       background = 0;
-      ball1 = new Ball(new PVector(width1/2, height1/2 - 50), 20);
+      resetDefenders();
     }
     else if (background == FRONTVIEW && pitching == false){
       pitching = true;
-      ball1.positionFront = new PVector(width1/2, height1/2 - 50);
-     ball1.velocityFront = new PVector(random(-1.3, 1.3), 0);
-     ball1.accelerationFront = new PVector(0, random(0.02, 0.03));
+      ball1 = pitcher1.pitch();
+      ball1.velocityFront = new PVector(random(-0.75, 0.75), 0);
+      ball1.accelerationFront = new PVector(0, random(0.02, 0.03));
+      /*
+          ball1 = new Ball(new PVector(width1/2, height1/2 - 50), 20);
+          }
+          else if (background == FRONTVIEW && pitching == false){
+            pitching = true;
+            ball1.positionFront = new PVector(width1/2, height1/2 - 50);
+           ball1.velocityFront = new PVector(random(-1.3, 1.3), 0);
+           ball1.accelerationFront = new PVector(0, random(0.02, 0.03));
+           */
     }
   }
   /*if(key == '0'){
     for (Baserunner player : runners){
       if (player.onBase == 0) player.run();
+>>>>>>> 22c7db9d404c2b89632db0f3fb88bab77059aa11
     }
   }*/
   if(key == '1'){
@@ -132,7 +130,7 @@ void draw() {
             }
           }
         }
-      }      
+      }
     }
   }
   if(key == '2'){
@@ -148,6 +146,11 @@ void draw() {
     }
   }
   if(key == '3'){
+    for (Baserunner player : runners){
+      if (player.onBase == 2) player.run();
+    }
+  }
+  if(key == '4'){
     for (Baserunner player : runners){
       if (player.onBase == 3) player.run();
     }
@@ -186,7 +189,7 @@ void mousePressed(){
             }
           }
         }
-      }      
+      }
     }
   }
 }
@@ -238,6 +241,112 @@ void topDownView() {
   drawBase(homePlate.x, homePlate.y);
 }
 
+boolean playersOnBase(){
+  for (Baserunner player : runners){
+     if (player.velocity.mag() > 0){
+      return false;
+    }
+  }
+  return true;
+}
+
+void movePlayers(){
+  for (Baserunner player : runners){
+    player.move();
+    if (player.position.x > firstBase.x){
+      player.stop();
+      player.onBase = 1;
+    }
+    else if (player.position.y < secondBase.y + 25){
+      player.stop();
+      player.onBase = 2;
+    }
+    else if (player.position.x < thirdBase.x){
+      player.stop();
+      player.onBase = 3;
+    }
+    else if (player.position.y > homePlate.y + 25){
+      player.stop();
+      player.position = new PVector(10000,10000);
+      remove = true;
+      runs++;
+    }
+  }
+  if (remove){
+    runners.remove(0);
+    remove = false;
+  }
+}
+
+void moveDefenders(){
+  Outfielder closestDefender = closestDefender();
+
+  if (!ballCaught){
+    closestDefender.chaseBall(ball1);
+    if (closestDefender.position.dist(ball1.positionTop) < 12.5){
+      ball1.positionTop = new PVector(closestDefender.position.x, closestDefender.position.y);
+      ballCaught = true;
+    }
+  }
+  else if (!ballThrown){
+    Outfielder catcher = throwTarget();
+    closestDefender.throwBall(catcher, ball1);
+    ballThrown = true;
+  }
+
+  if (ballThrown){
+    for (Outfielder catcher : basemen){
+      if (catcher.position.dist(ball1.positionTop) < 12.5){
+        ballThrown = false;
+        ball1.velocityTop = new PVector(0, 0);
+        int base = basemen.indexOf(catcher);
+        for (Baserunner player : runners){
+          if (player.velocity.mag() > 0 && player.onBase + 1 % 4 == base){
+            player.out();
+          }
+        }
+      }
+    }
+  }
+}
+
+Outfielder closestDefender(){
+  float minDist = outfielders.get(0).position.dist(ball1.positionTop);
+  Outfielder closestOutfielder = outfielders.get(0);
+
+  for (Outfielder player : outfielders){
+    if (player.position.dist(ball1.positionTop) < minDist){
+      minDist = player.position.dist(ball1.positionTop);
+      closestOutfielder = player;
+    }
+  }
+
+  return closestOutfielder;
+}
+
+Outfielder throwTarget(){
+  Outfielder catcher = basemen.get(0);
+
+  for (Baserunner player : runners){
+    if (player.velocity.mag() > 0){
+      catcher = basemen.get(player.onBase + 1 % 4);
+    }
+  }
+
+  return catcher;
+}
+
+void resetDefenders(){
+  outfielders = new ArrayList<Outfielder>();
+  outfielders.add(new Outfielder(10, 1, new PVector(width/2 - 100, height/2)));
+  outfielders.add(new Outfielder(10, 1, new PVector(width/2 + 100, height/2)));
+  outfielders.add(new Outfielder(10, 1, new PVector(width/2, height/2 - 100)));
+  outfielders.add(new Outfielder(10, 1, new PVector(width/2, height/2 + 100)));
+
+  ballCaught = false;
+  ballThrown = false;
+}
+
 void drawBase(float x, float y){
   quad(x, y, x - 25, y + 25, x, y + 50, x + 25, y + 25);
 }
@@ -255,6 +364,10 @@ void displayPlayers(){
   noStroke();
   for (Baserunner player : runners){
     fill(0);
+    circle(player.position.x, player.position.y, 30);
+  }
+  for (Outfielder player : outfielders){
+    fill(255);
     circle(player.position.x, player.position.y, 30);
   }
 }
