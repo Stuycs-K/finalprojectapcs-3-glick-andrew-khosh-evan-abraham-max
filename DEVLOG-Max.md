@@ -65,3 +65,9 @@ Finished the new UML in totality, which took around 40 minutes, including adding
 - added code that disappeared (10 minutes)
 - Read and understood code that had been wirtten by Evan (7 minutes)
 - Added base defenders (10 minutes)
+
+### 2025-06-06 - Worked on features
+- shifted defender positions (10 minutes)
+- changed ball velocity (3 minutes)
+- fixed baserunning bug (10 minutes)
+- made the scorebug dynamic (10 minutes)
