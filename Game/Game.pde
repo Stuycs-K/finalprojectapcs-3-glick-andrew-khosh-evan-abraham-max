@@ -300,15 +300,17 @@ void moveDefenders(){
 
   if (!ballCaught){
     closestDefender.chaseBall(ball1);
-    if (closestDefender.position.dist(ball1.positionTop) < 12.5){
+    if (closestDefender.position.dist(ball1.positionTop) < 12.5 && ball1.heightTop == 0){
       ball1.positionTop = new PVector(closestDefender.position.x, closestDefender.position.y);
       ballCaught = true;
     }
   }
   else if (!ballThrown){
     Outfielder catcher = throwTarget();
-    closestDefender.throwBall(catcher, ball1);
-    ballThrown = true;
+    if (catcher != null){ 
+      closestDefender.throwBall(catcher, ball1);
+      ballThrown = true;
+    }
   }
 
   if (ballThrown){
@@ -317,9 +319,12 @@ void moveDefenders(){
         ballThrown = false;
         ball1.velocityTop = new PVector(0, 0);
         int base = basemen.indexOf(catcher);
-        for (Baserunner player : runners){
-          if (player.velocity.mag() > 0 && player.onBase + 1 % 4 == base){
+         
+        for(int i = 0; i < runners.size(); i++){
+          Baserunner player = runners.get(i);
+          if (player.velocity.mag() > 0 && player.onBase % 4 == base){
             player.out();
+            i--;
           }
         }
       }
@@ -342,11 +347,12 @@ Outfielder closestDefender(){
 }
 
 Outfielder throwTarget(){
-  Outfielder catcher = basemen.get(0);
+  Outfielder catcher = null;
 
   for (Baserunner player : runners){
     if (player.velocity.mag() > 0){
-      catcher = basemen.get(player.onBase + 1 % 4);
+      catcher = basemen.get(player.onBase % 4);
+      break;
     }
   }
 
@@ -359,9 +365,11 @@ void resetDefenders(){
   outfielders.add(new Outfielder(10, 1, new PVector(width/2 + 180, height/2)));
   outfielders.add(new Outfielder(10, 1, new PVector(width/2, height/2 - 200)));
   outfielders.add(new Outfielder(10, 1, new PVector((width/2)-40, height/2 + 100)));
+  basemen = new ArrayList<Outfielder>();
   basemen.add(new Outfielder(10, 1, new PVector(-40,-14).add(firstBase)));
   basemen.add(new Outfielder(10, 1, new PVector(40,66).add(secondBase)));
   basemen.add(new Outfielder(10, 1, new PVector(40,-14).add(thirdBase)));
+  basemen.add(new Outfielder(10, 1, new PVector(40,66).add(homePlate)));
   ballCaught = false;
   ballThrown = false;
 }
