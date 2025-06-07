@@ -114,7 +114,8 @@ if (balls >= 4) {
 
   public void displayTop(){
     stroke(255, 100, 100, 100);
-    line(positionTop.x, positionTop.y, positionTop.x - velocityTop.x * 5, positionTop.y - velocityTop.y * 5);
+    strokeWeight(3);
+    line(positionTop.x, positionTop.y, positionTop.x - velocityTop.x * 8, positionTop.y - velocityTop.y * 8);
 
     noStroke();
     fill(255, 0, 0);
@@ -124,6 +125,6 @@ if (balls >= 4) {
   public void hit(PVector forceTop, double forceHeight){
     //Sets the starting velocityTop velocityHeight based on the force applied
     velocityTop = forceTop;
-    velocityHeight = forceHeight*1.3;
+    velocityHeight = forceHeight*1.1;
   }
 }
