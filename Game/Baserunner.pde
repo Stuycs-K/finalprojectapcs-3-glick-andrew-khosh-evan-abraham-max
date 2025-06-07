@@ -1,4 +1,4 @@
-public class Baserunner extends Player{
+ public class Baserunner extends Player{
    private int onBase; //0 for home; 1 for first; 2 for second; 3 for third//
 
    public Baserunner(int str, int spd){

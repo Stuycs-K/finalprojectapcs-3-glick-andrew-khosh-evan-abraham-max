@@ -108,7 +108,26 @@ if (balls >= 4) {
     if (heightTop < 0){
       heightTop = 0;
       velocityHeight = 0;
-      velocityTop = new PVector(0, 0);
+      if (!ballCaught){
+        velocityTop = new PVector(0, 0);
+        
+        for (Outfielder catcher : outfielders){ //Ball lands in outfielder's glove
+          if (catcher.position.dist(this.positionTop) < 12.5){
+            this.positionTop = new PVector(catcher.position.x, catcher.position.y);
+            ballCaught = true;
+            runners.get(runners.size() - 1).out();
+          }
+        }
+        
+        for (Outfielder catcher : basemen){ //Ball lands in outfielder's glove
+          if (catcher.position.dist(this.positionTop) < 12.5){
+            this.positionTop = new PVector(catcher.position.x, catcher.position.y);
+            ballCaught = true;
+            runners.get(runners.size() - 1).out();
+          }
+        }
+        
+      }
     }
   }
 
