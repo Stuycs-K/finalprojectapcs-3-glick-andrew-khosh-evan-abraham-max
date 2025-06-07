@@ -263,21 +263,21 @@ void topDownView() {
 }
 
 void reset(){
-  boolean foul = false;
-  boolean swung = false;
-  boolean on1 = false;
-  boolean on2 = false;
-  boolean on3 = false;
-  int strikes = 0;
-  int balls = 0;
-  int outs = 0;
-  boolean swinging = false;
-  boolean pitching = false;
+  foul = false;
+  swung = false;
+  on1 = false;
+  on2 = false;
+  on3 = false;
+  strikes = 0;
+  balls = 0;
+  outs = 0;
+  swinging = false;
+  pitching = false;
   runners = new ArrayList<Baserunner>();
   resetDefenders();
-  int hits = 0;
-  int runs = 0;
-  int totalPitches = 0;
+  hits = 0;
+  runs = 0;
+  totalPitches = 0;
 }
 
 boolean playersOnBase(){
@@ -328,7 +328,7 @@ void moveDefenders(){
     }
   }
   else if (!ballThrown){
-    Outfielder catcher = throwTarget();
+    Outfielder catcher = throwTarget(closestDefender);
     if (catcher != null){ 
       closestDefender.throwBall(catcher, ball1);
       ballThrown = true;
@@ -368,13 +368,19 @@ Outfielder closestDefender(){
   return closestOutfielder;
 }
 
-Outfielder throwTarget(){
+Outfielder throwTarget(Outfielder thrower){
   Outfielder catcher = null;
+  float minDist = -1.0;
 
   for (Baserunner player : runners){
     if (player.velocity.mag() > 0){
-      catcher = basemen.get(player.onBase % 4);
-      break;
+      if (minDist < 0){
+        minDist = thrower.position.dist(basemen.get(player.onBase % 4).position);
+      }
+      if (minDist > thrower.position.dist(basemen.get(player.onBase % 4).position)){
+        minDist = thrower.position.dist(basemen.get(player.onBase % 4).position);
+        catcher = basemen.get(player.onBase % 4);
+      }
     }
   }
 
