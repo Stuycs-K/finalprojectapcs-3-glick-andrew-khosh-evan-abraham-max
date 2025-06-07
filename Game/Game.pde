@@ -98,11 +98,11 @@ void draw() {
 
     ball1.tickTop();
     ball1.displayTop();
-    
+    /*
     println("ballCaught: " + ballCaught + " ballThrown: " + ballThrown);
     if (throwTarget(closestDefender()) != null){
       println(throwTarget(closestDefender()).position);
-    }
+    }*/
   } //End Top View
 
 }
@@ -324,11 +324,12 @@ void movePlayers(){
 
 void moveDefenders(){
   Outfielder closestDefender = closestDefender();
+  Outfielder closestOutfielder = closestOutfielder();
 
   if (!ballCaught){
-    closestDefender.chaseBall(ball1);
-    if (closestDefender.position.dist(ball1.positionTop) < 12.5 && ball1.heightTop == 0){
-      ball1.positionTop = new PVector(closestDefender.position.x, closestDefender.position.y);
+    closestOutfielder.chaseBall(ball1);
+    if (closestOutfielder.position.dist(ball1.positionTop) < 12.5 && ball1.heightTop == 0){
+      ball1.positionTop = new PVector(closestOutfielder.position.x, closestOutfielder.position.y);
       ballCaught = true;
     }
   }
@@ -344,6 +345,7 @@ void moveDefenders(){
     for (Outfielder catcher : basemen){
       if (catcher.position.dist(ball1.positionTop) < 12.5){
         ballThrown = false;
+        ball1.positionTop = new PVector(catcher.position.x, catcher.position.y);
         ball1.velocityTop = new PVector(0, 0);
         int base = basemen.indexOf(catcher);
          
@@ -360,6 +362,26 @@ void moveDefenders(){
 }
 
 Outfielder closestDefender(){
+  float minDist = outfielders.get(0).position.dist(ball1.positionTop);
+  Outfielder closestDefender = outfielders.get(0);
+
+  for (Outfielder player : outfielders){
+    if (player.position.dist(ball1.positionTop) < minDist){
+      minDist = player.position.dist(ball1.positionTop);
+      closestDefender = player;
+    }
+  }
+  for (Outfielder player : basemen){
+    if (player.position.dist(ball1.positionTop) < minDist){
+      minDist = player.position.dist(ball1.positionTop);
+      closestDefender = player;
+    }
+  }
+
+  return closestDefender;
+}
+
+Outfielder closestOutfielder(){
   float minDist = outfielders.get(0).position.dist(ball1.positionTop);
   Outfielder closestOutfielder = outfielders.get(0);
 
@@ -378,7 +400,7 @@ Outfielder throwTarget(Outfielder thrower){
   float minDist = -1.0;
 
   for (Baserunner player : runners){
-    if (player.velocity.mag() > 0){
+    if (player.velocity.mag() > 0 && thrower != basemen.get((player.onBase + 1) % 4)){
       if (minDist < 0 || minDist > thrower.position.dist(basemen.get((player.onBase + 1) % 4).position)){
         catcher = basemen.get((player.onBase + 1) % 4);
         minDist = thrower.position.dist(catcher.position);
