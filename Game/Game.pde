@@ -98,6 +98,11 @@ void draw() {
 
     ball1.tickTop();
     ball1.displayTop();
+    
+    println("ballCaught: " + ballCaught + " ballThrown: " + ballThrown);
+    if (throwTarget(closestDefender()) != null){
+      println(throwTarget(closestDefender()).position);
+    }
   } //End Top View
 
 }
@@ -344,7 +349,7 @@ void moveDefenders(){
          
         for(int i = 0; i < runners.size(); i++){
           Baserunner player = runners.get(i);
-          if (player.velocity.mag() > 0 && player.onBase % 4 == base){
+          if (player.velocity.mag() > 0 && (player.onBase + 1) % 4 == base){
             player.out();
             i--;
           }
@@ -374,12 +379,9 @@ Outfielder throwTarget(Outfielder thrower){
 
   for (Baserunner player : runners){
     if (player.velocity.mag() > 0){
-      if (minDist < 0){
-        minDist = thrower.position.dist(basemen.get(player.onBase % 4).position);
-      }
-      if (minDist > thrower.position.dist(basemen.get(player.onBase % 4).position)){
-        minDist = thrower.position.dist(basemen.get(player.onBase % 4).position);
-        catcher = basemen.get(player.onBase % 4);
+      if (minDist < 0 || minDist > thrower.position.dist(basemen.get((player.onBase + 1) % 4).position)){
+        catcher = basemen.get((player.onBase + 1) % 4);
+        minDist = thrower.position.dist(catcher.position);
       }
     }
   }
@@ -394,10 +396,10 @@ void resetDefenders(){
   outfielders.add(new Outfielder(10, 1, new PVector(width/2, height/2 - 200)));
   outfielders.add(new Outfielder(10, 1, new PVector((width/2)-40, height/2 + 100)));
   basemen = new ArrayList<Outfielder>();
+  basemen.add(new Outfielder(10, 1, new PVector(40,66).add(homePlate)));
   basemen.add(new Outfielder(10, 1, new PVector(-40,-14).add(firstBase)));
   basemen.add(new Outfielder(10, 1, new PVector(40,66).add(secondBase)));
   basemen.add(new Outfielder(10, 1, new PVector(40,-14).add(thirdBase)));
-  basemen.add(new Outfielder(10, 1, new PVector(40,66).add(homePlate)));
   ballCaught = false;
   ballThrown = false;
 }
