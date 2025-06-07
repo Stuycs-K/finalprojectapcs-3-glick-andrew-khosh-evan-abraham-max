@@ -31,9 +31,37 @@ Wrote hit method in Hitter class to calculate force applied to ball
 
 Wrote hit method in Ball class to set the starting velocity of the ball from the hit
 
+### 2025-05-30
+Finished hitting functionality and merged branch
+
 ### 2025-06-01 HOME
 Cleaned up code for controlling the ball in top view to use the proper variables and functions
 
 Fixed hit method in Hitter class to properly calculate direction of force applied to ball
 
 Wrote code to control and display ball in top view
+
+### 2025-06-02
+Changed pitch to go through Pitcher class and use pitcher's stats
+
+Made functionality for outfielders chasing the ball when hit
+
+### 2025-06-03
+Finished functionality for display and movement of outfielders
+
+### 2025-06-04
+Added functionality for outfielders throwing the ball around the bases to tag runners out
+
+Wrote out method in Baserunner for when runners are tagged out
+
+### 2025-06-06
+OUT ON VACATION
+
+### 2025-06-07 HOME
+Added functionality for a ball being caught straight off of a hit
+
+Wrote reset method in Game to reset all variables when innings change
+
+Changed outfielder behavior to throw the ball to nearest baseman that can tag a runner out
+
+Finished outfielder and basemen functionality
