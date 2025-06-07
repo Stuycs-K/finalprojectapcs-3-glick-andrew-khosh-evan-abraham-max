@@ -61,6 +61,10 @@ void draw() {
   }
 
   if (background == FRONTVIEW) { //Batting View
+    if (outs >= 3){
+      innings++;
+      reset();
+    }
     stroke(0);
     strokeWeight(1);
     frontView();
@@ -212,9 +216,9 @@ void frontView() {
   text("Balls : " + balls, 20, 70);
   text("Strikes : " + strikes, 20, 90);
  // text("Swinging = " + swinging, 20, 70);
-  text("Hits: " + hits, 20, 110);
+  text("Outs: " + outs, 20, 110);
   text("Runs: " + runs, 20, 130);
-    text("Inning : " + innings, 20, 150);
+    text("Inning : " + innings, 20, 150);  
   fill(255, 255, 255, 80);
   //MAKING SCOREBUG ---------
   rect(1100, 50, 200, 100);
@@ -256,6 +260,24 @@ void topDownView() {
   drawBase(secondBase.x, secondBase.y);
   drawBase(thirdBase.x, thirdBase.y);
   drawBase(homePlate.x, homePlate.y);
+}
+
+void reset(){
+  boolean foul = false;
+  boolean swung = false;
+  boolean on1 = false;
+  boolean on2 = false;
+  boolean on3 = false;
+  int strikes = 0;
+  int balls = 0;
+  int outs = 0;
+  boolean swinging = false;
+  boolean pitching = false;
+  runners = new ArrayList<Baserunner>();
+  resetDefenders();
+  int hits = 0;
+  int runs = 0;
+  int totalPitches = 0;
 }
 
 boolean playersOnBase(){
