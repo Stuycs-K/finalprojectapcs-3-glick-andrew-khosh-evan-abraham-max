@@ -110,6 +110,10 @@ void keyPressed() {
     if (background == TOPVIEW && ball1.heightTop == 0 && playersOnBase()){
       background = 0;
       resetDefenders();
+      if (foul){
+        runners.remove(runners.size() - 1);
+        foul = false;
+      }
     }
     else if (background == FRONTVIEW && pitching == false){
       pitching = true;
@@ -174,15 +178,19 @@ void mousePressed(){
     swinging = true;
     if (hitter1.hit(ball1, new PVector(mouseX, mouseY))){
       foul = foulBall(ball1);
-      println(foul);
-      if (!foul){
+      runners.add(new Baserunner(hitter1.strength,hitter1.speed));
+      pitching = false;
+      swinging = false;
+      switchView();
+      if (foul){
+        if (strikes < 2){
+          strikes++;
+        }
+      }
+      else {
         balls = 0;
         strikes = 0;
         hits++;
-        pitching = false;
-        swinging = false;
-        switchView();
-        runners.add(new Baserunner(hitter1.strength,hitter1.speed));
         for (Baserunner player : runners){
           if (player.onBase == 0) {
             player.run();
