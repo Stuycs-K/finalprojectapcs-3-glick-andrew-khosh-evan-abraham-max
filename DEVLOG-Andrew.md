@@ -29,3 +29,8 @@ added strikes and balls and outs
 Fixed text display
 worked on bat logic(without success)
 added innings
+### 2025-06-06
+Fixed defender logic
+### 2025-06-08
+added in instructions for baserunning
+added in enemy turn 
