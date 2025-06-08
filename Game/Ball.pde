@@ -152,7 +152,7 @@ if (balls >= 4) {
     velocityTop = forceTop;
     velocityHeight = forceHeight*1.1;
     
-    double time = (velocityHeight * 2) / 0.1;
+    double time = Math.ceil((velocityHeight * 2) / 0.1);
     double dist = velocityTop.mag() * time;
     PVector direction = new PVector(velocityTop.x, velocityTop.y);
     
