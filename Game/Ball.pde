@@ -145,7 +145,7 @@ if (balls >= 4) {
 
     noStroke();
     fill(255, 0, 0);
-    image(ball, positionTop.x, positionTop.y, (float) (25 + 0.1 * heightTop), (float) (25 + 0.1 * heightTop));
+    image(ball, positionTop.x - (float) (12.5 + 0.1 * heightTop), positionTop.y - (float) (12.5 + 0.1 * heightTop), (float) (25 + 0.1 * heightTop), (float) (25 + 0.1 * heightTop));
   }
 
   public void hit(PVector forceTop, double forceHeight){
