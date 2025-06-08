@@ -65,3 +65,10 @@ Wrote reset method in Game to reset all variables when innings change
 Changed outfielder behavior to throw the ball to nearest baseman that can tag a runner out
 
 Finished outfielder and basemen functionality
+
+### 2025-06-08 HOME
+Added predicted landing spot for ball
+
+Made outfielders run to predicted landing spot
+
+Added functionality for foul balls and outfielders stopping when ball goes out of the field
