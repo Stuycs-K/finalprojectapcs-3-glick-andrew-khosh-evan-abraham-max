@@ -42,6 +42,10 @@ ArrayList<Outfielder> basemen = new ArrayList<Outfielder>();
 int hits = 0;
 int runs = 0;
 int totalPitches = 0;
+int ENEMY_TURN = 2;
+int enemyScore = 0;
+int enemyTurnStartTime = 0;
+int enemyTotal = 0;
 
 
 void setup() {
@@ -69,10 +73,17 @@ void draw() {
   }
 
   if (background == FRONTVIEW) { //Batting View
-    if (outs >= 3){
-      innings++;
-      reset();
-    }
+  //  if (outs >= 3){
+  //    innings++;
+ //     reset();
+ //   }
+      if (outs >= 3) {
+    // Start enemy turn
+    background = ENEMY_TURN;
+    enemyScore = (int)random(0, 6);
+    enemyTurnStartTime = millis();
+    return;
+  }
     stroke(0);
     strokeWeight(1);
     frontView();
@@ -96,7 +107,21 @@ void draw() {
       ball1.displayFront();
     }
   } //End Batting View
+else if (background == ENEMY_TURN) {
+  background(0);
+  fill(255);
+  textSize(40);
+  textAlign(CENTER);
+  text("Enemy Turn", width/2, height/2 - 50);
+  text("They scored " + enemyScore + " runs!", width/2, height/2);
 
+  if (millis() - enemyTurnStartTime > 5000) {
+    innings++;
+    reset();
+      textSize(12);
+    background = 0; 
+  }
+}
   else { //Top View
     topDownView();
     displayPlayers();
@@ -109,6 +134,7 @@ void draw() {
   } //End Top View
 
 }
+
 
 void keyPressed() {
   if (key == 'b') {
@@ -225,6 +251,7 @@ void mousePressed(){
 }
 
 void frontView() {
+  textAlign(LEFT);
   background(135, 206, 235);
 
   fill(34, 139, 34);
@@ -280,7 +307,24 @@ void topDownView() {
   drawBase(homePlate.x, homePlate.y);
   
   image(fieldImage, 0, 0);
+  fill(255);
+textSize(20);
+String instruction = getInstruction();
+text(instruction, 20, 30);  // Adjust position if needed
+
 }
+String getInstruction() {
+  for (Baserunner runner : runners) {
+    int base = runner.onBase;
+
+    if (base == 1) return "Click 1 to run from first to second base";
+    if (base == 2) return "Click 2 to run from second to third base";
+    if (base == 3) return "Click 3 to run home after the hit";
+  }
+  return "";
+}
+
+
 
 void reset(){
   foul = false;
@@ -296,7 +340,7 @@ void reset(){
   runners = new ArrayList<Baserunner>();
   resetDefenders();
   hits = 0;
-  runs = 0;
+ // runs = 0;
   totalPitches = 0;
 }
 
