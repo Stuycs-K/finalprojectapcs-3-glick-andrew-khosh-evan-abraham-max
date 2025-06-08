@@ -98,11 +98,6 @@ void draw() {
 
     ball1.tickTop();
     ball1.displayTop();
-    /*
-    println("ballCaught: " + ballCaught + " ballThrown: " + ballThrown);
-    if (throwTarget(closestDefender()) != null){
-      println(throwTarget(closestDefender()).position);
-    }*/
   } //End Top View
 
 }
@@ -115,6 +110,10 @@ void keyPressed() {
     if (background == TOPVIEW && ball1.heightTop == 0 && playersOnBase()){
       background = 0;
       resetDefenders();
+      if (foul){
+        runners.remove(runners.size() - 1);
+        foul = false;
+      }
     }
     else if (background == FRONTVIEW && pitching == false){
       pitching = true;
@@ -178,14 +177,20 @@ void mousePressed(){
   if (background == FRONTVIEW){
     swinging = true;
     if (hitter1.hit(ball1, new PVector(mouseX, mouseY))){
-      if (!foul){
+      foul = foulBall(ball1);
+      runners.add(new Baserunner(hitter1.strength,hitter1.speed));
+      pitching = false;
+      swinging = false;
+      switchView();
+      if (foul){
+        if (strikes < 2){
+          strikes++;
+        }
+      }
+      else {
         balls = 0;
         strikes = 0;
         hits++;
-        pitching = false;
-        swinging = false;
-        switchView();
-        runners.add(new Baserunner(hitter1.strength,hitter1.speed));
         for (Baserunner player : runners){
           if (player.onBase == 0) {
             player.run();
@@ -382,12 +387,12 @@ Outfielder closestDefender(){
 }
 
 Outfielder closestOutfielder(){
-  float minDist = outfielders.get(0).position.dist(ball1.positionTop);
+  float minDist = outfielders.get(0).position.dist(ball1.positionLanding);
   Outfielder closestOutfielder = outfielders.get(0);
 
   for (Outfielder player : outfielders){
-    if (player.position.dist(ball1.positionTop) < minDist){
-      minDist = player.position.dist(ball1.positionTop);
+    if (player.position.dist(ball1.positionLanding) < minDist){
+      minDist = player.position.dist(ball1.positionLanding);
       closestOutfielder = player;
     }
   }
@@ -413,17 +418,29 @@ Outfielder throwTarget(Outfielder thrower){
 
 void resetDefenders(){
   outfielders = new ArrayList<Outfielder>();
-  outfielders.add(new Outfielder(10, 1, new PVector(width/2 - 180, height/2)));
-  outfielders.add(new Outfielder(10, 1, new PVector(width/2 + 180, height/2)));
+  outfielders.add(new Outfielder(10, 1, new PVector(width/2 - 200, height/2)));
+  outfielders.add(new Outfielder(10, 1, new PVector(width/2 + 200, height/2)));
   outfielders.add(new Outfielder(10, 1, new PVector(width/2, height/2 - 200)));
-  outfielders.add(new Outfielder(10, 1, new PVector((width/2)-40, height/2 + 100)));
+  outfielders.add(new Outfielder(10, 1, new PVector((width/2), height/2 + 200)));
   basemen = new ArrayList<Outfielder>();
-  basemen.add(new Outfielder(10, 1, new PVector(40,66).add(homePlate)));
-  basemen.add(new Outfielder(10, 1, new PVector(-40,-14).add(firstBase)));
-  basemen.add(new Outfielder(10, 1, new PVector(40,66).add(secondBase)));
-  basemen.add(new Outfielder(10, 1, new PVector(40,-14).add(thirdBase)));
+  basemen.add(new Outfielder(10, 1, new PVector(0,50).add(homePlate)));
+  basemen.add(new Outfielder(10, 1, new PVector(25,25).add(firstBase)));
+  basemen.add(new Outfielder(10, 1, new PVector(0,0).add(secondBase)));
+  basemen.add(new Outfielder(10, 1, new PVector(-25,25).add(thirdBase)));
   ballCaught = false;
   ballThrown = false;
+}
+
+boolean outfield(PVector position){
+  return position.y > -1 * position.x + 1540 ||
+         position.y > position.x + 770 ||
+         position.y < -1 * position.x + 770 ||
+         position.y < position.x - 700;
+}
+
+boolean foulBall(Ball ball){
+  return ball.positionLanding.y > -1 * ball.positionLanding.x + 1540 ||
+         ball.positionLanding.y > ball.positionLanding.x + 770;
 }
 
 void drawBase(float x, float y){
