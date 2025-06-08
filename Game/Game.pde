@@ -2,8 +2,10 @@ import java.util.*;
 import java.io.*;
 int innings = 1;
 int background = 0;    //0 will be front view, 1 will be top down
-PImage field;
-PImage ball;
+PImage fieldImage;
+PImage ballImage;
+PImage playerImage;
+PImage defenderImage;
 boolean remove = false;
 public final int width1 = 1400;
 public final int height1 = 840;
@@ -44,8 +46,10 @@ int totalPitches = 0;
 
 void setup() {
   size(1400, 840);
-  field = loadImage("Field.png");
-  ball = loadImage("Ball.png");
+  fieldImage = loadImage("Field.png");
+  ballImage = loadImage("Ball.png");
+  playerImage = loadImage("Player.png");
+  defenderImage = loadImage("Defender.png");
   swingDistance = 0;
   hitter1.position = homePlate.copy();
   resetDefenders();
@@ -275,7 +279,7 @@ void topDownView() {
   drawBase(thirdBase.x, thirdBase.y);
   drawBase(homePlate.x, homePlate.y);
   
-  image(field, 0, 0);
+  image(fieldImage, 0, 0);
 }
 
 void reset(){
@@ -463,17 +467,13 @@ void switchView(){
 }
 
 void displayPlayers(){
-  noStroke();
-  for (Baserunner player : runners){
-    fill(0);
-    circle(player.position.x, player.position.y, 30);
+  for (Outfielder player : basemen){
+    image(defenderImage, player.position.x - 25, player.position.y - 25);
   }
   for (Outfielder player : outfielders){
-    fill(255, 255, 0);
-    circle(player.position.x, player.position.y, 30);
+    image(defenderImage, player.position.x - 25, player.position.y - 25);
   }
-    for (Outfielder player : basemen){
-    fill(255, 165, 0);
-    circle(player.position.x, player.position.y, 30);
+  for (Baserunner player : runners){
+    image(playerImage, player.position.x - 25, player.position.y - 25);
   }
 }
