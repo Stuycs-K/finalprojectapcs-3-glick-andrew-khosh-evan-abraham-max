@@ -1,4 +1,4 @@
-public class Ball{
+ public class Ball{
   public PVector positionFront;       //Position in front view
   public PVector velocityFront;       //Velocity in 2D plane during front view (ex. curve ball)
   public PVector accelerationFront;   //Acceleration in 2D plane during front view (ex. curve ball)
@@ -6,6 +6,7 @@ public class Ball{
   public float radiusFront;           //Radius of slice of ball going through 2D plane during front view
   public float radiusMax;             //Max radius of slice of ball going through 2D plane during front view
   public PVector positionTop;         //Position in top view
+  public PVector positionLanding;     //Predicted position the ball will land
   public double heightTop;            //Height in top view
   public PVector velocityTop;         //Velocity in 2D plane during top view
   public double velocityHeight;       //Velocity in/out of 2D plane during top view
@@ -20,6 +21,7 @@ public class Ball{
     accelerationFront = new PVector(0, 0);
     //set starting vals for top view of ball
     positionTop = new PVector(homePlate.x, homePlate.y);
+    positionLanding = new PVector(homePlate.x, homePlate.y);
     heightTop = 10;
     velocityTop = new PVector(0, 0);
     velocityHeight = 0;
@@ -111,6 +113,10 @@ if (balls >= 4) {
       if (!ballCaught){
         velocityTop = new PVector(0, 0);
         
+        if (!foul && outfield(this.positionTop)){
+          //Code for big homerun alert to pop up?
+        }
+        
         for (Outfielder catcher : outfielders){ //Ball lands in outfielder's glove
           if (catcher.position.dist(this.positionTop) < 12.5){
             this.positionTop = new PVector(catcher.position.x, catcher.position.y);
@@ -145,5 +151,11 @@ if (balls >= 4) {
     //Sets the starting velocityTop velocityHeight based on the force applied
     velocityTop = forceTop;
     velocityHeight = forceHeight*1.1;
+    
+    double time = (velocityHeight * 2) / 0.1;
+    double dist = velocityTop.mag() * time;
+    PVector direction = new PVector(velocityTop.x, velocityTop.y);
+    
+    positionLanding.add(PVector.mult(direction.normalize(), (float) dist));
   }
 }
