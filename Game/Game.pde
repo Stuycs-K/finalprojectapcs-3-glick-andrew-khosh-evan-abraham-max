@@ -41,7 +41,9 @@ ArrayList<Outfielder> outfielders = new ArrayList<Outfielder>();
 ArrayList<Outfielder> basemen = new ArrayList<Outfielder>();
 int hits = 0;
 int runs = 0;
+int runsE = 0;
 int totalPitches = 0;
+PFont varsity;
 
 
 void setup() {
@@ -53,6 +55,8 @@ void setup() {
   swingDistance = 0;
   hitter1.position = homePlate.copy();
   resetDefenders();
+  varsity = createFont("varsity_regular.ttf", 24);
+  textFont(varsity);
 }
 
 void draw() {
@@ -236,28 +240,83 @@ void frontView() {
  // text("Swinging = " + swinging, 20, 70);
   text("Outs: " + outs, 20, 110);
   text("Runs: " + runs, 20, 130);
-    text("Inning : " + innings, 20, 150);  
+    text("Inning : " + innings, 20, 150);
   fill(255, 255, 255, 80);
+
   //MAKING SCOREBUG ---------
-  rect(1100, 50, 200, 100);
+  rect(825, 50, 465, 150);
+  line(1100,50,1100,200);
+  line(825, 125, 900,125);
+  line(900, 50, 900, 200);
   if (on1) fill(255,255,0);
   else fill(255,255,255);
-  quad(1200+35, 100, 1215+35, 115, 1200+35, 130 ,1185+35, 115);
+    quad(1240, 107.5, 1280, 147.5, 1240, 187.5, 1200, 147.5);
   on1 = false;
-  if (on3) fill(255,255,0);
-  else fill(255,255,255);
-  quad(1200, 100, 1215, 115, 1200, 130 ,1185, 115);
-  on3 = false;
   if (on2) fill(255,255,0);
   else fill(255,255,255);
-  quad(1200+17.5, 100-17.5, 1215+17.5, 115-17.5, 1200+17.5, 130-17.5 ,1185+17.5, 115-17.5);
+    quad(1195, 62.5, 1235, 102.5, 1195, 142.5, 1155, 102.5);
   on2 = false;
+  if (on3) fill(255,255,0);
+  else fill(255,255,255);
+    quad(1150, 107.5, 1190, 147.5, 1150, 187.5, 1110, 147.5);
+  on3 = false;
+  //BALLS
+  if (balls > 0) fill(255,255,0);
+  else fill(255,255,255);
+  circle(930,80,40);
+  if (balls > 1) fill(255,255,0);
+  else fill(255,255,255);
+  circle(975,80,40);
+  if (balls > 2) fill(255,255,0);
+  else fill(255,255,255);
+  circle(1020,80,40);
+  if (balls > 3) fill(255,255,0);
+  else fill(255,255,255);
+  circle(1065,80,40);
+
+  //STRIKES
+  if (strikes > 0) fill(255,255,0);
+  else fill(255,255,255);
+  circle(930,125,40);
+  if (strikes > 1) fill(255,255,0);
+  else fill(255,255,255);
+  circle(975,125,40);
+  if (strikes > 2) fill(255,255,0);
+  else fill(255,255,255);
+  circle(1020,125,40);
+
+  //OUTS
+  if (outs > 0) fill(199,30,30);
+  else fill(255,255,255);
+  circle(930,170,40);
+  if (outs > 1) fill(199,30,30);
+  else fill(255,255,255);
+  circle(975,170,40);
+  if (outs > 2) fill(199,30,30);
+  else fill(255,255,255);
+  circle(1020,170,40);
+
+  //SCORE
+  text("YOU",835,75);
+  text("THEM",830,150);
+  textSize(50);
+  text(runs,835,120);
+  text(runsE,835,195);
+  textSize(24);
+
+  //INNING
+  text("INN",1050,130);
+  textSize(50);
+  text(innings,1050,180);
+  textSize(24);
+
   //END OF SCOREBUG -----------
   fill(255, 255, 255, 80);
   rect(width/2 - 75, (height*2/3) - 250 , 150, 200);
   fill(150, 75, 0);
   //bat1.create();
   //ellipse(200,400,200,40);
+
 
 }
 
@@ -278,7 +337,7 @@ void topDownView() {
   drawBase(secondBase.x, secondBase.y);
   drawBase(thirdBase.x, thirdBase.y);
   drawBase(homePlate.x, homePlate.y);
-  
+
   image(fieldImage, 0, 0);
 }
 
@@ -296,7 +355,7 @@ void reset(){
   runners = new ArrayList<Baserunner>();
   resetDefenders();
   hits = 0;
-  runs = 0;
+  //runs = 0;
   totalPitches = 0;
 }
 
@@ -350,7 +409,7 @@ void moveDefenders(){
   }
   else if (!ballThrown){
     Outfielder catcher = throwTarget(closestDefender);
-    if (catcher != null){ 
+    if (catcher != null){
       closestDefender.throwBall(catcher, ball1);
       ballThrown = true;
     }
@@ -363,7 +422,7 @@ void moveDefenders(){
         ball1.positionTop = new PVector(catcher.position.x, catcher.position.y);
         ball1.velocityTop = new PVector(0, 0);
         int base = basemen.indexOf(catcher);
-         
+
         for(int i = 0; i < runners.size(); i++){
           Baserunner player = runners.get(i);
           if (player.velocity.mag() > 0 && (player.onBase + 1) % 4 == base){

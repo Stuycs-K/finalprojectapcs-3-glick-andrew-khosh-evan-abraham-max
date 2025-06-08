@@ -71,3 +71,6 @@ Finished the new UML in totality, which took around 40 minutes, including adding
 - changed ball velocity (3 minutes)
 - fixed baserunning bug (10 minutes)
 - made the scorebug dynamic (10 minutes)
+
+### 2025-06-08 - Made scorebug
+- made the scorebug (2 hours)
