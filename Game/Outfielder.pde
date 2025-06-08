@@ -15,7 +15,7 @@ public class Outfielder extends Player{
     if (!outfield(ball.positionTop)){
       velocity = PVector.sub(ball.positionLanding, position);
       velocity.normalize();
-      velocity.mult((float) speed / 2);
+      velocity.mult((float) speed * 0.7);
       move();
     }
   }
