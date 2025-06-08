@@ -112,6 +112,7 @@ if (balls >= 4) {
       velocityHeight = 0;
       if (!ballCaught){
         velocityTop = new PVector(0, 0);
+        positionLanding = new PVector(positionTop.x, positionTop.y);
         
         if (!foul && outfield(this.positionTop)){
           //Code for big homerun alert to pop up?
