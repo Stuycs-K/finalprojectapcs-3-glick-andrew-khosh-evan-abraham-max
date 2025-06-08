@@ -3,6 +3,7 @@ import java.io.*;
 int innings = 1;
 int background = 0;    //0 will be front view, 1 will be top down
 PImage field;
+PImage ball;
 boolean remove = false;
 public final int width1 = 1400;
 public final int height1 = 840;
@@ -44,7 +45,7 @@ int totalPitches = 0;
 void setup() {
   size(1400, 840);
   field = loadImage("Field.png");
-  field.resize(1400, 840);
+  ball = loadImage("Ball.png");
   swingDistance = 0;
   hitter1.position = homePlate.copy();
   resetDefenders();
