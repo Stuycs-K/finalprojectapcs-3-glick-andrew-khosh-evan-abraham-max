@@ -98,11 +98,6 @@ void draw() {
 
     ball1.tickTop();
     ball1.displayTop();
-    /*
-    println("ballCaught: " + ballCaught + " ballThrown: " + ballThrown);
-    if (throwTarget(closestDefender()) != null){
-      println(throwTarget(closestDefender()).position);
-    }*/
   } //End Top View
 
 }
@@ -178,6 +173,8 @@ void mousePressed(){
   if (background == FRONTVIEW){
     swinging = true;
     if (hitter1.hit(ball1, new PVector(mouseX, mouseY))){
+      foul = foulBall(ball1);
+      println(foul);
       if (!foul){
         balls = 0;
         strikes = 0;
@@ -424,6 +421,18 @@ void resetDefenders(){
   basemen.add(new Outfielder(10, 1, new PVector(40,-14).add(thirdBase)));
   ballCaught = false;
   ballThrown = false;
+}
+
+boolean outfield(PVector position){
+  return position.x - width/2 > height - position.y ||
+         position.x * -1 - (width/2 - height/2) < position.y - height/2 ||
+         position.x - (width/2 - height/2) > position.y - height/2 ||
+         position.x * -1 - width/2 > position.y - width/2;
+}
+
+boolean foulBall(Ball ball){
+  return ball.positionLanding.y > -1 * ball.positionLanding.x + 1540 ||
+         ball.positionLanding.y > ball.positionLanding.x + 770;
 }
 
 void drawBase(float x, float y){
