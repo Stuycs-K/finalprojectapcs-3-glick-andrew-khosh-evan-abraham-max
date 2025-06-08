@@ -387,12 +387,12 @@ Outfielder closestDefender(){
 }
 
 Outfielder closestOutfielder(){
-  float minDist = outfielders.get(0).position.dist(ball1.positionTop);
+  float minDist = outfielders.get(0).position.dist(ball1.positionLanding);
   Outfielder closestOutfielder = outfielders.get(0);
 
   for (Outfielder player : outfielders){
-    if (player.position.dist(ball1.positionTop) < minDist){
-      minDist = player.position.dist(ball1.positionTop);
+    if (player.position.dist(ball1.positionLanding) < minDist){
+      minDist = player.position.dist(ball1.positionLanding);
       closestOutfielder = player;
     }
   }
@@ -432,10 +432,10 @@ void resetDefenders(){
 }
 
 boolean outfield(PVector position){
-  return position.x - width/2 > height - position.y ||
-         position.x * -1 - (width/2 - height/2) < position.y - height/2 ||
-         position.x - (width/2 - height/2) > position.y - height/2 ||
-         position.x * -1 - width/2 > position.y - width/2;
+  return position.y > -1 * position.x + 1540 ||
+         position.y > position.x + 770 ||
+         position.y < -1 * position.x + 770 ||
+         position.y < position.x - 700;
 }
 
 boolean foulBall(Ball ball){
