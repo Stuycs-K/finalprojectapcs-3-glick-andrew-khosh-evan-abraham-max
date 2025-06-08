@@ -2,6 +2,7 @@ import java.util.*;
 import java.io.*;
 int innings = 1;
 int background = 0;    //0 will be front view, 1 will be top down
+PImage field;
 boolean remove = false;
 public final int width1 = 1400;
 public final int height1 = 840;
@@ -19,10 +20,10 @@ float zoneX1 = width1/2 - 75;
 float zoneX2 = width1/2 + 75;
 float zoneY1 = (height1*2/3) - 250;
 float zoneY2 = (height1*2/3) - 50;
-public final PVector homePlate = new PVector(width1 / 2, height1-70);
-public final PVector firstBase = new PVector((width1 / 2) + 155, height1 -225);
+public final PVector homePlate = new PVector(width1 / 2, height1-58);
+public final PVector firstBase = new PVector((width1 / 2) + 160, height1 -220);
 public final PVector secondBase = new PVector(width1 / 2, height1 - 380);
-public final PVector thirdBase = new PVector((width1 / 2) - 155, height1 - 225);
+public final PVector thirdBase = new PVector((width1 / 2) - 160, height1 - 220);
 private int swingDistance;
 private boolean swinging = false;
 public boolean pitching = false;
@@ -42,6 +43,8 @@ int totalPitches = 0;
 
 void setup() {
   size(1400, 840);
+  field = loadImage("Field.png");
+  field.resize(1400, 840);
   swingDistance = 0;
   hitter1.position = homePlate.copy();
   resetDefenders();
@@ -270,6 +273,8 @@ void topDownView() {
   drawBase(secondBase.x, secondBase.y);
   drawBase(thirdBase.x, thirdBase.y);
   drawBase(homePlate.x, homePlate.y);
+  
+  image(field, 0, 0);
 }
 
 void reset(){
@@ -306,7 +311,7 @@ void movePlayers(){
       player.stop();
       player.onBase = 1;
     }
-    else if (player.position.y < secondBase.y + 25){
+    else if (player.position.y < secondBase.y){
       player.stop();
       player.onBase = 2;
     }
@@ -314,7 +319,7 @@ void movePlayers(){
       player.stop();
       player.onBase = 3;
     }
-    else if (player.position.y > homePlate.y + 25){
+    else if (player.position.y > homePlate.y){
       player.stop();
       player.position = new PVector(10000,10000);
       remove = true;
@@ -423,10 +428,10 @@ void resetDefenders(){
   outfielders.add(new Outfielder(10, 1, new PVector(width/2, height/2 - 200)));
   outfielders.add(new Outfielder(10, 1, new PVector((width/2), height/2 + 200)));
   basemen = new ArrayList<Outfielder>();
-  basemen.add(new Outfielder(10, 1, new PVector(0,50).add(homePlate)));
-  basemen.add(new Outfielder(10, 1, new PVector(25,25).add(firstBase)));
-  basemen.add(new Outfielder(10, 1, new PVector(0,0).add(secondBase)));
-  basemen.add(new Outfielder(10, 1, new PVector(-25,25).add(thirdBase)));
+  basemen.add(new Outfielder(10, 1, new PVector(0,25).add(homePlate)));
+  basemen.add(new Outfielder(10, 1, new PVector(25,0).add(firstBase)));
+  basemen.add(new Outfielder(10, 1, new PVector(0,-25).add(secondBase)));
+  basemen.add(new Outfielder(10, 1, new PVector(-25,0).add(thirdBase)));
   ballCaught = false;
   ballThrown = false;
 }
