@@ -140,12 +140,13 @@ if (balls >= 4) {
 
   public void displayTop(){
     stroke(255, 100, 100, 100);
-    strokeWeight(3);
-    line(positionTop.x, positionTop.y, positionTop.x - velocityTop.x * 8, positionTop.y - velocityTop.y * 8);
+    strokeWeight(4);
+    line(positionTop.x - (float) (0.05 * heightTop), positionTop.y - (float) (0.05 * heightTop),
+         positionTop.x - velocityTop.x * 10 - (float) (0.05 * heightTop), positionTop.y - velocityTop.y * 10 - (float) (0.05 * heightTop));
 
     noStroke();
     fill(255, 0, 0);
-    image(ball, positionTop.x - (float) (12.5 + 0.1 * heightTop), positionTop.y - (float) (12.5 + 0.1 * heightTop), (float) (25 + 0.1 * heightTop), (float) (25 + 0.1 * heightTop));
+    image(ballImage, positionTop.x - (float) (12.5 + 0.1 * heightTop), positionTop.y - (float) (12.5 + 0.1 * heightTop), (float) (25 + 0.1 * heightTop), (float) (25 + 0.1 * heightTop));
   }
 
   public void hit(PVector forceTop, double forceHeight){
