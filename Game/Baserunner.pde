@@ -4,7 +4,6 @@
    public Baserunner(int str, int spd){
      super(str, spd);
      position = homePlate.copy();
-     position.y+=25;
      onBase = 0;
    }
 
