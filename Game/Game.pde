@@ -80,7 +80,7 @@ void draw() {
       on3 = true;
     }
   }
-  if (innings > 9) background = ENDGAME;
+  if (innings > 9 && runs != enemyScore) background = ENDGAME;
   if (background == ENDGAME) {
     background(0);
     fill(255);
