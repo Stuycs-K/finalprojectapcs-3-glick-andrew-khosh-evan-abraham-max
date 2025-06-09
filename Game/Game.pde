@@ -63,7 +63,7 @@ void setup() {
   hitter1.position = homePlate.copy();
   resetDefenders();
   varsity = createFont("varsity_regular.ttf", 24);
-//  textFont(varsity);
+  //textFont(varsity);
 }
 
 void draw() {
