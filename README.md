@@ -10,7 +10,7 @@ This is a 9-inning baseball game simulation where you control the batter and bas
 
 ### Basic Gameplay
 - **Spacebar** — Pitch the ball (in front view) or return to hitting after a hit.
-- **Mouse Click** — Swing the bat to hit the ball(ball distance and direction depends on where the ball is hit and how cenetered the ball is in the strike zone)
+- **Mouse Click** — Swing the bat to hit the ball(ball distance and direction depends on where and when the ball is hit as well as how cenetered the ball is in the strike zone)
 - **1** — Run from first to second base.
 - **2** — Run from second to third base.
 - **3** — Run from third base to home.
