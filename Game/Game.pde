@@ -227,7 +227,7 @@ void keyPressed() {
 
 void mousePressed(){
   if (background == FRONTVIEW){
-    swinging = true;
+bat1.startSwing();
     if (hitter1.hit(ball1, new PVector(mouseX, mouseY))){
       foul = foulBall(ball1);
       runners.add(new Baserunner(hitter1.strength,hitter1.speed));
