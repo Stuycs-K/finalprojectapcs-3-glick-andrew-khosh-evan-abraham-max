@@ -28,11 +28,17 @@
   }
 
   public void tickFront(){
+      if (cheatMode && radiusFront >= radiusMax) {
+    radiusFront = radiusMax;
+    velocityFront = new PVector(0, 0);
+    accelerationFront = new PVector(0, 0);
+    return;
+  }
     //Increases/Decreases radiusFront according to speedFront and updates positionFront and velocityFront
     velocityFront.add(accelerationFront);
     positionFront.add(velocityFront);
     radiusFront += speedFront;
-    if (radiusFront > radiusMax){
+      if (radiusFront > radiusMax) {
       float bx = positionFront.x;
       float by = positionFront.y;
       System.out.println("bx " + bx + "by " + by);
