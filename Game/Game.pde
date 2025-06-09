@@ -47,9 +47,9 @@ Ball ball1 = new Ball(new PVector(width1/2, height1/2 - 50), 20, pitcher1.streng
 ArrayList<Baserunner> runners = new ArrayList<Baserunner>();
 ArrayList<Outfielder> outfielders = new ArrayList<Outfielder>();
 ArrayList<Outfielder> basemen = new ArrayList<Outfielder>();
-int hits = 0;
+
 int runs = 0;
-int totalPitches = 0;
+
 
 
 int enemyScore = 0;
@@ -147,7 +147,6 @@ void draw() {
           else {
             balls = 0;
             strikes = 0;
-            hits++;
             for (Baserunner player : runners){
               if (player.onBase == 0) {
                 player.run();
@@ -548,11 +547,10 @@ void reset(){
   pitching = false;
   runners = new ArrayList<Baserunner>();
   resetDefenders();
-  hits = 0;
 
  // runs = 0;
 
-  totalPitches = 0;
+
 }
 
 boolean playersOnBase(){

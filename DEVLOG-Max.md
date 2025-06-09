@@ -74,3 +74,13 @@ Finished the new UML in totality, which took around 40 minutes, including adding
 
 ### 2025-06-08 - Made scorebug
 - made the scorebug (2 hours)
+
+### 2025-06-08 - Made cheats among other things
+- made balls cheat (15 minutes)
+- Made inning cheat (10 mintes)
+- made end game and extra innings (1 hour)
+- made autospawn players cheat (1 hour)
+- fixed bugs (1 hour 30 minutes)
+
+### 2025-06-09 - Updated UMl
+- updated the UML (1 hour)

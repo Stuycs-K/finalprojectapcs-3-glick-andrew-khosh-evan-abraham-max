@@ -6,7 +6,7 @@
      position = homePlate.copy();
      onBase = 0;
    }
-   
+
    public Baserunner(int str, int spd, PVector positionx, int base){
      super(str, spd);
      position = positionx;

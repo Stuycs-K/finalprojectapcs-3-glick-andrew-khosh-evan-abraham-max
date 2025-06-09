@@ -28,12 +28,4 @@ public class Outfielder extends Player{
 
     ball1.velocityTop = throwVelocity;
   }
-
-  public void catchBall(Player thrower){
-
-  }
-
-  public void tagRunner(Baserunner runner){
-
-  }
 }

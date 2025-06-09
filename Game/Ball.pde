@@ -119,7 +119,7 @@ if (balls >= 4) {
       if (!ballCaught){
         velocityTop = new PVector(0, 0);
         positionLanding = new PVector(positionTop.x, positionTop.y);
-        
+
         for (Outfielder catcher : outfielders){ //Ball lands in outfielder's glove
           if (catcher.position.dist(this.positionTop) < 12.5){
             this.positionTop = new PVector(catcher.position.x, catcher.position.y);
@@ -127,7 +127,7 @@ if (balls >= 4) {
             runners.get(runners.size() - 1).out();
           }
         }
-        
+
         for (Outfielder catcher : basemen){ //Ball lands in outfielder's glove
           if (catcher.position.dist(this.positionTop) < 12.5){
             this.positionTop = new PVector(catcher.position.x, catcher.position.y);
@@ -135,10 +135,10 @@ if (balls >= 4) {
             runners.get(runners.size() - 1).out();
           }
         }
-        
+
       }
     }
-    
+
     if (!foul && homerun(this)){
       homerun = true;
     }
@@ -159,11 +159,11 @@ if (balls >= 4) {
     //Sets the starting velocityTop velocityHeight based on the force applied
     velocityTop = forceTop;
     velocityHeight = forceHeight*1.1;
-    
+
     double time = Math.ceil((velocityHeight * 2) / 0.1);
     double dist = velocityTop.mag() * time;
     PVector direction = new PVector(velocityTop.x, velocityTop.y);
-    
+
     positionLanding.add(PVector.mult(direction.normalize(), (float) dist));
   }
 }
