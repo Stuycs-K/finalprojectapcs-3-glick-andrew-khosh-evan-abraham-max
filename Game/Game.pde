@@ -219,9 +219,11 @@ void keyPressed() {
 
 
 
+
 //  if (key == 'b') {
   //  switchView();
  // }
+
 
 
   if(key == ' '){
