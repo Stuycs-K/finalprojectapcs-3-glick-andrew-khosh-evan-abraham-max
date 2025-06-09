@@ -20,6 +20,7 @@ This is a 9-inning baseball game simulation where you control the batter and bas
 - **9** - When you click 9 it send you all the way to the top of the 9th inning, making it easier to see what happens at the end of the game.
 - **!, @, #** Shift + 1(!) puts a player on 1st base, Shift + 2(@) puts a player on 2nd base, Shift + 3(#) puts a player on 3rd base.
 - **e** - Enemy won't score while e is active making it easier to test specific scores such as a tie.
+- **b** - Sets balls to 3 making it more likely you will get a walk
 ---
 
 ## Game Rules
