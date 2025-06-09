@@ -181,7 +181,7 @@ void keyPressed() {
     reset();
   }
   if (key == 'b') {
-    switchView();
+    balls = 3;
   }
   if (key == '!') {
     for (Baserunner runner : runners){
@@ -220,9 +220,7 @@ void keyPressed() {
 
 
 
-//  if (key == 'b') {
-  //  switchView();
- // }
+
 
 
 
