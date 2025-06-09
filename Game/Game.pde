@@ -239,7 +239,7 @@ void keyPressed() {
     else if (background == FRONTVIEW && pitching == false){
       pitching = true;
       ball1 = pitcher1.pitch();
-      ball1.velocityFront = new PVector(random(-0.75, 0.75), 0);
+      ball1.velocityFront = new PVector(random(-1.2, 1.2), 0);
       ball1.accelerationFront = new PVector(0, random(0.02, 0.03));
       /*
           ball1 = new Ball(new PVector(width1/2, height1/2 - 50), 20);
