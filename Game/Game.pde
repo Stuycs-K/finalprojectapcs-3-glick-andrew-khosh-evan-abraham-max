@@ -13,7 +13,7 @@ public final int height1 = 840;
 public final int FRONTVIEW = 0;
 public final int TOPVIEW = 1;
 public final int ENEMY_TURN = 2;
-public final int ENDGAME = 3; 
+public final int ENDGAME = 3;
 public boolean foul = false;
 public boolean swung = false;
 public boolean on1 = false;
@@ -96,12 +96,12 @@ void draw() {
     }
     if (millis() - enemyTurnStartTime > 5000) {
       innings++;
-      enemyTotal += enemyScore; 
+      enemyTotal += enemyScore;
     reset();
         textSize(12);
   }
 }
-    
+
 
   if (background == FRONTVIEW) { //Batting View
   //  if (outs >= 3){
@@ -152,10 +152,10 @@ else if (background == ENEMY_TURN) {
   }
   if (millis() - enemyTurnStartTime > 5000) {
     innings++;
-      enemyTotal += enemyScore; 
+      enemyTotal += enemyScore;
     reset();
       textSize(12);
-    background = 0; 
+    background = 0;
   }
 }
   else if (background == TOPVIEW) { //Top View
@@ -175,7 +175,6 @@ else if (background == ENEMY_TURN) {
 void keyPressed() {
   if (key == 'c') {
   cheatMode = !cheatMode;
-<<<<<<< HEAD
   }
   if (key == '9' && innings < 9) {
     innings = 9;
@@ -217,12 +216,6 @@ void keyPressed() {
     }
     on3 = false;
   }
-=======
-}
-//  if (key == 'b') {
-  //  switchView();
- // }
->>>>>>> 9608fa2534f022e926614475c19b298ae36b97c4
   if(key == ' '){
     if (background == TOPVIEW && ball1.heightTop == 0 && playersOnBase()){
       background = 0;
@@ -438,15 +431,15 @@ void topDownView() {
   image(fieldImage, 0, 0);
 
   displayInstructions();
-  
+
   if (homerun){
     fill(255, 255, 100);
     textSize(70);
     text("HOMERUN!", width/2 + 285, 200);
-    
+
     runAll();
   }
-  
+
   if (foul){
     fill(255, 100, 100);
     textSize(70);
@@ -456,7 +449,7 @@ void topDownView() {
 
 void displayInstructions() {
   if (homerun || foul){ return; }
-  
+
   fill(255);
   textSize(20);
   for (Baserunner runner : runners) {
