@@ -35,3 +35,4 @@ Fixed defender logic
 added in instructions for baserunning
 added in enemy turn 
 added c cheat code to freeze the ball
+Wrote the readme

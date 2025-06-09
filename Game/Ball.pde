@@ -121,7 +121,7 @@ if (balls >= 4) {
         positionLanding = new PVector(positionTop.x, positionTop.y);
         
         if (!foul && outfield(this.positionTop)){
-          //Code for big homerun alert to pop up?
+          homerun = true;
         }
         
         for (Outfielder catcher : outfielders){ //Ball lands in outfielder's glove

@@ -1,8 +1,31 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/YxXKqIeT)
-# Project Description
 
-lorem ipsum.
+#  Baseball Game Simulator
 
-# Intended usage:
+This is a 9-inning baseball game simulation where you control the batter and base runners. After each inning, the enemy team takes a turn on offense and scores a random number of runs.
 
-A description as to how the project will be used (describe the user interface). (CHANGE THIS!!!!!)
+---
+
+## Controls
+
+### Basic Gameplay
+- **Spacebar** — Pitch the ball (in front view) or return to hitting after a hit.
+- **Mouse Click** — Swing the bat to hit the ball.
+- **1** — Run from first to second base.
+- **2** — Run from second to third base.
+- **3** — Run from third base to home.
+
+### Cheat Mode (for Testing)
+- **C** — Toggle cheat mode. When enabled, the ball will pause at full size instead of disappearing, allowing you to test different swing positions.
+
+---
+
+## Game Rules
+
+- The game lasts 9 innings.
+- After your 3 outs, the enemy team scores randomly (0–5 runs).
+- Once 9 innings are complete, a final screen displays the winner based on total runs.
+
+---
+
+All controls are also shown on screen during gameplay, but this README serves as a complete reference for players and testers.
