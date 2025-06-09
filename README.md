@@ -10,14 +10,16 @@ This is a 9-inning baseball game simulation where you control the batter and bas
 
 ### Basic Gameplay
 - **Spacebar** — Pitch the ball (in front view) or return to hitting after a hit.
-- **Mouse Click** — Swing the bat to hit the ball.
+- **Mouse Click** — Swing the bat to hit the ball(ball distance and direction depends on where and when the ball is hit as well as how cenetered the ball is in the strike zone)
 - **1** — Run from first to second base.
 - **2** — Run from second to third base.
 - **3** — Run from third base to home.
 
-### Cheat Mode (for Testing)
-- **C** — Toggle cheat mode. When enabled, the ball will pause at full size instead of disappearing, allowing you to test different swing positions.
-
+### Cheats (for Testing)
+- **c** — Toggle cheat mode. When enabled, the ball will pause at full size instead of disappearing, allowing you to test different swing positions.
+- **9** - When you click 9 it send you all the way to the top of the 9th inning, making it easier to see what happens at the end of the game.
+- **!, @, #** Shift + 1(!) puts a player on 1st base, Shift + 2(@) puts a player on 2nd base, Shift + 3(#) puts a player on 3rd base.
+- **e** - Enemy won't score while e is active making it easier to test specific scores such as a tie.
 ---
 
 ## Game Rules
