@@ -31,8 +31,8 @@ These are the features we want working by the 1.5-week MVP deadline:
   
 Nice to Have Features:
 - Different pitch speeds/directions
-- Stats for the different Batters/Pitchers (speed, strength, staminda, etc)
-- Weather Conditions / Wind Speed
+- ~Stats for the different Batters/Pitchers (speed, strength, staminda, etc)~ We didn't end up having a visible pitcher or any chance to switch between pitcher so this step was unneccesary
+- ~Weather Conditions / Wind Speed~ Our stadium is located indoors so weather concerns are not factored into play
 - The ability to have different runners on different bases that will act according to the batter
 - Batter will walk when they have four balls(instead of an instant homerun in MVP)
      
