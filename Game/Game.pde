@@ -63,7 +63,7 @@ void setup() {
   swingDistance = 0;
   hitter1.position = homePlate.copy();
   resetDefenders();
-  varsity = createFont("varsity_regular.ttf", 24);
+  //varsity = createFont("varsity_regular.ttf", 24);
   //textFont(varsity);
 }
 
@@ -153,9 +153,9 @@ void keyPressed() {
   if (key == 'c') {
   cheatMode = !cheatMode;
 }
-  if (key == 'b') {
-    switchView();
-  }
+//  if (key == 'b') {
+  //  switchView();
+ // }
   if(key == ' '){
     if (background == TOPVIEW && ball1.heightTop == 0 && playersOnBase()){
       background = 0;
