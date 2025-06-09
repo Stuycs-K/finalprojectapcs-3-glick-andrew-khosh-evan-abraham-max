@@ -270,12 +270,12 @@ void frontView() {
   rect(0, height * 2 / 3, width, height / 3);
   text("Click space to pitch the ball and to go back to hitting", 20, 30);
   text("Click with your mouse to swing the bat", 20, 50);
-  text("Balls : " + balls, 20, 70);
-  text("Strikes : " + strikes, 20, 90);
+ // text("Balls : " + balls, 20, 70);
+ // text("Strikes : " + strikes, 20, 90);
  // text("Swinging = " + swinging, 20, 70);
-  text("Outs: " + outs, 20, 110);
-  text("Runs: " + runs, 20, 130);
-    text("Inning : " + innings, 20, 150);
+//  text("Outs: " + outs, 20, 110);
+//  text("Runs: " + runs, 20, 130);
+ //   text("Inning : " + innings, 20, 150);
   fill(255, 255, 255, 80);
 
   //MAKING SCOREBUG ---------
