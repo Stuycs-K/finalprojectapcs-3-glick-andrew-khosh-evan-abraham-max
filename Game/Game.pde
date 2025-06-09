@@ -339,7 +339,7 @@ void keyPressed() {
 }
 
 void mousePressed(){
-  if (background == FRONTVIEW && !swinging){
+  if (background == FRONTVIEW && !swinging && mouseY > 300 && mouseY < 510){
     swinging = true;
     hitPosition = new PVector(mouseX, mouseY);
     ball1.speedFront = 0;
@@ -689,6 +689,11 @@ boolean outfield(PVector position){
 boolean foulBall(Ball ball){
   return ball.positionLanding.y > -1 * ball.positionLanding.x + 1540 ||
          ball.positionLanding.y > ball.positionLanding.x + 140;
+}
+
+boolean homerun(Ball ball){
+  return ball.positionLanding.y < -1 * ball.positionLanding.x + 700 ||
+         ball.positionLanding.y < ball.positionLanding.x - 700;
 }
 
 void drawBase(float x, float y){
