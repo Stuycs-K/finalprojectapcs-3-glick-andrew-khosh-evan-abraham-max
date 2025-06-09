@@ -98,13 +98,7 @@ void draw() {
     else{
       text("YOU lose", width/2, height/2 - 50);
     }
-    if (millis() - enemyTurnStartTime > 5000) {
-      innings++;
-      enemyTotal += enemyScore;
-    reset();
-        textSize(12);
   }
-}
 
 
   if (background == FRONTVIEW) { //Batting View
@@ -319,7 +313,7 @@ void keyPressed() {
 >>>>>>> 22c7db9d404c2b89632db0f3fb88bab77059aa11
     }
   }*/
-  if(key == '1'){
+  if(key == '1' && !foul){
     for (Baserunner player : runners){
       if (player.onBase == 1) {
         player.run();
@@ -336,7 +330,7 @@ void keyPressed() {
       }
     }
   }
-  if(key == '2'){
+  if(key == '2' && !foul){
     for (Baserunner player : runners){
       if (player.onBase == 2) {
         player.run();
@@ -348,7 +342,7 @@ void keyPressed() {
       }
     }
   }
-  if(key == '3'){
+  if(key == '3' && !foul){
     for (Baserunner player : runners){
       if (player.onBase == 3) player.run();
     }
@@ -624,17 +618,16 @@ void moveDefenders(){
         ball1.velocityTop = new PVector(0, 0);
         int base = basemen.indexOf(catcher);
 
-        for(int i = 0; i < runners.size(); i++){
-          Baserunner player = runners.get(i);
-          if (player.velocity.mag() > 0 && (player.onBase + 1) % 4 == base){
-            player.out();
-            i--;
+        for (Baserunner playerR : runners){
+          if (playerR.velocity.mag() > 0 && (playerR.onBase + 1) % 4 == base){
+            playerR.out();
+            break;
           }
         }
       }
     }
   }
-}
+  }
 
 Outfielder closestDefender(){
   float minDist = outfielders.get(0).position.dist(ball1.positionTop);
