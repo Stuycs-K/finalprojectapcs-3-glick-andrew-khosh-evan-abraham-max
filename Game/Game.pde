@@ -3,6 +3,7 @@ import java.io.*;
 int innings = 1;
 int background = 0;    //0 will be front view, 1 will be top down
 PImage fieldImage;
+boolean cheatMode = false;
 PImage ballImage;
 PImage playerImage;
 PImage defenderImage;
@@ -150,6 +151,9 @@ else if (background == ENEMY_TURN) {
 
 
 void keyPressed() {
+  if (key == 'c') {
+  cheatMode = !cheatMode;
+}
   if (key == 'b') {
     switchView();
   }
@@ -272,6 +276,10 @@ void frontView() {
   rect(0, height * 2 / 3, width, height / 3);
   text("Click space to pitch the ball and to go back to hitting", 20, 30);
   text("Click with your mouse to swing the bat", 20, 50);
+  if (cheatMode) {
+  fill(255, 255, 0);
+  text("CHEAT MODE: Ball will pause at max size until hit", 20, 170);
+}
  // text("Balls : " + balls, 20, 70);
  // text("Strikes : " + strikes, 20, 90);
  // text("Swinging = " + swinging, 20, 70);

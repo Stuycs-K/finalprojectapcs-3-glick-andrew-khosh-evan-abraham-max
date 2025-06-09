@@ -28,15 +28,21 @@
   }
 
   public void tickFront(){
+      if (cheatMode && radiusFront >= radiusMax) {
+    radiusFront = radiusMax;
+    velocityFront = new PVector(0, 0);
+    accelerationFront = new PVector(0, 0);
+    return;
+  }
     //Increases/Decreases radiusFront according to speedFront and updates positionFront and velocityFront
     velocityFront.add(accelerationFront);
     positionFront.add(velocityFront);
     radiusFront += speedFront;
-    if (radiusFront > radiusMax){
+      if (radiusFront > radiusMax) {
       float bx = positionFront.x;
       float by = positionFront.y;
-      System.out.println("bx " + bx + "by " + by);
-      System.out.println("zoneX1: " + zoneX1 + "zoneX2" + zoneX2 + "zoneY1 " + zoneY1 + "zoneY2 " + zoneY2);
+  //    System.out.println("bx " + bx + "by " + by);
+  //    System.out.println("zoneX1: " + zoneX1 + "zoneX2" + zoneX2 + "zoneY1 " + zoneY1 + "zoneY2 " + zoneY2);
       pitching = false;
       radiusFront = 0;
       totalPitches++;
@@ -44,21 +50,21 @@
 if (bx >= zoneX1 && bx <= zoneX2 && by >= zoneY1 && by <= zoneY2||swung) {
   strikes++;
   swung = false;
-  println("Strike " + strikes);
+ // println("Strike " + strikes);
 } else {
 
   balls++;
-  println("Ball " + balls);
+//  println("Ball " + balls);
 }
 
 if (strikes >= 3) {
   outs++;
-  println("Strikeout!");
+//  println("Strikeout!");
   strikes = 0;
   balls = 0;
 }
 if (balls >= 4) {
-  println("Walk!");
+//  println("Walk!");
   balls = 0;
   strikes = 0;
   runners.add(new Baserunner(hitter1.strength,hitter1.speed));
