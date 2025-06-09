@@ -172,6 +172,11 @@ void draw() {
             strikes++;
           }
           pitching = false;
+          if (strikes == 3){
+            outs++;
+            strikes = 0;
+            balls = 0;
+          }
         }
       }
     }
