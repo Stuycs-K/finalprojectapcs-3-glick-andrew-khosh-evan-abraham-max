@@ -76,3 +76,5 @@ Finished the new UML in totality, which took around 40 minutes, including adding
 - made the scorebug (2 hours)
 
 I believe this document accurately reflects the contributions of my teamate.
+
+I believe this document accurately reflects the contributions of my teamate. -Evan
