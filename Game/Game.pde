@@ -32,6 +32,7 @@ private boolean swinging = false;
 public boolean pitching = false;
 public boolean ballCaught = false;
 public boolean ballThrown = false;
+public boolean homerun = false;
 Bat bat1 = new Bat();
 Hitter hitter1 = new Hitter();
 Pitcher pitcher1 = new Pitcher();
@@ -155,6 +156,7 @@ void keyPressed() {
   if(key == ' '){
     if (background == TOPVIEW && ball1.heightTop == 0 && playersOnBase()){
       background = 0;
+      homerun = false;
       resetDefenders();
       if (foul){
         runners.remove(runners.size() - 1);
@@ -359,42 +361,77 @@ void topDownView() {
   background(200);
   noStroke();
 
-  fill(34, 139, 34);
-  quad(width / 2, 0, (width/2)-(height / 2), height / 2,
-       width / 2, height, (width/2)+(height / 2), (height / 2));
-
-  fill(200, 139, 34);
-  quad(width / 2, height - 400, (width / 2) - 200, height- 200,
-       width / 2, height, (width / 2) + 200, height -200);
-
-  fill(255);
-  drawBase(firstBase.x, firstBase.y);
-  drawBase(secondBase.x, secondBase.y);
-  drawBase(thirdBase.x, thirdBase.y);
-  drawBase(homePlate.x, homePlate.y);
-
   image(fieldImage, 0, 0);
-  fill(255);
-textSize(20);
-String instruction = getInstruction();
-text(instruction, 20, 30);  // Adjust position if needed
 
-}
-String getInstruction() {
-  for (Baserunner runner : runners) {
-    int base = runner.onBase;
-
-    if (base == 1) return "Click 1 to run from first to second base";
-    if (base == 2) return "Click 2 to run from second to third base";
-    if (base == 3) return "Click 3 to run home after the hit";
+  displayInstructions();
+  
+  if (homerun){
+    fill(255, 255, 100);
+    textSize(70);
+    text("HOMERUN!", width/2 + 285, 200);
+    
+    runAll();
   }
-  return "";
+  
+  if (foul){
+    fill(255, 100, 100);
+    textSize(70);
+    text("FOUL BALL!", width/2 + 285, 200);
+  }
 }
 
+void displayInstructions() {
+  if (homerun || foul){ return; }
+  
+  fill(255);
+  textSize(20);
+  for (Baserunner runner : runners) {
+    if (runner.onBase == 1 && runner.velocity.mag() == 0){
+      text("Click 1 to run from first to second base", 20, 30);
+    }
+    if (runner.onBase == 2 && runner.velocity.mag() == 0){
+      text("Click 2 to run from second to third base", 20, 60);
+    }
+    if (runner.onBase == 3 && runner.velocity.mag() == 0){
+      text("Click 3 to run home after the hit", 20, 90);
+    }
+  }
+}
 
+void runAll(){
+  for (Baserunner player : runners){
+    if (player.onBase == 1) {
+      player.run();
+      for (Baserunner player1 : runners){
+        if (player1.onBase == 2){
+          player1.run();
+          for (Baserunner player2 : runners){
+            if (player2.onBase == 3){
+              player2.run();
+            }
+          }
+        }
+      }
+    }
+  }
+  for (Baserunner player : runners){
+    if (player.onBase == 2) {
+      player.run();
+      for (Baserunner player1 : runners){
+        if (player1.onBase == 3) {
+          player1.run();
+        }
+      }
+    }
+  }
+  for (Baserunner player : runners){
+    if (player.onBase == 3) player.run();
+  }
+}
 
 void reset(){
   foul = false;
+  homerun = false;
   swung = false;
   on1 = false;
   on2 = false;
@@ -556,14 +593,14 @@ void resetDefenders(){
 
 boolean outfield(PVector position){
   return position.y > -1 * position.x + 1540 ||
-         position.y > position.x + 770 ||
-         position.y < -1 * position.x + 770 ||
+         position.y > position.x + 140 ||
+         position.y < -1 * position.x + 700 ||
          position.y < position.x - 700;
 }
 
 boolean foulBall(Ball ball){
   return ball.positionLanding.y > -1 * ball.positionLanding.x + 1540 ||
-         ball.positionLanding.y > ball.positionLanding.x + 770;
+         ball.positionLanding.y > ball.positionLanding.x + 140;
 }
 
 void drawBase(float x, float y){
