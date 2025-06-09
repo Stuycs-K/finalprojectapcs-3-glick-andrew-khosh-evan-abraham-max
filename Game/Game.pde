@@ -12,6 +12,8 @@ public final int width1 = 1400;
 public final int height1 = 840;
 public final int FRONTVIEW = 0;
 public final int TOPVIEW = 1;
+public final int ENEMY_TURN = 2;
+public final int ENDGAME = 3; 
 public boolean foul = false;
 public boolean swung = false;
 public boolean on1 = false;
@@ -42,10 +44,9 @@ ArrayList<Outfielder> outfielders = new ArrayList<Outfielder>();
 ArrayList<Outfielder> basemen = new ArrayList<Outfielder>();
 int hits = 0;
 int runs = 0;
-int runsE = 0;
 int totalPitches = 0;
 
-int ENEMY_TURN = 2;
+
 int enemyScore = 0;
 int enemyTurnStartTime = 0;
 int enemyTotal = 0;
@@ -79,6 +80,27 @@ void draw() {
       on3 = true;
     }
   }
+  if (innings > 9) background = ENDGAME;
+  if (background == ENDGAME) {
+    background(0);
+    fill(255);
+    textSize(40);
+    textAlign(CENTER);
+    text("Final Score: " + enemyScore + " to " + runs, width/2, height/2);
+    if(enemyScore < runs){
+      text("YOU WIN!", width/2, height/2 - 50);
+    }
+    else{
+      text("you lose", width/2, height/2 - 50);
+    }
+    if (millis() - enemyTurnStartTime > 5000) {
+      innings++;
+      enemyTotal += enemyScore; 
+    reset();
+        textSize(12);
+  }
+}
+    
 
   if (background == FRONTVIEW) { //Batting View
   //  if (outs >= 3){
@@ -135,7 +157,7 @@ else if (background == ENEMY_TURN) {
     background = 0; 
   }
 }
-  else { //Top View
+  else if (background == TOPVIEW) { //Top View
     topDownView();
     displayPlayers();
 
@@ -152,7 +174,11 @@ else if (background == ENEMY_TURN) {
 void keyPressed() {
   if (key == 'c') {
   cheatMode = !cheatMode;
-}
+  }
+  if (key == '9' && innings < 9) {
+    innings = 9;
+    reset();
+  }
   if (key == 'b') {
     switchView();
   }
