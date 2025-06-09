@@ -120,8 +120,12 @@ else if (background == ENEMY_TURN) {
   textSize(40);
   textAlign(CENTER);
   text("Enemy Turn", width/2, height/2 - 50);
+  if(enemyScore == 1){
+      text("They scored " + enemyScore + " run!", width/2, height/2);
+  }
+  else{
   text("They scored " + enemyScore + " runs!", width/2, height/2);
-
+  }
   if (millis() - enemyTurnStartTime > 5000) {
     innings++;
       enemyTotal += enemyScore; 
