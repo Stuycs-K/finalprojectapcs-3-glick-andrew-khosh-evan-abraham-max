@@ -182,6 +182,39 @@ void keyPressed() {
   if (key == 'b') {
     switchView();
   }
+  if (key == '!') {
+    for (Baserunner runner : runners){
+    if (runner.onBase == 1){
+      on1 = true;
+    }
+    }
+    if (!on1){
+    runners.add(new Baserunner(hitter1.strength,hitter1.speed,firstBase.copy(),1));
+    }
+    on1 = false;
+  }
+  if (key == '@') {
+    for (Baserunner runner : runners){
+    if (runner.onBase == 2){
+      on2 = true;
+    }
+    }
+    if (!on2){
+    runners.add(new Baserunner(hitter1.strength,hitter1.speed,secondBase.copy(),2));
+    }
+    on2 = false;
+  }
+  if (key == '#') {
+    for (Baserunner runner : runners){
+    if (runner.onBase == 3){
+      on3 = true;
+    }
+    }
+    if (!on3){
+    runners.add(new Baserunner(hitter1.strength,hitter1.speed,thirdBase.copy(),3));
+    }
+    on3 = false;
+  }
   if(key == ' '){
     if (background == TOPVIEW && ball1.heightTop == 0 && playersOnBase()){
       background = 0;
