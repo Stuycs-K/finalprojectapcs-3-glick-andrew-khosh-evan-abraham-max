@@ -8,6 +8,8 @@ PImage ballImage;
 PImage playerImage;
 PImage defenderImage;
 boolean remove = false;
+boolean endOfI = false;
+boolean cheatMode2 = false;
 public final int width1 = 1400;
 public final int height1 = 840;
 public final int FRONTVIEW = 0;
@@ -82,18 +84,19 @@ void draw() {
       on3 = true;
     }
   }
-  if (innings > 9 && runs != enemyScore) background = ENDGAME;
+  if (innings > 9 && runs != enemyTotal && endOfI) background = ENDGAME;
+  else endOfI = false;
   if (background == ENDGAME) {
     background(0);
     fill(255);
     textSize(40);
     textAlign(CENTER);
-    text("Final Score: " + enemyScore + " to " + runs, width/2, height/2);
-    if(enemyScore < runs){
+    text("Final Score: " + enemyTotal + " to " + runs, width/2, height/2);
+    if(enemyTotal < runs){
       text("YOU WIN!", width/2, height/2 - 50);
     }
     else{
-      text("you lose", width/2, height/2 - 50);
+      text("YOU lose", width/2, height/2 - 50);
     }
     if (millis() - enemyTurnStartTime > 5000) {
       innings++;
@@ -112,7 +115,12 @@ void draw() {
       if (outs >= 3) {
     // Start enemy turn
     background = ENEMY_TURN;
-    enemyScore = (int)random(0, 6);
+        if (!cheatMode2) {
+      enemyScore = (int)random(0, 6);
+    }
+    else{
+      enemyScore = 0;
+    }
     enemyTurnStartTime = millis();
     return;
   }
@@ -190,6 +198,7 @@ void draw() {
     }
   } //End Batting View
 else if (background == ENEMY_TURN) {
+  endOfI = true;
   background(0);
   fill(255);
   textSize(40);
@@ -230,6 +239,9 @@ void keyPressed() {
   if (key == '9' && innings < 9) {
     innings = 9;
     reset();
+  }
+  if (key == 'e') {
+    cheatMode2 = !cheatMode2;
   }
   if (key == 'b') {
     balls = 3;
@@ -364,7 +376,12 @@ void frontView() {
   if (cheatMode) {
   fill(255, 255, 0);
   text("CHEAT MODE: Ball will pause at max size until hit", 20, 170);
+  }
+if (cheatMode2) {
+  fill(255, 255, 0);
+  text("CHEAT MODE: Enemy will score 0 every inning", 20, 120);
 }
+
  // text("Balls : " + balls, 20, 70);
  // text("Strikes : " + strikes, 20, 90);
  // text("Swinging = " + swinging, 20, 70);
