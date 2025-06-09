@@ -45,7 +45,7 @@
   //    System.out.println("zoneX1: " + zoneX1 + "zoneX2" + zoneX2 + "zoneY1 " + zoneY1 + "zoneY2 " + zoneY2);
       pitching = false;
       radiusFront = 0;
-      totalPitches++;
+      //totalPitches++;
 
 if (bx >= zoneX1 && bx <= zoneX2 && by >= zoneY1 && by <= zoneY2||swung) {
   strikes++;
