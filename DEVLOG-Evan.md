@@ -72,3 +72,5 @@ Added predicted landing spot for ball
 Made outfielders run to predicted landing spot
 
 Added functionality for foul balls and outfielders stopping when ball goes out of the field
+
+I believe this document accurately reflects the contributions of my teamate.

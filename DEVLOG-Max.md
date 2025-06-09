@@ -75,6 +75,7 @@ Finished the new UML in totality, which took around 40 minutes, including adding
 ### 2025-06-08 - Made scorebug
 - made the scorebug (2 hours)
 
+<<<<<<< HEAD
 ### 2025-06-08 - Made cheats among other things
 - made balls cheat (15 minutes)
 - Made inning cheat (10 mintes)
@@ -84,3 +85,8 @@ Finished the new UML in totality, which took around 40 minutes, including adding
 
 ### 2025-06-09 - Updated UMl
 - updated the UML (1 hour)
+=======
+I believe this document accurately reflects the contributions of my teamate.
+
+I believe this document accurately reflects the contributions of my teamate. -Evan
+>>>>>>> f36db3af19fad9efbad62236d2ad22457b12efc5
