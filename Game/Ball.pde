@@ -120,10 +120,6 @@ if (balls >= 4) {
         velocityTop = new PVector(0, 0);
         positionLanding = new PVector(positionTop.x, positionTop.y);
         
-        if (!foul && outfield(this.positionTop)){
-          homerun = true;
-        }
-        
         for (Outfielder catcher : outfielders){ //Ball lands in outfielder's glove
           if (catcher.position.dist(this.positionTop) < 12.5){
             this.positionTop = new PVector(catcher.position.x, catcher.position.y);
@@ -141,6 +137,10 @@ if (balls >= 4) {
         }
         
       }
+    }
+    
+    if (!foul && homerun(this)){
+      homerun = true;
     }
   }
 
