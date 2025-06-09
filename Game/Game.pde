@@ -216,15 +216,14 @@ void keyPressed() {
     }
     on3 = false;
   }
-<<<<<<< HEAD
-=======
+
 
 
 //  if (key == 'b') {
   //  switchView();
  // }
 
->>>>>>> fd9e832e5f0e3b2f6a3e64ba3a775cb4860b8fc7
+
   if(key == ' '){
     if (background == TOPVIEW && ball1.heightTop == 0 && playersOnBase()){
       background = 0;
