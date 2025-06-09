@@ -12,8 +12,6 @@ public final int width1 = 1400;
 public final int height1 = 840;
 public final int FRONTVIEW = 0;
 public final int TOPVIEW = 1;
-public final int ENEMY_TURN = 2;
-public final int ENDGAME = 3;
 public boolean foul = false;
 public boolean swung = false;
 public boolean on1 = false;
@@ -45,9 +43,10 @@ ArrayList<Outfielder> outfielders = new ArrayList<Outfielder>();
 ArrayList<Outfielder> basemen = new ArrayList<Outfielder>();
 int hits = 0;
 int runs = 0;
+int runsE = 0;
 int totalPitches = 0;
 
-
+int ENEMY_TURN = 2;
 int enemyScore = 0;
 int enemyTurnStartTime = 0;
 int enemyTotal = 0;
@@ -81,27 +80,6 @@ void draw() {
       on3 = true;
     }
   }
-  if (innings > 9 && runs != enemyScore) background = ENDGAME;
-  if (background == ENDGAME) {
-    background(0);
-    fill(255);
-    textSize(40);
-    textAlign(CENTER);
-    text("Final Score: " + enemyScore + " to " + runs, width/2, height/2);
-    if(enemyScore < runs){
-      text("YOU WIN!", width/2, height/2 - 50);
-    }
-    else{
-      text("you lose", width/2, height/2 - 50);
-    }
-    if (millis() - enemyTurnStartTime > 5000) {
-      innings++;
-      enemyTotal += enemyScore;
-    reset();
-        textSize(12);
-  }
-}
-
 
   if (background == FRONTVIEW) { //Batting View
   //  if (outs >= 3){
@@ -152,13 +130,13 @@ else if (background == ENEMY_TURN) {
   }
   if (millis() - enemyTurnStartTime > 5000) {
     innings++;
-      enemyTotal += enemyScore;
+      enemyTotal += enemyScore; 
     reset();
       textSize(12);
-    background = 0;
+    background = 0; 
   }
 }
-  else if (background == TOPVIEW) { //Top View
+  else { //Top View
     topDownView();
     displayPlayers();
 
@@ -175,56 +153,10 @@ else if (background == ENEMY_TURN) {
 void keyPressed() {
   if (key == 'c') {
   cheatMode = !cheatMode;
-  }
-  if (key == '9' && innings < 9) {
-    innings = 9;
-    reset();
-  }
-  if (key == 'b') {
-    switchView();
-  }
-  if (key == '!') {
-    for (Baserunner runner : runners){
-    if (runner.onBase == 1){
-      on1 = true;
-    }
-    }
-    if (!on1){
-    runners.add(new Baserunner(hitter1.strength,hitter1.speed,firstBase.copy(),1));
-    }
-    on1 = false;
-  }
-  if (key == '@') {
-    for (Baserunner runner : runners){
-    if (runner.onBase == 2){
-      on2 = true;
-    }
-    }
-    if (!on2){
-    runners.add(new Baserunner(hitter1.strength,hitter1.speed,secondBase.copy(),2));
-    }
-    on2 = false;
-  }
-  if (key == '#') {
-    for (Baserunner runner : runners){
-    if (runner.onBase == 3){
-      on3 = true;
-    }
-    }
-    if (!on3){
-    runners.add(new Baserunner(hitter1.strength,hitter1.speed,thirdBase.copy(),3));
-    }
-    on3 = false;
-  }
-<<<<<<< HEAD
-=======
-
-
+}
 //  if (key == 'b') {
   //  switchView();
  // }
-
->>>>>>> fd9e832e5f0e3b2f6a3e64ba3a775cb4860b8fc7
   if(key == ' '){
     if (background == TOPVIEW && ball1.heightTop == 0 && playersOnBase()){
       background = 0;
@@ -440,15 +372,15 @@ void topDownView() {
   image(fieldImage, 0, 0);
 
   displayInstructions();
-
+  
   if (homerun){
     fill(255, 255, 100);
     textSize(70);
     text("HOMERUN!", width/2 + 285, 200);
-
+    
     runAll();
   }
-
+  
   if (foul){
     fill(255, 100, 100);
     textSize(70);
@@ -458,7 +390,7 @@ void topDownView() {
 
 void displayInstructions() {
   if (homerun || foul){ return; }
-
+  
   fill(255);
   textSize(20);
   for (Baserunner runner : runners) {
