@@ -34,3 +34,4 @@ Fixed defender logic
 ### 2025-06-08
 added in instructions for baserunning
 added in enemy turn 
+added c cheat code to freeze the ball
