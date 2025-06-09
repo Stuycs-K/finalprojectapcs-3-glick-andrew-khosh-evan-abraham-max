@@ -30,7 +30,8 @@ public final PVector homePlate = new PVector(width1 / 2, height1-58);
 public final PVector firstBase = new PVector((width1 / 2) + 160, height1 -220);
 public final PVector secondBase = new PVector(width1 / 2, height1 - 380);
 public final PVector thirdBase = new PVector((width1 / 2) - 160, height1 - 220);
-private int swingDistance;
+private int swingRotation;
+public PVector hitPosition = new PVector(0,0);
 private boolean swinging = false;
 public boolean pitching = false;
 public boolean ballCaught = false;
@@ -62,7 +63,7 @@ void setup() {
   ballImage = loadImage("Ball.png");
   playerImage = loadImage("Player.png");
   defenderImage = loadImage("Defender.png");
-  swingDistance = 0;
+  swingRotation = 0;
   hitter1.position = homePlate.copy();
   resetDefenders();
   //varsity = createFont("varsity_regular.ttf", 24);
@@ -120,13 +121,58 @@ void draw() {
     frontView();
 
     if(swinging){
-      bat1.swing(swingDistance);
-      swingDistance++;
+      bat1.swing(swingRotation);
+      swingRotation += 5;
+      bat1.batYcor = (int) hitPosition.y;
 
-      if(swingDistance > 20){
-        swingDistance = 0;
+      if(swingRotation > 180){
+        swingRotation = 0;
         swung = true;
         swinging = false;
+        bat1.batYcor = 400;
+        if (hitter1.hit(ball1, hitPosition)){
+          foul = foulBall(ball1);
+          runners.add(new Baserunner(hitter1.strength,hitter1.speed));
+          pitching = false;
+          swinging = false;
+          switchView();
+          if (foul){
+            if (strikes < 2){
+              strikes++;
+            }
+          }
+          else {
+            balls = 0;
+            strikes = 0;
+            hits++;
+            for (Baserunner player : runners){
+              if (player.onBase == 0) {
+                player.run();
+                for (Baserunner player1 : runners){
+                  if (player1.onBase == 1) {
+                    player1.run();
+                    for (Baserunner player2 : runners){
+                      if (player2.onBase == 2){
+                        player2.run();
+                        for (Baserunner player3 : runners){
+                          if (player3.onBase == 3){
+                            player3.run();
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        else {
+          if (pitching){
+            strikes++;
+          }
+          pitching = false;
+        }
       }
     }
     else {
@@ -293,45 +339,12 @@ void keyPressed() {
 }
 
 void mousePressed(){
-  if (background == FRONTVIEW){
-swinging = true;
-    if (hitter1.hit(ball1, new PVector(mouseX, mouseY))){
-      foul = foulBall(ball1);
-      runners.add(new Baserunner(hitter1.strength,hitter1.speed));
-      pitching = false;
-      swinging = false;
-      switchView();
-      if (foul){
-        if (strikes < 2){
-          strikes++;
-        }
-      }
-      else {
-        balls = 0;
-        strikes = 0;
-        hits++;
-        for (Baserunner player : runners){
-          if (player.onBase == 0) {
-            player.run();
-            for (Baserunner player1 : runners){
-              if (player1.onBase == 1) {
-                player1.run();
-                for (Baserunner player2 : runners){
-                  if (player2.onBase == 2){
-                    player2.run();
-                    for (Baserunner player3 : runners){
-                      if (player3.onBase == 3){
-                        player3.run();
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+  if (background == FRONTVIEW && !swinging){
+    swinging = true;
+    hitPosition = new PVector(mouseX, mouseY);
+    ball1.speedFront = 0;
+    ball1.velocityFront = new PVector(0,0);
+    ball1.accelerationFront = new PVector(0,0);
   }
 }
 
