@@ -36,3 +36,5 @@ added in instructions for baserunning
 added in enemy turn 
 added c cheat code to freeze the ball
 Wrote the readme
+
+I believe this document accurately reflects the contributions of my teamate. -Evan
