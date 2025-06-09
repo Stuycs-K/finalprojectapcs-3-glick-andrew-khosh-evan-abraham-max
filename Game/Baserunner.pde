@@ -6,6 +6,12 @@
      position = homePlate.copy();
      onBase = 0;
    }
+   
+   public Baserunner(int str, int spd, PVector positionx, int base){
+     super(str, spd);
+     position = positionx;
+     onBase = base;
+   }
 
    public void run(){
      if (onBase == 0) velocity = new PVector(speed,-speed);
