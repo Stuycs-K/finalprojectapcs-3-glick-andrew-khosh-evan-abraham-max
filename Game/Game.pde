@@ -5,6 +5,7 @@ int background = 0;    //0 will be front view, 1 will be top down
 PImage fieldImage;
 boolean cheatMode = false;
 PImage ballImage;
+Baserunner runnerToRemove = null;
 PImage playerImage;
 PImage defenderImage;
 boolean remove = false;
