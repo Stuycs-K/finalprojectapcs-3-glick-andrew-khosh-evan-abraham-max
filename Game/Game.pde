@@ -4,11 +4,9 @@ int innings = 1;
 int background = 0;    //0 will be front view, 1 will be top down
 PImage fieldImage;
 boolean cheatMode = false;
-boolean cheatMode2 = false;
 PImage ballImage;
 PImage playerImage;
 PImage defenderImage;
-boolean endOfI = false;
 boolean remove = false;
 public final int width1 = 1400;
 public final int height1 = 840;
@@ -83,15 +81,14 @@ void draw() {
       on3 = true;
     }
   }
-  if (innings > 9 && runs != enemyTotal && endOfI) background = ENDGAME;
-  else endOfI = false;
+  if (innings > 9 && runs != enemyScore) background = ENDGAME;
   if (background == ENDGAME) {
     background(0);
     fill(255);
     textSize(40);
     textAlign(CENTER);
     text("Final Score: " + enemyScore + " to " + runs, width/2, height/2);
-    if(enemyTotal < runs){
+    if(enemyScore < runs){
       text("YOU WIN!", width/2, height/2 - 50);
     }
     else{
@@ -114,12 +111,7 @@ void draw() {
       if (outs >= 3) {
     // Start enemy turn
     background = ENEMY_TURN;
-    if (!cheatMode2) {
-      enemyScore = (int)random(0, 6);
-    }
-    else{
-      enemyScore = 0;
-    }
+    enemyScore = (int)random(0, 6);
     enemyTurnStartTime = millis();
     return;
   }
@@ -147,7 +139,6 @@ void draw() {
     }
   } //End Batting View
 else if (background == ENEMY_TURN) {
-  endOfI = true;
   background(0);
   fill(255);
   textSize(40);
@@ -185,12 +176,12 @@ void keyPressed() {
   if (key == 'c') {
   cheatMode = !cheatMode;
   }
-  if (key == 'e') {
-    cheatMode2 = !cheatMode2;
-  }
   if (key == '9' && innings < 9) {
     innings = 9;
     reset();
+  }
+  if (key == 'b') {
+    switchView();
   }
   if (key == '!') {
     for (Baserunner runner : runners){
@@ -225,7 +216,6 @@ void keyPressed() {
     }
     on3 = false;
   }
-
   if(key == ' '){
     if (background == TOPVIEW && ball1.heightTop == 0 && playersOnBase()){
       background = 0;
@@ -239,7 +229,7 @@ void keyPressed() {
     else if (background == FRONTVIEW && pitching == false){
       pitching = true;
       ball1 = pitcher1.pitch();
-      ball1.velocityFront = new PVector(random(-1.2, 1.2), 0);
+      ball1.velocityFront = new PVector(random(-0.75, 0.75), 0);
       ball1.accelerationFront = new PVector(0, random(0.02, 0.03));
       /*
           ball1 = new Ball(new PVector(width1/2, height1/2 - 50), 20);
@@ -348,10 +338,6 @@ void frontView() {
   if (cheatMode) {
   fill(255, 255, 0);
   text("CHEAT MODE: Ball will pause at max size until hit", 20, 170);
-}
-if (cheatMode2) {
-  fill(255, 255, 0);
-  text("CHEAT MODE: Enemy will score 0 every inning", 20, 120);
 }
  // text("Balls : " + balls, 20, 70);
  // text("Strikes : " + strikes, 20, 90);
