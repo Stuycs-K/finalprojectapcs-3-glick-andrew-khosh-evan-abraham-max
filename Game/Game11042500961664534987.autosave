@@ -8,8 +8,6 @@ PImage ballImage;
 PImage playerImage;
 PImage defenderImage;
 boolean remove = false;
-boolean endOfI = false;
-boolean cheatMode2 = false;
 public final int width1 = 1400;
 public final int height1 = 840;
 public final int FRONTVIEW = 0;
@@ -84,21 +82,26 @@ void draw() {
       on3 = true;
     }
   }
-  if (innings > 9 && runs != enemyTotal && endOfI) background = ENDGAME;
-  else endOfI = false;
+  if (innings > 9 && runs != enemyScore) background = ENDGAME;
   if (background == ENDGAME) {
     background(0);
     fill(255);
     textSize(40);
     textAlign(CENTER);
-    text("Final Score: " + enemyTotal + " to " + runs, width/2, height/2);
-    if(enemyTotal < runs){
+    text("Final Score: " + enemyScore + " to " + runs, width/2, height/2);
+    if(enemyScore < runs){
       text("YOU WIN!", width/2, height/2 - 50);
     }
     else{
-      text("YOU lose", width/2, height/2 - 50);
+      text("you lose", width/2, height/2 - 50);
     }
+    if (millis() - enemyTurnStartTime > 5000) {
+      innings++;
+      enemyTotal += enemyScore;
+    reset();
+        textSize(12);
   }
+}
 
 
   if (background == FRONTVIEW) { //Batting View
@@ -109,12 +112,7 @@ void draw() {
       if (outs >= 3) {
     // Start enemy turn
     background = ENEMY_TURN;
-        if (!cheatMode2) {
-      enemyScore = (int)random(0, 6);
-    }
-    else{
-      enemyScore = 0;
-    }
+    enemyScore = (int)random(0, 6);
     enemyTurnStartTime = millis();
     return;
   }
@@ -174,11 +172,6 @@ void draw() {
             strikes++;
           }
           pitching = false;
-          if (strikes == 3){
-            outs++;
-            strikes = 0;
-            balls = 0;
-          }
         }
       }
     }
@@ -192,7 +185,6 @@ void draw() {
     }
   } //End Batting View
 else if (background == ENEMY_TURN) {
-  endOfI = true;
   background(0);
   fill(255);
   textSize(40);
@@ -233,9 +225,6 @@ void keyPressed() {
   if (key == '9' && innings < 9) {
     innings = 9;
     reset();
-  }
-  if (key == 'e') {
-    cheatMode2 = !cheatMode2;
   }
   if (key == 'b') {
     balls = 3;
@@ -313,7 +302,7 @@ void keyPressed() {
 >>>>>>> 22c7db9d404c2b89632db0f3fb88bab77059aa11
     }
   }*/
-  if(key == '1' && !foul){
+  if(key == '1'){
     for (Baserunner player : runners){
       if (player.onBase == 1) {
         player.run();
@@ -330,7 +319,7 @@ void keyPressed() {
       }
     }
   }
-  if(key == '2' && !foul){
+  if(key == '2'){
     for (Baserunner player : runners){
       if (player.onBase == 2) {
         player.run();
@@ -342,7 +331,7 @@ void keyPressed() {
       }
     }
   }
-  if(key == '3' && !foul){
+  if(key == '3'){
     for (Baserunner player : runners){
       if (player.onBase == 3) player.run();
     }
@@ -350,7 +339,7 @@ void keyPressed() {
 }
 
 void mousePressed(){
-  if (background == FRONTVIEW && !swinging && mouseY > 300 && mouseY < 510){
+  if (background == FRONTVIEW && !swinging){
     swinging = true;
     hitPosition = new PVector(mouseX, mouseY);
     ball1.speedFront = 0;
@@ -370,12 +359,7 @@ void frontView() {
   if (cheatMode) {
   fill(255, 255, 0);
   text("CHEAT MODE: Ball will pause at max size until hit", 20, 170);
-  }
-if (cheatMode2) {
-  fill(255, 255, 0);
-  text("CHEAT MODE: Enemy will score 0 every inning", 20, 120);
 }
-
  // text("Balls : " + balls, 20, 70);
  // text("Strikes : " + strikes, 20, 90);
  // text("Swinging = " + swinging, 20, 70);
@@ -581,16 +565,14 @@ void movePlayers(){
     else if (player.position.y > homePlate.y){
       player.stop();
       player.position = new PVector(10000,10000);
-       runnerToRemove = player;
       remove = true;
       runs++;
     }
   }
-if (remove) {
-  runners.remove(runnerToRemove);
-  remove = false;
-}
-
+  if (remove){
+    runners.remove(0);
+    remove = false;
+  }
 }
 
 void moveDefenders(){
@@ -620,16 +602,17 @@ void moveDefenders(){
         ball1.velocityTop = new PVector(0, 0);
         int base = basemen.indexOf(catcher);
 
-        for (Baserunner playerR : runners){
-          if (playerR.velocity.mag() > 0 && (playerR.onBase + 1) % 4 == base){
-            playerR.out();
-            break;
+        for(int i = 0; i < runners.size(); i++){
+          Baserunner player = runners.get(i);
+          if (player.velocity.mag() > 0 && (player.onBase + 1) % 4 == base){
+            player.out();
+            i--;
           }
         }
       }
     }
   }
-  }
+}
 
 Outfielder closestDefender(){
   float minDist = outfielders.get(0).position.dist(ball1.positionTop);
@@ -706,11 +689,6 @@ boolean outfield(PVector position){
 boolean foulBall(Ball ball){
   return ball.positionLanding.y > -1 * ball.positionLanding.x + 1540 ||
          ball.positionLanding.y > ball.positionLanding.x + 140;
-}
-
-boolean homerun(Ball ball){
-  return ball.positionLanding.y < -1 * ball.positionLanding.x + 700 ||
-         ball.positionLanding.y < ball.positionLanding.x - 700;
 }
 
 void drawBase(float x, float y){

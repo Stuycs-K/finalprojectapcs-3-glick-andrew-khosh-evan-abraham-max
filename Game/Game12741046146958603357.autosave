@@ -1,6 +1,7 @@
 import java.util.*;
 import java.io.*;
 int innings = 1;
+Baserunner runnerToRemove = null;
 int background = 0;    //0 will be front view, 1 will be top down
 PImage fieldImage;
 boolean cheatMode = false;
@@ -98,7 +99,13 @@ void draw() {
     else{
       text("YOU lose", width/2, height/2 - 50);
     }
+    if (millis() - enemyTurnStartTime > 5000) {
+      innings++;
+      enemyTotal += enemyScore;
+    reset();
+        textSize(12);
   }
+}
 
 
   if (background == FRONTVIEW) { //Batting View
@@ -313,7 +320,7 @@ void keyPressed() {
 >>>>>>> 22c7db9d404c2b89632db0f3fb88bab77059aa11
     }
   }*/
-  if(key == '1' && !foul){
+  if(key == '1'){
     for (Baserunner player : runners){
       if (player.onBase == 1) {
         player.run();
@@ -330,7 +337,7 @@ void keyPressed() {
       }
     }
   }
-  if(key == '2' && !foul){
+  if(key == '2'){
     for (Baserunner player : runners){
       if (player.onBase == 2) {
         player.run();
@@ -342,7 +349,7 @@ void keyPressed() {
       }
     }
   }
-  if(key == '3' && !foul){
+  if(key == '3'){
     for (Baserunner player : runners){
       if (player.onBase == 3) player.run();
     }
@@ -581,16 +588,15 @@ void movePlayers(){
     else if (player.position.y > homePlate.y){
       player.stop();
       player.position = new PVector(10000,10000);
-       runnerToRemove = player;
+      runnerToRemove = player;
       remove = true;
       runs++;
     }
   }
-if (remove) {
+  if (remove) {
   runners.remove(runnerToRemove);
   remove = false;
 }
-
 }
 
 void moveDefenders(){
@@ -620,16 +626,17 @@ void moveDefenders(){
         ball1.velocityTop = new PVector(0, 0);
         int base = basemen.indexOf(catcher);
 
-        for (Baserunner playerR : runners){
-          if (playerR.velocity.mag() > 0 && (playerR.onBase + 1) % 4 == base){
-            playerR.out();
-            break;
+        for(int i = 0; i < runners.size(); i++){
+          Baserunner player = runners.get(i);
+          if (player.velocity.mag() > 0 && (player.onBase + 1) % 4 == base){
+            player.out();
+            i--;
           }
         }
       }
     }
   }
-  }
+}
 
 Outfielder closestDefender(){
   float minDist = outfielders.get(0).position.dist(ball1.positionTop);
